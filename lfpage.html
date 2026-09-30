@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PawNest – Trung tâm thú y & spa thú cưng</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF1E0;--card:#FFF8EE;--ink:#4A2E24;--mute:#8A6A5C;--coral:#FF7F66;--sun:#FFC94D;--mint:#6FD1BC;--pink:#FFB5C8;--sh:rgba(150,80,40,.22);--hi:rgba(255,255,255,.85);--lo:rgba(150,80,40,.10);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2B1D18;--card:#3B2A23;--ink:#FFEBD6;--mute:#D3B7A4;--sh:rgba(0,0,0,.45);--hi:rgba(255,255,255,.07);--lo:rgba(0,0,0,.25)}}
+:root[data-theme="dark"]{--bg:#2B1D18;--card:#3B2A23;--ink:#FFEBD6;--mute:#D3B7A4;--sh:rgba(0,0,0,.45);--hi:rgba(255,255,255,.07);--lo:rgba(0,0,0,.25)}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:'Baloo 2',Nunito,sans-serif;line-height:1.15;margin:0}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+h2{font-size:clamp(2rem,4vw,2.8rem);font-weight:800;margin-bottom:8px}
+.sub{color:var(--mute);max-width:56ch;margin:0 0 36px}
+.clay{background:var(--card);border-radius:32px;box-shadow:10px 10px 22px var(--sh),inset -7px -7px 14px var(--lo),inset 7px 7px 14px var(--hi)}
+.btn{display:inline-block;border:0;cursor:pointer;font:700 1rem 'Baloo 2',sans-serif;padding:14px 28px;border-radius:999px;color:#fff;background:var(--coral);box-shadow:6px 6px 14px var(--sh),inset -4px -4px 8px rgba(0,0,0,.14),inset 4px 4px 8px rgba(255,255,255,.4);transition:transform .15s}
+.btn:active{transform:scale(.96)}
+.btn.alt{background:var(--sun);color:#4A2E24}
+:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;padding:12px 0}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 20px}
+nav .clay{border-radius:999px;display:flex;width:100%;align-items:center;justify-content:space-between;padding:8px 12px 8px 22px}
+.logo{font:800 1.4rem 'Baloo 2',sans-serif}
+.links{display:flex;gap:22px;font-weight:700}
+.links a:hover{color:var(--coral)}
+@media(max-width:760px){.links{display:none}}
+.hero{padding-top:36px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800}
+.hero p{color:var(--mute);font-size:1.15rem;max-width:46ch;margin:18px 0 26px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.blob{aspect-ratio:1;border-radius:46% 54% 50% 50%/55% 45% 55% 45%;background:var(--sun);display:grid;place-items:center;font-size:clamp(7rem,20vw,11rem);position:relative;animation:bob 5s ease-in-out infinite;box-shadow:14px 14px 30px var(--sh),inset -12px -12px 24px rgba(0,0,0,.1),inset 12px 12px 24px rgba(255,255,255,.5)}
+.blob i{position:absolute;font-style:normal;font-size:3.2rem;background:var(--pink);border-radius:50%;width:84px;height:84px;display:grid;place-items:center;box-shadow:6px 6px 12px var(--sh),inset -4px -4px 8px rgba(0,0,0,.1),inset 4px 4px 8px rgba(255,255,255,.5)}
+.blob i:nth-child(1){top:-4%;right:2%}.blob i:nth-child(2){bottom:2%;left:-4%;background:var(--mint)}
+@keyframes bob{50%{transform:translateY(-12px)}}
+@media(prefers-reduced-motion:reduce){.blob{animation:none}html{scroll-behavior:auto}}
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.blob{max-width:320px;margin:0 auto}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px;max-width:520px}
+.stats div{padding:14px;text-align:center}
+.stats b{display:block;font:800 1.6rem 'Baloo 2',sans-serif;color:var(--coral)}
+.stats span{font-size:.85rem;color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
+.svc{padding:28px;display:flex;flex-direction:column;gap:10px}
+.svc .ic{width:64px;height:64px;border-radius:22px;display:grid;place-items:center;font-size:2rem;background:var(--pink);box-shadow:inset -4px -4px 8px rgba(0,0,0,.1),inset 4px 4px 8px rgba(255,255,255,.55)}
+.svc:nth-child(2) .ic{background:var(--mint)}.svc:nth-child(3) .ic{background:var(--sun)}.svc:nth-child(4) .ic{background:#FFB08F}
+.svc h3{font-size:1.3rem}.svc p{margin:0;color:var(--mute);font-size:.95rem}
+.pk{padding:32px 28px;display:flex;flex-direction:column;gap:14px}
+.pk.hot{background:var(--sun);color:#4A2E24}
+.pk.hot li,.pk.hot .tag{color:#4A2E24}
+.tag{font-weight:700;color:var(--coral)}
+.price{font:800 2.3rem 'Baloo 2',sans-serif}
+.price small{font:600 .9rem Nunito;color:var(--mute)}
+.pk ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;flex:1}
+.pk li::before{content:"🐾 ";}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:22px}
+.pet{aspect-ratio:1;border-radius:34px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:4.5rem;box-shadow:8px 8px 18px var(--sh),inset -8px -8px 16px rgba(0,0,0,.09),inset 8px 8px 16px rgba(255,255,255,.5);color:#4A2E24;transition:transform .2s}
+.pet:hover{transform:rotate(-3deg) scale(1.03)}
+.pet span{font:700 1rem 'Baloo 2',sans-serif}
+.pet small{font-size:.8rem;opacity:.75}
+.bk{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:start}
+@media(max-width:820px){.bk{grid-template-columns:1fr}}
+.info{padding:30px}.info p{color:var(--mute)}
+form{padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+form .full{grid-column:1/-1}
+label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
+input,select{font:600 1rem Nunito,sans-serif;color:var(--ink);background:var(--bg);border:0;border-radius:18px;padding:13px 16px;box-shadow:inset 4px 4px 9px var(--lo),inset -4px -4px 9px var(--hi);width:100%}
+@media(max-width:520px){form{grid-template-columns:1fr}}
+.msg{display:none;padding:18px 20px;border-radius:22px;background:var(--mint);color:#173A33;font-weight:700}
+.msg.err{background:#FFB5A8;color:#5A1D12}
+.tests .t{padding:28px}
+.t p{margin:0 0 16px}
+.who{display:flex;align-items:center;gap:12px;font-weight:700}
+.av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;background:var(--pink);box-shadow:inset -3px -3px 6px rgba(0,0,0,.1),inset 3px 3px 6px rgba(255,255,255,.5)}
+.who small{display:block;font-weight:400;color:var(--mute)}
+.stars{color:var(--sun);letter-spacing:2px}
+footer{padding:36px 0 48px;color:var(--mute);text-align:center;font-size:.92rem}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><div class="clay">
+<a class="logo" href="#top">🐾 PawNest</a>
+<div class="links"><a href="#dich-vu">Dịch vụ</a><a href="#goi">Gói chăm sóc</a><a href="#thu-cung">Bé cưng</a><a href="#danh-gia">Đánh giá</a></div>
+<a class="btn" href="#dat-lich">Đặt lịch</a></div></div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+<div>
+<h1>Bé cưng khỏe mạnh, thơm tho, vui cả ngày</h1>
+<p>Trung tâm thú y & spa thú cưng tại TP. Hồ Chí Minh. Bác sĩ thú y khám tổng quát, tiêm phòng và tắm cắt tỉa nhẹ nhàng ngay trong một buổi hẹn.</p>
+<div class="cta"><a class="btn" href="#dat-lich">Đặt lịch hẹn</a><a class="btn alt" href="#goi">Xem bảng giá</a></div>
+<div class="stats"><div class="clay"><b>5.000+</b><span>bé đã được chăm sóc</span></div><div class="clay"><b>8</b><span>bác sĩ & groomer</span></div><div class="clay"><b>4,9/5</b><span>điểm đánh giá</span></div></div>
+</div>
+<div class="blob" aria-hidden="true">🐶<i>🛁</i><i>💉</i></div>
+</div></header>
+
+<section id="dich-vu"><div class="wrap">
+<h2>Mọi thứ bé cần, gói gọn một nơi</h2>
+<p class="sub">Từ khám bệnh đến làm đẹp, bé không phải chạy qua nhiều địa chỉ.</p>
+<div class="grid">
+<div class="clay svc"><div class="ic">🩺</div><h3>Khám & điều trị</h3><p>Khám tổng quát, siêu âm, xét nghiệm máu và điều trị bệnh thường gặp.</p></div>
+<div class="clay svc"><div class="ic">💉</div><h3>Tiêm phòng & tẩy giun</h3><p>Lịch tiêm dại, 5 bệnh, 7 bệnh được nhắc trước hẹn qua Zalo.</p></div>
+<div class="clay svc"><div class="ic">🛁</div><h3>Tắm & spa</h3><p>Sữa tắm dịu nhẹ, sấy êm, vệ sinh tai, cắt móng và chải lông.</p></div>
+<div class="clay svc"><div class="ic">✂️</div><h3>Cắt tỉa tạo kiểu</h3><p>Cắt tỉa theo giống hoặc theo ý bạn, ảnh trước/sau gửi ngay cho bạn.</p></div>
+</div></div></section>
+
+<section id="goi"><div class="wrap">
+<h2>Chọn gói phù hợp với bé</h2>
+<p class="sub">Giá áp dụng cho bé dưới 10 kg. Bé lớn hơn phụ thu 20.000 – 60.000 ₫.</p>
+<div class="grid">
+<div class="clay pk"><span class="tag">Gói Cơ bản</span><h3>Tắm thơm</h3><div class="price">150.000 ₫<small> /lần</small></div><ul><li>Tắm & sấy khô</li><li>Cắt móng, vệ sinh tai</li><li>Xịt thơm cho bé</li></ul><button class="btn" data-pk="Gói Cơ bản – Tắm thơm">Chọn gói này</button></div>
+<div class="clay pk hot"><span class="tag">Được chọn nhiều nhất</span><h3>Spa & cắt tỉa</h3><div class="price">320.000 ₫<small> /lần</small></div><ul><li>Toàn bộ gói Cơ bản</li><li>Cắt tỉa tạo kiểu</li><li>Massage & dưỡng lông</li><li>Khám sức khỏe nhanh</li></ul><button class="btn" data-pk="Gói Spa & cắt tỉa">Chọn gói này</button></div>
+<div class="clay pk"><span class="tag">Gói Toàn diện</span><h3>Khám + tiêm + spa</h3><div class="price">690.000 ₫<small> /lần</small></div><ul><li>Khám tổng quát</li><li>1 mũi tiêm phòng</li><li>Tẩy giun</li><li>Gói Spa & cắt tỉa</li></ul><button class="btn" data-pk="Gói Toàn diện">Chọn gói này</button></div>
+</div></div></section>
+
+<section id="thu-cung"><div class="wrap">
+<h2>Những gương mặt quen thuộc</h2>
+<p class="sub">Một vài bé vừa ghé PawNest tuần này.</p>
+<div class="gal">
+<div class="pet" style="background:#FFD9A0">🐕<span>Bơ</span><small>Corgi, 2 tuổi</small></div>
+<div class="pet" style="background:#FFC2D4">🐩<span>Mochi</span><small>Poodle, 3 tuổi</small></div>
+<div class="pet" style="background:#BDEBDD">🐈<span>Mướp</span><small>Mèo ta, 1 tuổi</small></div>
+<div class="pet" style="background:#FFE38A">🐇<span>Cà Rốt</span><small>Thỏ, 8 tháng</small></div>
+<div class="pet" style="background:#FFB9A0">🐶<span>Xíu</span><small>Phốc sóc, 4 tuổi</small></div>
+<div class="pet" style="background:#D9CBFF">🐱<span>Bông</span><small>Ba Tư, 2 tuổi</small></div>
+</div></div></section>
+
+<section id="dat-lich"><div class="wrap">
+<h2>Đặt lịch trong 1 phút</h2>
+<p class="sub">Điền thông tin, chúng tôi gọi xác nhận trong 30 phút (giờ làm việc).</p>
+<div class="bk">
+<div class="clay info"><h3>Giờ mở cửa</h3><p>Thứ 2 – Chủ nhật: 08:00 – 20:00</p><h3>Địa chỉ</h3><p>123 Đường Hoa Cúc, Q. Phú Nhuận, TP. Hồ Chí Minh</p><h3>Cấp cứu 24/7</h3><p>Hotline: 0900 123 456</p></div>
+<form class="clay" id="f" novalidate>
+<label class="full">Dịch vụ<select id="sv"><option>Gói Cơ bản – Tắm thơm</option><option>Gói Spa & cắt tỉa</option><option>Gói Toàn diện</option><option>Khám bệnh</option><option>Tiêm phòng</option></select></label>
+<label>Tên chủ nuôi<input id="nm" placeholder="Nguyễn Văn A" autocomplete="name"></label>
+<label>Số điện thoại<input id="ph" type="tel" placeholder="09xx xxx xxx" autocomplete="tel"></label>
+<label>Loại thú cưng<select id="pt"><option>Chó</option><option>Mèo</option><option>Thỏ</option><option>Khác</option></select></label>
+<label>Tên bé<input id="pn" placeholder="Bơ"></label>
+<label>Ngày hẹn<input id="dt" type="date"></label>
+<label>Giờ hẹn<select id="tm"><option>08:00</option><option>09:30</option><option>11:00</option><option>13:30</option><option>15:00</option><option>16:30</option><option>18:00</option></select></label>
+<div class="full msg" id="ms" role="status"></div>
+<button class="btn full" type="submit">Xác nhận đặt lịch</button>
+</form></div></div></section>
+
+<section id="danh-gia"><div class="wrap">
+<h2>Chủ nuôi nói gì về PawNest</h2>
+<p class="sub">Những lời nhắn từ các gia đình đã đồng hành cùng chúng tôi.</p>
+<div class="grid tests">
+<div class="clay t"><div class="stars">★★★★★</div><p>Bơ vốn sợ nước nhưng lần này ra về vẫn vẫy đuôi. Bạn groomer rất kiên nhẫn và gửi ảnh cho mình liên tục.</p><div class="who"><div class="av">👩</div><div>Chị Thu Hà<small>Chủ của Bơ</small></div></div></div>
+<div class="clay t"><div class="stars">★★★★★</div><p>Khám và tiêm phòng cho mèo xong còn tắm luôn trong buổi sáng, đỡ phải đi hai nơi. Bác sĩ giải thích rất rõ ràng.</p><div class="who"><div class="av">👨</div><div>Anh Minh Quân<small>Chủ của Mướp</small></div></div></div>
+<div class="clay t"><div class="stars">★★★★★</div><p>Đặt lịch online nhanh, đến nơi không phải chờ. Mochi được cắt tỉa đúng kiểu mình muốn, giá cũng hợp lý.</p><div class="who"><div class="av">👧</div><div>Bạn Ngọc Anh<small>Chủ của Mochi</small></div></div></div>
+</div></div></section>
+
+<footer><div class="wrap">🐾 PawNest – Trung tâm thú y & spa thú cưng · 123 Đường Hoa Cúc, Q. Phú Nhuận, TP.HCM<br>© 2026 PawNest. Thông tin của bạn được bảo vệ theo Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân.</div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+$('dt').min=new Date().toISOString().split('T')[0];
+document.querySelectorAll('[data-pk]').forEach(b=>b.onclick=()=>{$('sv').value=b.dataset.pk;$('dat-lich').scrollIntoView({behavior:'smooth'});$('nm').focus({preventScroll:true})});
+$('f').onsubmit=e=>{
+e.preventDefault();const m=$('ms');m.style.display='block';
+const ph=$('ph').value.replace(/\s/g,'');
+if(!$('nm').value.trim()||!$('pn').value.trim()||!$('dt').value){m.className='full msg err';m.textContent='Vui lòng điền tên chủ nuôi, tên bé và chọn ngày hẹn.';return}
+if(!/^0\d{9}$/.test(ph)){m.className='full msg err';m.textContent='Số điện thoại cần đủ 10 số, bắt đầu bằng 0.';return}
+const [y,mo,d]=$('dt').value.split('-');
+m.className='full msg';
+m.textContent=`Đã đặt lịch cho bé ${$('pn').value.trim()} (${$('pt').value.toLowerCase()}): ${$('sv').value}, lúc ${$('tm').value} ngày ${d}/${mo}/${y}. Chúng tôi sẽ gọi ${$('ph').value} để xác nhận.`;
+};
+</script>
+</body>
+</html>

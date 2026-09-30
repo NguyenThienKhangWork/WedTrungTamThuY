@@ -1,0 +1,94 @@
+@startuml 08_seq_danh_gia
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ tuần tự – Gửi và duyệt đánh giá
+autonumber
+actor "Khách" as K
+participant "Trang đánh giá\n(danh-gia.php + JS)" as P
+participant "api/reviews.php" as R
+database "MySQL" as DB
+actor "Quản lý" as Q
+participant "admin/reviews.php" as AR
+
+== Gửi đánh giá ==
+K -> P : Mở liên kết đánh giá trong tin nhắn (kèm mã)
+K -> P : Chọn số sao và nhập nhận xét
+P -> R : fetch POST /api/reviews.php
+activate R
+R -> DB : Kiểm tra lịch hẹn có status = 'done' và chưa có đánh giá
+DB --> R : kết quả
+alt không hợp lệ (chưa hoàn thành / đã đánh giá / mã sai)
+  R --> P : 400 Lỗi
+  P --> K : Báo lỗi cụ thể
+else hợp lệ
+  R -> DB : INSERT reviews (status = 'pending')
+  R --> P : 201 Đã nhận
+  P --> K : Cảm ơn, đánh giá chờ duyệt
+end
+deactivate R
+
+== Duyệt đánh giá ==
+Q -> AR : Mở danh sách đánh giá chờ duyệt
+AR -> DB : SELECT reviews WHERE status = 'pending'
+DB --> AR : danh sách
+Q -> AR : Chọn Hiển thị hoặc Ẩn
+AR -> DB : UPDATE reviews SET status = 'approved' hoặc 'hidden'
+AR --> Q : Cập nhật thành công
+@enduml

@@ -1,0 +1,92 @@
+@startuml 12_component
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ thành phần – Kiến trúc website PawNest
+left to right direction
+package "Trình duyệt (Client)" as CL {
+  [HTML5 + CSS3\n(claymorphism, Flexbox, Grid)] as UI
+  [JavaScript\nmain.js, booking.js] as JS
+}
+package "Web server (Apache / Nginx + PHP 8.1)" as SV {
+  [Trang công khai\n*.php] as PAGES
+  [API JSON\n/api] as API
+  [Trang quản trị\n/admin] as ADM
+  [includes\ndb, auth, validator] as INC
+  [PHPMailer] as MAILER
+}
+database "MySQL 8\n(InnoDB, utf8mb4)" as DB
+folder "uploads\n(ảnh thư viện)" as FS
+cloud "Email SMTP / Zalo ZNS / SMS" as MSG
+cloud "Google Maps, Facebook,\nInstagram, TikTok, Zalo" as EXT
+
+UI --> PAGES : HTTPS (GET)
+JS --> API : fetch (AJAX, JSON)
+UI --> ADM : HTTPS
+PAGES --> INC
+API --> INC
+ADM --> INC
+INC --> DB : PDO (prepared statement)
+ADM --> FS : tải ảnh lên
+PAGES --> FS : đọc ảnh
+API --> MAILER
+ADM --> MAILER
+MAILER --> MSG : SMTP / HTTP API
+UI ..> EXT : nhúng bản đồ, liên kết mạng xã hội
+@enduml

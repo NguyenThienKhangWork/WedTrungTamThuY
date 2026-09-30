@@ -1,0 +1,147 @@
+@startuml 03_class_php
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ lớp – Tầng xử lý PHP (includes, api, repository)
+hide empty members
+package "includes" {
+  class Database {
+    - pdo : PDO
+    + getConnection() : PDO
+  }
+  class Auth {
+    + login(username, password) : bool
+    + logout()
+    + requireRole(roles)
+    + csrfToken() : string
+    + verifyCsrf(token) : bool
+  }
+  class Validator {
+    + required(value) : bool
+    + phone(value) : bool
+    + futureDate(value) : bool
+    + escape(text) : string
+  }
+  class Mailer {
+    + send(to, subject, body) : bool
+  }
+}
+package "repository" {
+  class ServiceRepository {
+    + findActive() : array
+  }
+  class SlotRepository {
+    + freeSlots(date, serviceId) : array
+  }
+  class AppointmentRepository {
+    + create(data) : int
+    + updateStatus(id, status)
+    + reschedule(id, newStart)
+    + findByStatus(status) : array
+  }
+  class CustomerRepository {
+    + findOrCreate(data) : int
+  }
+  class PetRepository {
+    + findOrCreate(customerId, data) : int
+  }
+  class ReviewRepository {
+    + create(data)
+    + findApproved() : array
+    + setStatus(id, status)
+  }
+}
+package "api" {
+  class ServicesApi
+  class SlotsApi
+  class AppointmentsApi {
+    + handlePost()
+  }
+  class ReviewsApi
+}
+package "admin" {
+  class AdminAppointments
+  class AdminServices
+  class AdminReviews
+}
+
+ServicesApi ..> ServiceRepository
+SlotsApi ..> SlotRepository
+AppointmentsApi ..> Validator
+AppointmentsApi ..> Auth : CSRF
+AppointmentsApi ..> CustomerRepository
+AppointmentsApi ..> PetRepository
+AppointmentsApi ..> AppointmentRepository
+AppointmentsApi ..> Mailer
+ReviewsApi ..> ReviewRepository
+ReviewsApi ..> Validator
+AdminAppointments ..> Auth
+AdminAppointments ..> AppointmentRepository
+AdminAppointments ..> Mailer
+AdminServices ..> Auth
+AdminServices ..> ServiceRepository
+AdminReviews ..> Auth
+AdminReviews ..> ReviewRepository
+ServiceRepository ..> Database
+SlotRepository ..> Database
+AppointmentRepository ..> Database
+CustomerRepository ..> Database
+PetRepository ..> Database
+ReviewRepository ..> Database
+@enduml

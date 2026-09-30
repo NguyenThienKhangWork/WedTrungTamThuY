@@ -1,0 +1,92 @@
+@startmindmap 15_sitemap_mindmap
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ cấu trúc trang web (Sitemap) – PawNest
+* PawNest
+** Trang công khai
+*** Trang chủ
+**** Banner và Navbar
+**** Số liệu nổi bật
+*** Giới thiệu và năng lực
+**** Giới thiệu trung tâm
+**** Sứ mệnh và tầm nhìn
+**** Sở thích
+**** Ngôn ngữ và Kỹ năng
+**** Chứng chỉ – Giải thưởng
+**** Dự án
+*** Dịch vụ và gói chăm sóc
+*** Thư viện bé cưng
+*** Đặt lịch hẹn
+*** Đánh giá của chủ nuôi
+*** Liên hệ và bản đồ
+** Tài khoản khách (GĐ2)
+*** Đăng ký / đăng nhập
+*** Hồ sơ thú cưng
+*** Lịch sử lịch hẹn
+** Quản trị
+*** Đăng nhập
+*** Dashboard
+*** Lịch hẹn
+*** Dịch vụ và giá
+*** Thư viện ảnh
+*** Đánh giá
+*** Báo cáo
+*** Nhân sự và tài khoản
+@endmindmap

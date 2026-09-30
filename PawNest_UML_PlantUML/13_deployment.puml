@@ -1,0 +1,86 @@
+@startuml 13_deployment
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ triển khai – Website PawNest
+node "Thiết bị người dùng\n(điện thoại / máy tính)" as DEV {
+  node "Trình duyệt\nChrome, Safari, Edge, Firefox" as BR
+}
+node "Hosting / VPS (Linux)" as HOST {
+  node "Apache hoặc Nginx\n(HTTPS, gzip, cache)" as WS {
+    artifact "PHP 8.1+\nmã nguồn /pawnest" as SRC
+    artifact "/assets\nCSS, JS, ảnh" as AST
+    artifact "/uploads\nảnh thư viện" as UP
+  }
+  node "MySQL 8 / MariaDB" as DBS {
+    database "pawnest_db" as DB
+  }
+  artifact "Sao lưu mysqldump\nhằng ngày" as BK
+}
+node "Máy phát triển\n(XAMPP / Laragon, Git, phpMyAdmin)" as DEVPC
+cloud "Email SMTP / Zalo ZNS" as MSG
+cloud "GitHub" as GH
+
+BR --> WS : HTTPS 443
+SRC --> DB : PDO, localhost:3306
+SRC --> MSG : SMTP 587 / HTTPS
+DB ..> BK : mysqldump
+DEVPC --> GH : git push
+GH ..> HOST : triển khai (upload / git pull)
+@enduml

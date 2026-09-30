@@ -1,0 +1,96 @@
+@startuml 06_seq_xac_nhan_lich
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ tuần tự – Lễ tân xử lý lịch hẹn
+autonumber
+actor "Lễ tân" as L
+participant "admin/appointments.php" as P
+participant "includes/auth.php" as Au
+database "MySQL" as DB
+participant "PHPMailer" as M
+actor "Khách" as K
+
+L -> P : Mở danh sách lịch chờ xác nhận
+activate P
+P -> Au : requireRole(receptionist, admin)
+Au --> P : hợp lệ
+P -> DB : SELECT appointments WHERE status = 'pending'
+DB --> P : danh sách lịch
+P --> L : Hiển thị danh sách
+L -> P : Bấm Xác nhận / Đổi giờ / Hủy (POST + CSRF)
+P -> Au : verifyCsrf(token)
+Au --> P : hợp lệ
+alt Xác nhận
+  P -> DB : UPDATE status = 'confirmed'
+  P -> M : Gửi tin xác nhận lịch
+  M --> K : Email / Zalo xác nhận
+else Đổi giờ
+  P -> DB : Kiểm tra trùng giờ rồi UPDATE start_at
+  P -> M : Gửi tin đổi lịch
+  M --> K : Email / Zalo báo giờ mới
+else Hủy
+  P -> DB : UPDATE status = 'cancelled'
+  P -> M : Gửi tin hủy lịch
+  M --> K : Email / Zalo báo hủy
+end
+P -> DB : INSERT notifications (kết quả gửi)
+P --> L : Thông báo kết quả
+deactivate P
+@enduml

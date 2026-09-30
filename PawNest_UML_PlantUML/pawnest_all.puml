@@ -1,0 +1,1684 @@
+@startuml 01_usecase
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ Use Case tổng quát – Website PawNest
+left to right direction
+actor "Khách / Chủ nuôi" as KH
+actor "Nhân viên" as NV
+actor "Lễ tân" as LT
+actor "Bác sĩ / Groomer" as BS
+actor "Quản lý" as QL
+actor "Dịch vụ Email / Zalo" as MAIL <<hệ thống>>
+LT --|> NV
+BS --|> NV
+QL --|> NV
+
+rectangle "Website PawNest" {
+  package "Trang công khai" {
+    usecase "Xem trang chủ và giới thiệu" as UC1
+    usecase "Xem dịch vụ và bảng giá" as UC2
+    usecase "Xem thư viện bé cưng" as UC3
+    usecase "Xem đánh giá" as UC4
+    usecase "Xem liên hệ và bản đồ" as UC5
+    usecase "Đặt lịch hẹn" as UC6
+    usecase "Xem khung giờ trống" as UC7
+    usecase "Gửi đánh giá" as UC8
+    usecase "Đổi / hủy lịch hẹn" as UC9
+  }
+  package "Tài khoản khách (GĐ2)" {
+    usecase "Đăng ký / đăng nhập" as UC10
+    usecase "Quản lý hồ sơ thú cưng" as UC11
+    usecase "Xem lịch sử chăm sóc" as UC12
+  }
+  package "Quản trị" {
+    usecase "Đăng nhập quản trị" as UC20
+    usecase "Xác nhận / đổi / hủy lịch" as UC21
+    usecase "Ghi nhận khách đến, hoàn thành" as UC22
+    usecase "Ghi chú tình trạng bé" as UC23
+    usecase "Xem lịch làm việc cá nhân" as UC24
+    usecase "Quản lý dịch vụ và giá" as UC25
+    usecase "Quản lý thư viện ảnh" as UC26
+    usecase "Duyệt đánh giá" as UC27
+    usecase "Xem báo cáo" as UC28
+    usecase "Quản lý nhân sự và tài khoản" as UC29
+  }
+  usecase "Gửi thông báo\n(email / Zalo)" as UC30
+}
+
+KH --> UC1
+KH --> UC2
+KH --> UC3
+KH --> UC4
+KH --> UC5
+KH --> UC6
+KH --> UC8
+KH --> UC9
+KH --> UC10
+KH --> UC11
+KH --> UC12
+UC6 ..> UC7 : <<include>>
+UC6 ..> UC30 : <<include>>
+UC9 ..> UC30 : <<include>>
+UC21 ..> UC30 : <<include>>
+UC11 ..> UC10 : <<include>>
+UC12 ..> UC10 : <<include>>
+NV --> UC20
+LT --> UC21
+LT --> UC22
+BS --> UC23
+BS --> UC24
+QL --> UC25
+QL --> UC26
+QL --> UC27
+QL --> UC28
+QL --> UC29
+UC30 -- MAIL
+@enduml
+
+@startuml 02_class_domain
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ lớp – Miền nghiệp vụ (Domain)
+hide empty members
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  DONE
+  CANCELLED
+  NO_SHOW
+}
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  HIDDEN
+}
+enum StaffRole {
+  DOCTOR
+  GROOMER
+  RECEPTIONIST
+}
+enum UserRole {
+  ADMIN
+  RECEPTIONIST
+  STAFF
+}
+
+class Customer {
+  - id : int
+  - fullName : string
+  - phone : string
+  - email : string
+  - address : string
+  - consentAt : datetime
+  + register()
+  + bookAppointment()
+  + deleteMyData()
+}
+class Pet {
+  - id : int
+  - name : string
+  - species : string
+  - breed : string
+  - birthDate : date
+  - weightKg : float
+  - note : string
+}
+class Service {
+  - id : int
+  - name : string
+  - description : string
+  - durationMin : int
+  - price : decimal
+  - isPackage : bool
+  - isActive : bool
+  + calcPrice(weightKg) : decimal
+}
+class Staff {
+  - id : int
+  - fullName : string
+  - role : StaffRole
+  - specialty : string
+  - photo : string
+  - isActive : bool
+  + isFree(startAt, endAt) : bool
+}
+class Appointment {
+  - id : int
+  - startAt : datetime
+  - endAt : datetime
+  - status : AppointmentStatus
+  - note : string
+  - source : string
+  + confirm()
+  + reschedule(newStart)
+  + cancel()
+  + complete()
+  + markNoShow()
+}
+class Review {
+  - id : int
+  - rating : int
+  - content : string
+  - status : ReviewStatus
+  + approve()
+  + hide()
+}
+class GalleryItem {
+  - id : int
+  - imageBefore : string
+  - imageAfter : string
+  - hasConsent : bool
+  - isVisible : bool
+}
+class User {
+  - id : int
+  - username : string
+  - passwordHash : string
+  - role : UserRole
+  - lastLoginAt : datetime
+  + login()
+  + logout()
+  + hasRole(role) : bool
+}
+class Notification {
+  - id : int
+  - channel : string
+  - type : string
+  - sentAt : datetime
+  - status : string
+  + send()
+}
+
+Customer "1" --> "0..*" Pet : nuôi
+Customer "1" --> "0..*" Appointment : đặt
+Pet "1" --> "0..*" Appointment : được chăm sóc
+Service "1" --> "0..*" Appointment : thuộc về
+Staff "1" --> "0..*" Appointment : thực hiện
+Appointment "1" --> "0..1" Review : nhận
+Appointment "1" --> "0..*" Notification : phát sinh
+Pet "1" --> "0..*" GalleryItem : có ảnh
+User "0..1" -- "0..1" Staff : tài khoản của
+Appointment ..> AppointmentStatus
+Review ..> ReviewStatus
+Staff ..> StaffRole
+User ..> UserRole
+@enduml
+
+@startuml 03_class_php
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ lớp – Tầng xử lý PHP (includes, api, repository)
+hide empty members
+package "includes" {
+  class Database {
+    - pdo : PDO
+    + getConnection() : PDO
+  }
+  class Auth {
+    + login(username, password) : bool
+    + logout()
+    + requireRole(roles)
+    + csrfToken() : string
+    + verifyCsrf(token) : bool
+  }
+  class Validator {
+    + required(value) : bool
+    + phone(value) : bool
+    + futureDate(value) : bool
+    + escape(text) : string
+  }
+  class Mailer {
+    + send(to, subject, body) : bool
+  }
+}
+package "repository" {
+  class ServiceRepository {
+    + findActive() : array
+  }
+  class SlotRepository {
+    + freeSlots(date, serviceId) : array
+  }
+  class AppointmentRepository {
+    + create(data) : int
+    + updateStatus(id, status)
+    + reschedule(id, newStart)
+    + findByStatus(status) : array
+  }
+  class CustomerRepository {
+    + findOrCreate(data) : int
+  }
+  class PetRepository {
+    + findOrCreate(customerId, data) : int
+  }
+  class ReviewRepository {
+    + create(data)
+    + findApproved() : array
+    + setStatus(id, status)
+  }
+}
+package "api" {
+  class ServicesApi
+  class SlotsApi
+  class AppointmentsApi {
+    + handlePost()
+  }
+  class ReviewsApi
+}
+package "admin" {
+  class AdminAppointments
+  class AdminServices
+  class AdminReviews
+}
+
+ServicesApi ..> ServiceRepository
+SlotsApi ..> SlotRepository
+AppointmentsApi ..> Validator
+AppointmentsApi ..> Auth : CSRF
+AppointmentsApi ..> CustomerRepository
+AppointmentsApi ..> PetRepository
+AppointmentsApi ..> AppointmentRepository
+AppointmentsApi ..> Mailer
+ReviewsApi ..> ReviewRepository
+ReviewsApi ..> Validator
+AdminAppointments ..> Auth
+AdminAppointments ..> AppointmentRepository
+AdminAppointments ..> Mailer
+AdminServices ..> Auth
+AdminServices ..> ServiceRepository
+AdminReviews ..> Auth
+AdminReviews ..> ReviewRepository
+ServiceRepository ..> Database
+SlotRepository ..> Database
+AppointmentRepository ..> Database
+CustomerRepository ..> Database
+PetRepository ..> Database
+ReviewRepository ..> Database
+@enduml
+
+@startuml 04_er_mysql
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ ER – Cơ sở dữ liệu MySQL (pawnest_db)
+hide circle
+skinparam linetype polyline
+entity "customers" as customers {
+  * id : INT <<PK>>
+  --
+  * full_name : VARCHAR(100)
+  * phone : VARCHAR(15)
+  email : VARCHAR(100)
+  address : VARCHAR(255)
+  consent_at : DATETIME
+  created_at : DATETIME
+}
+entity "pets" as pets {
+  * id : INT <<PK>>
+  --
+  * customer_id : INT <<FK>>
+  * name : VARCHAR(60)
+  * species : VARCHAR(30)
+  breed : VARCHAR(60)
+  birth_date : DATE
+  weight_kg : DECIMAL(5,2)
+  note : TEXT
+}
+entity "services" as services {
+  * id : INT <<PK>>
+  --
+  * name : VARCHAR(100)
+  description : TEXT
+  * duration_min : INT
+  * price : DECIMAL(12,0)
+  * is_package : TINYINT(1)
+  * is_active : TINYINT(1)
+}
+entity "staff" as staff {
+  * id : INT <<PK>>
+  --
+  * full_name : VARCHAR(100)
+  * role : ENUM
+  specialty : VARCHAR(100)
+  photo : VARCHAR(255)
+  * is_active : TINYINT(1)
+}
+entity "appointments" as appointments {
+  * id : INT <<PK>>
+  --
+  * customer_id : INT <<FK>>
+  * pet_id : INT <<FK>>
+  * service_id : INT <<FK>>
+  * staff_id : INT <<FK>>
+  * start_at : DATETIME
+  * end_at : DATETIME
+  * status : ENUM
+  note : TEXT
+  source : VARCHAR(20)
+  created_at : DATETIME
+  ..
+  UNIQUE (staff_id, start_at)
+}
+entity "reviews" as reviews {
+  * id : INT <<PK>>
+  --
+  * appointment_id : INT <<FK>> <<UNIQUE>>
+  * rating : TINYINT
+  content : TEXT
+  * status : ENUM
+  created_at : DATETIME
+}
+entity "gallery" as gallery {
+  * id : INT <<PK>>
+  --
+  * pet_id : INT <<FK>>
+  image_before : VARCHAR(255)
+  image_after : VARCHAR(255)
+  * has_consent : TINYINT(1)
+  * is_visible : TINYINT(1)
+}
+entity "users" as users {
+  * id : INT <<PK>>
+  --
+  staff_id : INT <<FK>>
+  * username : VARCHAR(50) <<UNIQUE>>
+  * password_hash : VARCHAR(255)
+  * role : ENUM
+  last_login_at : DATETIME
+}
+entity "notifications" as notifications {
+  * id : INT <<PK>>
+  --
+  * appointment_id : INT <<FK>>
+  * channel : VARCHAR(20)
+  * type : VARCHAR(30)
+  sent_at : DATETIME
+  * status : VARCHAR(20)
+}
+
+customers ||--o{ pets : "sở hữu"
+customers ||--o{ appointments : "đặt"
+pets ||--o{ appointments : "được chăm sóc"
+services ||--o{ appointments : "áp dụng"
+staff ||--o{ appointments : "thực hiện"
+appointments ||--o| reviews : "nhận"
+appointments ||--o{ notifications : "phát sinh"
+pets ||--o{ gallery : "có ảnh"
+staff |o--o| users : "có tài khoản"
+@enduml
+
+@startuml 05_seq_dat_lich
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ tuần tự – Khách đặt lịch hẹn (AJAX + PHP + MySQL)
+autonumber
+actor "Khách" as K
+participant "Trình duyệt\n(dat-lich.php + booking.js)" as B
+participant "api/slots.php" as S
+participant "api/appointments.php" as A
+database "MySQL" as DB
+participant "PHPMailer\n(Email / Zalo)" as M
+
+K -> B : Chọn dịch vụ và ngày hẹn
+activate B
+B -> S : fetch GET /api/slots.php?date=&service_id=
+activate S
+S -> DB : SELECT lịch đã đặt và giờ làm việc (PDO prepared)
+DB --> S : danh sách giờ bận
+S --> B : JSON các khung giờ còn trống
+deactivate S
+B --> K : Hiển thị các giờ còn trống
+K -> B : Chọn giờ, điền tên, SĐT, tên bé, loại thú cưng
+B -> B : Kiểm tra dữ liệu bằng JavaScript
+alt dữ liệu không hợp lệ
+  B --> K : Hiện lỗi ngay dưới ô nhập
+else dữ liệu hợp lệ
+  B -> A : fetch POST /api/appointments.php (kèm token CSRF)
+  activate A
+  A -> A : Kiểm tra lại dữ liệu, CSRF, giới hạn tần suất
+  A -> DB : BEGIN
+  A -> DB : Tìm hoặc tạo customers và pets
+  A -> DB : Chọn nhân sự còn trống
+  A -> DB : INSERT appointments (status = pending)
+  alt trùng UNIQUE (staff_id, start_at)
+    DB --> A : lỗi duplicate key
+    A -> DB : ROLLBACK
+    A --> B : 409 Khung giờ đã có người đặt
+    B --> K : Báo chọn giờ khác
+  else lưu thành công
+    DB --> A : id lịch hẹn
+    A -> DB : COMMIT
+    A -> M : Gửi tin xác nhận đã nhận lịch
+    M --> A : Kết quả gửi (ghi vào notifications)
+    A --> B : 201 Created + thông tin lịch hẹn
+    deactivate A
+    B --> K : Hiện xác nhận: tên bé, dịch vụ, giờ, ngày DD/MM/YYYY
+  end
+end
+deactivate B
+@enduml
+
+@startuml 06_seq_xac_nhan_lich
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ tuần tự – Lễ tân xử lý lịch hẹn
+autonumber
+actor "Lễ tân" as L
+participant "admin/appointments.php" as P
+participant "includes/auth.php" as Au
+database "MySQL" as DB
+participant "PHPMailer" as M
+actor "Khách" as K
+
+L -> P : Mở danh sách lịch chờ xác nhận
+activate P
+P -> Au : requireRole(receptionist, admin)
+Au --> P : hợp lệ
+P -> DB : SELECT appointments WHERE status = 'pending'
+DB --> P : danh sách lịch
+P --> L : Hiển thị danh sách
+L -> P : Bấm Xác nhận / Đổi giờ / Hủy (POST + CSRF)
+P -> Au : verifyCsrf(token)
+Au --> P : hợp lệ
+alt Xác nhận
+  P -> DB : UPDATE status = 'confirmed'
+  P -> M : Gửi tin xác nhận lịch
+  M --> K : Email / Zalo xác nhận
+else Đổi giờ
+  P -> DB : Kiểm tra trùng giờ rồi UPDATE start_at
+  P -> M : Gửi tin đổi lịch
+  M --> K : Email / Zalo báo giờ mới
+else Hủy
+  P -> DB : UPDATE status = 'cancelled'
+  P -> M : Gửi tin hủy lịch
+  M --> K : Email / Zalo báo hủy
+end
+P -> DB : INSERT notifications (kết quả gửi)
+P --> L : Thông báo kết quả
+deactivate P
+@enduml
+
+@startuml 07_seq_dang_nhap_admin
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ tuần tự – Đăng nhập trang quản trị
+autonumber
+actor "Nhân viên" as U
+participant "admin/login.php" as L
+participant "includes/auth.php" as A
+database "MySQL" as DB
+
+U -> L : Mở trang đăng nhập
+L -> A : csrfToken()
+A --> L : token lưu trong session
+L --> U : Hiển thị form đăng nhập
+U -> L : Nhập tên đăng nhập, mật khẩu (POST)
+L -> A : verifyCsrf(token)
+alt token sai
+  A --> L : không hợp lệ
+  L --> U : Báo lỗi, tải lại form
+else token đúng
+  L -> A : login(username, password)
+  A -> DB : SELECT * FROM users WHERE username = ? (PDO)
+  DB --> A : bản ghi người dùng
+  alt tài khoản đang bị khóa tạm
+    A --> L : bị khóa
+    L --> U : Báo thử lại sau
+  else không bị khóa
+    A -> A : password_verify(password, password_hash)
+    alt mật khẩu đúng
+      A -> A : session_regenerate_id(true), lưu role vào session
+      A -> DB : UPDATE last_login_at
+      A --> L : thành công
+      L --> U : Chuyển đến dashboard theo vai trò
+    else mật khẩu sai
+      A -> A : Tăng số lần sai (khóa tạm sau nhiều lần)
+      A --> L : thất bại
+      L --> U : Báo sai thông tin đăng nhập
+    end
+  end
+end
+@enduml
+
+@startuml 08_seq_danh_gia
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ tuần tự – Gửi và duyệt đánh giá
+autonumber
+actor "Khách" as K
+participant "Trang đánh giá\n(danh-gia.php + JS)" as P
+participant "api/reviews.php" as R
+database "MySQL" as DB
+actor "Quản lý" as Q
+participant "admin/reviews.php" as AR
+
+== Gửi đánh giá ==
+K -> P : Mở liên kết đánh giá trong tin nhắn (kèm mã)
+K -> P : Chọn số sao và nhập nhận xét
+P -> R : fetch POST /api/reviews.php
+activate R
+R -> DB : Kiểm tra lịch hẹn có status = 'done' và chưa có đánh giá
+DB --> R : kết quả
+alt không hợp lệ (chưa hoàn thành / đã đánh giá / mã sai)
+  R --> P : 400 Lỗi
+  P --> K : Báo lỗi cụ thể
+else hợp lệ
+  R -> DB : INSERT reviews (status = 'pending')
+  R --> P : 201 Đã nhận
+  P --> K : Cảm ơn, đánh giá chờ duyệt
+end
+deactivate R
+
+== Duyệt đánh giá ==
+Q -> AR : Mở danh sách đánh giá chờ duyệt
+AR -> DB : SELECT reviews WHERE status = 'pending'
+DB --> AR : danh sách
+Q -> AR : Chọn Hiển thị hoặc Ẩn
+AR -> DB : UPDATE reviews SET status = 'approved' hoặc 'hidden'
+AR --> Q : Cập nhật thành công
+@enduml
+
+@startuml 09_activity_dat_lich
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ hoạt động – Quy trình đặt lịch và chăm sóc
+|Khách|
+start
+:Chọn dịch vụ / gói;
+:Chọn ngày hẹn;
+|Website|
+:Tra khung giờ trống (AJAX);
+|Khách|
+repeat
+  :Chọn giờ và điền thông tin\n(tên, SĐT, tên bé, loại thú cưng);
+  |Website|
+  :JavaScript kiểm tra dữ liệu;
+  if (Dữ liệu hợp lệ?) then (không)
+    :Hiện lỗi cụ thể;
+  else (có)
+    :Gửi yêu cầu đến PHP;
+    :PHP kiểm tra lại và kiểm tra trùng giờ;
+    if (Khung giờ còn trống?) then (có)
+      :Lưu lịch hẹn (pending);
+      :Gửi tin xác nhận đã nhận lịch;
+    else (không)
+      :Báo khung giờ đã có người đặt;
+    endif
+  endif
+  |Khách|
+repeat while (Chưa đặt được lịch?) is (đúng) not (đã xong)
+:Nhận thông báo đã đặt lịch;
+|Lễ tân|
+:Xem lịch chờ xác nhận;
+if (Xác nhận lịch?) then (có)
+  :Chuyển sang confirmed;
+  |Website|
+  :Gửi xác nhận và nhắc lịch\ntrước 24 giờ và 2 giờ;
+  |Khách|
+  if (Khách đến đúng hẹn?) then (có)
+    |Lễ tân|
+    :Ghi nhận khách đến;
+    |Bác sĩ / Groomer|
+    :Thực hiện dịch vụ, ghi chú tình trạng bé;
+    :Chuyển sang done;
+    |Website|
+    :Gửi lời cảm ơn và mời đánh giá;
+  else (không)
+    |Lễ tân|
+    :Đánh dấu no_show;
+  endif
+else (không)
+  :Hủy lịch (cancelled), gọi báo khách;
+  |Website|
+  :Gửi thông báo hủy;
+endif
+stop
+@enduml
+
+@startuml 10_state_lich_hen
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ trạng thái – Lịch hẹn (Appointment)
+hide empty description
+[*] --> Pending : Khách đặt lịch
+Pending --> Confirmed : Lễ tân xác nhận
+Pending --> Cancelled : Khách hoặc lễ tân hủy
+Confirmed --> Confirmed : Đổi giờ (không trùng lịch)
+Confirmed --> Cancelled : Hủy lịch
+Confirmed --> Done : Khách đến, hoàn thành dịch vụ
+Confirmed --> NoShow : Khách không đến
+Done --> [*]
+Cancelled --> [*]
+NoShow --> [*]
+
+state Pending : Chờ xác nhận
+state Confirmed : Đã xác nhận\n(nhắc lịch 24 giờ và 2 giờ)
+state Done : Hoàn thành\n(mời đánh giá)
+state Cancelled : Đã hủy
+state NoShow : Không đến
+@enduml
+
+@startuml 11_state_danh_gia
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ trạng thái – Đánh giá (Review)
+hide empty description
+[*] --> Pending : Khách gửi đánh giá
+Pending --> Approved : Quản lý duyệt
+Pending --> Hidden : Quản lý ẩn
+Approved --> Hidden : Ẩn đánh giá
+Hidden --> Approved : Hiển thị lại
+Approved --> [*]
+Hidden --> [*]
+
+state Pending : Chờ duyệt
+state Approved : Đang hiển thị trên website
+state Hidden : Đã ẩn
+@enduml
+
+@startuml 12_component
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ thành phần – Kiến trúc website PawNest
+left to right direction
+package "Trình duyệt (Client)" as CL {
+  [HTML5 + CSS3\n(claymorphism, Flexbox, Grid)] as UI
+  [JavaScript\nmain.js, booking.js] as JS
+}
+package "Web server (Apache / Nginx + PHP 8.1)" as SV {
+  [Trang công khai\n*.php] as PAGES
+  [API JSON\n/api] as API
+  [Trang quản trị\n/admin] as ADM
+  [includes\ndb, auth, validator] as INC
+  [PHPMailer] as MAILER
+}
+database "MySQL 8\n(InnoDB, utf8mb4)" as DB
+folder "uploads\n(ảnh thư viện)" as FS
+cloud "Email SMTP / Zalo ZNS / SMS" as MSG
+cloud "Google Maps, Facebook,\nInstagram, TikTok, Zalo" as EXT
+
+UI --> PAGES : HTTPS (GET)
+JS --> API : fetch (AJAX, JSON)
+UI --> ADM : HTTPS
+PAGES --> INC
+API --> INC
+ADM --> INC
+INC --> DB : PDO (prepared statement)
+ADM --> FS : tải ảnh lên
+PAGES --> FS : đọc ảnh
+API --> MAILER
+ADM --> MAILER
+MAILER --> MSG : SMTP / HTTP API
+UI ..> EXT : nhúng bản đồ, liên kết mạng xã hội
+@enduml
+
+@startuml 13_deployment
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ triển khai – Website PawNest
+node "Thiết bị người dùng\n(điện thoại / máy tính)" as DEV {
+  node "Trình duyệt\nChrome, Safari, Edge, Firefox" as BR
+}
+node "Hosting / VPS (Linux)" as HOST {
+  node "Apache hoặc Nginx\n(HTTPS, gzip, cache)" as WS {
+    artifact "PHP 8.1+\nmã nguồn /pawnest" as SRC
+    artifact "/assets\nCSS, JS, ảnh" as AST
+    artifact "/uploads\nảnh thư viện" as UP
+  }
+  node "MySQL 8 / MariaDB" as DBS {
+    database "pawnest_db" as DB
+  }
+  artifact "Sao lưu mysqldump\nhằng ngày" as BK
+}
+node "Máy phát triển\n(XAMPP / Laragon, Git, phpMyAdmin)" as DEVPC
+cloud "Email SMTP / Zalo ZNS" as MSG
+cloud "GitHub" as GH
+
+BR --> WS : HTTPS 443
+SRC --> DB : PDO, localhost:3306
+SRC --> MSG : SMTP 587 / HTTPS
+DB ..> BK : mysqldump
+DEVPC --> GH : git push
+GH ..> HOST : triển khai (upload / git pull)
+@enduml
+
+@startuml 14_package
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ gói – Cấu trúc mã nguồn /pawnest
+package "Trang công khai" as PUB {
+  [index.php]
+  [dich-vu.php]
+  [bang-gia.php]
+  [thu-vien.php]
+  [dat-lich.php]
+  [danh-gia.php]
+  [lien-he.php]
+}
+package "assets" as AS {
+  [css/style.css, clay.css]
+  [js/main.js, booking.js]
+  [img/]
+}
+package "api" as API {
+  [services.php]
+  [slots.php]
+  [appointments.php]
+  [reviews.php]
+}
+package "admin" as ADM {
+  [login.php]
+  [dashboard.php]
+  [appointments.php ]
+  [services.php ]
+  [gallery.php]
+  [reviews.php ]
+}
+package "includes" as INC {
+  [config.php]
+  [db.php]
+  [auth.php]
+  [functions.php]
+  [header.php, footer.php]
+}
+package "database" as DBP {
+  [schema.sql]
+  [seed.sql]
+}
+
+PUB ..> INC : require
+PUB ..> AS : liên kết CSS/JS/ảnh
+AS ..> API : fetch (AJAX)
+API ..> INC : require
+ADM ..> INC : require
+INC ..> DBP : kết nối CSDL
+@enduml
+
+@startmindmap 15_sitemap_mindmap
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ cấu trúc trang web (Sitemap) – PawNest
+* PawNest
+** Trang công khai
+*** Trang chủ
+**** Banner và Navbar
+**** Số liệu nổi bật
+*** Giới thiệu và năng lực
+**** Giới thiệu trung tâm
+**** Sứ mệnh và tầm nhìn
+**** Sở thích
+**** Ngôn ngữ và Kỹ năng
+**** Chứng chỉ – Giải thưởng
+**** Dự án
+*** Dịch vụ và gói chăm sóc
+*** Thư viện bé cưng
+*** Đặt lịch hẹn
+*** Đánh giá của chủ nuôi
+*** Liên hệ và bản đồ
+** Tài khoản khách (GĐ2)
+*** Đăng ký / đăng nhập
+*** Hồ sơ thú cưng
+*** Lịch sử lịch hẹn
+** Quản trị
+*** Đăng nhập
+*** Dashboard
+*** Lịch hẹn
+*** Dịch vụ và giá
+*** Thư viện ảnh
+*** Đánh giá
+*** Báo cáo
+*** Nhân sự và tài khoản
+@endmindmap

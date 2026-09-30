@@ -1,0 +1,79 @@
+@startuml 10_state_lich_hen
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ trạng thái – Lịch hẹn (Appointment)
+hide empty description
+[*] --> Pending : Khách đặt lịch
+Pending --> Confirmed : Lễ tân xác nhận
+Pending --> Cancelled : Khách hoặc lễ tân hủy
+Confirmed --> Confirmed : Đổi giờ (không trùng lịch)
+Confirmed --> Cancelled : Hủy lịch
+Confirmed --> Done : Khách đến, hoàn thành dịch vụ
+Confirmed --> NoShow : Khách không đến
+Done --> [*]
+Cancelled --> [*]
+NoShow --> [*]
+
+state Pending : Chờ xác nhận
+state Confirmed : Đã xác nhận\n(nhắc lịch 24 giờ và 2 giờ)
+state Done : Hoàn thành\n(mời đánh giá)
+state Cancelled : Đã hủy
+state NoShow : Không đến
+@enduml

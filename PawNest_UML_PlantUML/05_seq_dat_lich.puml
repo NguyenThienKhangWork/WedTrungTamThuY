@@ -1,0 +1,107 @@
+@startuml 05_seq_dat_lich
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ tuần tự – Khách đặt lịch hẹn (AJAX + PHP + MySQL)
+autonumber
+actor "Khách" as K
+participant "Trình duyệt\n(dat-lich.php + booking.js)" as B
+participant "api/slots.php" as S
+participant "api/appointments.php" as A
+database "MySQL" as DB
+participant "PHPMailer\n(Email / Zalo)" as M
+
+K -> B : Chọn dịch vụ và ngày hẹn
+activate B
+B -> S : fetch GET /api/slots.php?date=&service_id=
+activate S
+S -> DB : SELECT lịch đã đặt và giờ làm việc (PDO prepared)
+DB --> S : danh sách giờ bận
+S --> B : JSON các khung giờ còn trống
+deactivate S
+B --> K : Hiển thị các giờ còn trống
+K -> B : Chọn giờ, điền tên, SĐT, tên bé, loại thú cưng
+B -> B : Kiểm tra dữ liệu bằng JavaScript
+alt dữ liệu không hợp lệ
+  B --> K : Hiện lỗi ngay dưới ô nhập
+else dữ liệu hợp lệ
+  B -> A : fetch POST /api/appointments.php (kèm token CSRF)
+  activate A
+  A -> A : Kiểm tra lại dữ liệu, CSRF, giới hạn tần suất
+  A -> DB : BEGIN
+  A -> DB : Tìm hoặc tạo customers và pets
+  A -> DB : Chọn nhân sự còn trống
+  A -> DB : INSERT appointments (status = pending)
+  alt trùng UNIQUE (staff_id, start_at)
+    DB --> A : lỗi duplicate key
+    A -> DB : ROLLBACK
+    A --> B : 409 Khung giờ đã có người đặt
+    B --> K : Báo chọn giờ khác
+  else lưu thành công
+    DB --> A : id lịch hẹn
+    A -> DB : COMMIT
+    A -> M : Gửi tin xác nhận đã nhận lịch
+    M --> A : Kết quả gửi (ghi vào notifications)
+    A --> B : 201 Created + thông tin lịch hẹn
+    deactivate A
+    B --> K : Hiện xác nhận: tên bé, dịch vụ, giờ, ngày DD/MM/YYYY
+  end
+end
+deactivate B
+@enduml

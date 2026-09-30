@@ -1,0 +1,166 @@
+@startuml 04_er_mysql
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ ER – Cơ sở dữ liệu MySQL (pawnest_db)
+hide circle
+skinparam linetype polyline
+entity "customers" as customers {
+  * id : INT <<PK>>
+  --
+  * full_name : VARCHAR(100)
+  * phone : VARCHAR(15)
+  email : VARCHAR(100)
+  address : VARCHAR(255)
+  consent_at : DATETIME
+  created_at : DATETIME
+}
+entity "pets" as pets {
+  * id : INT <<PK>>
+  --
+  * customer_id : INT <<FK>>
+  * name : VARCHAR(60)
+  * species : VARCHAR(30)
+  breed : VARCHAR(60)
+  birth_date : DATE
+  weight_kg : DECIMAL(5,2)
+  note : TEXT
+}
+entity "services" as services {
+  * id : INT <<PK>>
+  --
+  * name : VARCHAR(100)
+  description : TEXT
+  * duration_min : INT
+  * price : DECIMAL(12,0)
+  * is_package : TINYINT(1)
+  * is_active : TINYINT(1)
+}
+entity "staff" as staff {
+  * id : INT <<PK>>
+  --
+  * full_name : VARCHAR(100)
+  * role : ENUM
+  specialty : VARCHAR(100)
+  photo : VARCHAR(255)
+  * is_active : TINYINT(1)
+}
+entity "appointments" as appointments {
+  * id : INT <<PK>>
+  --
+  * customer_id : INT <<FK>>
+  * pet_id : INT <<FK>>
+  * service_id : INT <<FK>>
+  * staff_id : INT <<FK>>
+  * start_at : DATETIME
+  * end_at : DATETIME
+  * status : ENUM
+  note : TEXT
+  source : VARCHAR(20)
+  created_at : DATETIME
+  ..
+  UNIQUE (staff_id, start_at)
+}
+entity "reviews" as reviews {
+  * id : INT <<PK>>
+  --
+  * appointment_id : INT <<FK>> <<UNIQUE>>
+  * rating : TINYINT
+  content : TEXT
+  * status : ENUM
+  created_at : DATETIME
+}
+entity "gallery" as gallery {
+  * id : INT <<PK>>
+  --
+  * pet_id : INT <<FK>>
+  image_before : VARCHAR(255)
+  image_after : VARCHAR(255)
+  * has_consent : TINYINT(1)
+  * is_visible : TINYINT(1)
+}
+entity "users" as users {
+  * id : INT <<PK>>
+  --
+  staff_id : INT <<FK>>
+  * username : VARCHAR(50) <<UNIQUE>>
+  * password_hash : VARCHAR(255)
+  * role : ENUM
+  last_login_at : DATETIME
+}
+entity "notifications" as notifications {
+  * id : INT <<PK>>
+  --
+  * appointment_id : INT <<FK>>
+  * channel : VARCHAR(20)
+  * type : VARCHAR(30)
+  sent_at : DATETIME
+  * status : VARCHAR(20)
+}
+
+customers ||--o{ pets : "sở hữu"
+customers ||--o{ appointments : "đặt"
+pets ||--o{ appointments : "được chăm sóc"
+services ||--o{ appointments : "áp dụng"
+staff ||--o{ appointments : "thực hiện"
+appointments ||--o| reviews : "nhận"
+appointments ||--o{ notifications : "phát sinh"
+pets ||--o{ gallery : "có ảnh"
+staff |o--o| users : "có tài khoản"
+@enduml

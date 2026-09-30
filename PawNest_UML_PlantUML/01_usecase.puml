@@ -1,0 +1,133 @@
+@startuml 01_usecase
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ Use Case tổng quát – Website PawNest
+left to right direction
+actor "Khách / Chủ nuôi" as KH
+actor "Nhân viên" as NV
+actor "Lễ tân" as LT
+actor "Bác sĩ / Groomer" as BS
+actor "Quản lý" as QL
+actor "Dịch vụ Email / Zalo" as MAIL <<hệ thống>>
+LT --|> NV
+BS --|> NV
+QL --|> NV
+
+rectangle "Website PawNest" {
+  package "Trang công khai" {
+    usecase "Xem trang chủ và giới thiệu" as UC1
+    usecase "Xem dịch vụ và bảng giá" as UC2
+    usecase "Xem thư viện bé cưng" as UC3
+    usecase "Xem đánh giá" as UC4
+    usecase "Xem liên hệ và bản đồ" as UC5
+    usecase "Đặt lịch hẹn" as UC6
+    usecase "Xem khung giờ trống" as UC7
+    usecase "Gửi đánh giá" as UC8
+    usecase "Đổi / hủy lịch hẹn" as UC9
+  }
+  package "Tài khoản khách (GĐ2)" {
+    usecase "Đăng ký / đăng nhập" as UC10
+    usecase "Quản lý hồ sơ thú cưng" as UC11
+    usecase "Xem lịch sử chăm sóc" as UC12
+  }
+  package "Quản trị" {
+    usecase "Đăng nhập quản trị" as UC20
+    usecase "Xác nhận / đổi / hủy lịch" as UC21
+    usecase "Ghi nhận khách đến, hoàn thành" as UC22
+    usecase "Ghi chú tình trạng bé" as UC23
+    usecase "Xem lịch làm việc cá nhân" as UC24
+    usecase "Quản lý dịch vụ và giá" as UC25
+    usecase "Quản lý thư viện ảnh" as UC26
+    usecase "Duyệt đánh giá" as UC27
+    usecase "Xem báo cáo" as UC28
+    usecase "Quản lý nhân sự và tài khoản" as UC29
+  }
+  usecase "Gửi thông báo\n(email / Zalo)" as UC30
+}
+
+KH --> UC1
+KH --> UC2
+KH --> UC3
+KH --> UC4
+KH --> UC5
+KH --> UC6
+KH --> UC8
+KH --> UC9
+KH --> UC10
+KH --> UC11
+KH --> UC12
+UC6 ..> UC7 : <<include>>
+UC6 ..> UC30 : <<include>>
+UC9 ..> UC30 : <<include>>
+UC21 ..> UC30 : <<include>>
+UC11 ..> UC10 : <<include>>
+UC12 ..> UC10 : <<include>>
+NV --> UC20
+LT --> UC21
+LT --> UC22
+BS --> UC23
+BS --> UC24
+QL --> UC25
+QL --> UC26
+QL --> UC27
+QL --> UC28
+QL --> UC29
+UC30 -- MAIL
+@enduml

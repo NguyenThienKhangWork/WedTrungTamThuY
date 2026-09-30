@@ -1,0 +1,113 @@
+@startuml 09_activity_dat_lich
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ hoạt động – Quy trình đặt lịch và chăm sóc
+|Khách|
+start
+:Chọn dịch vụ / gói;
+:Chọn ngày hẹn;
+|Website|
+:Tra khung giờ trống (AJAX);
+|Khách|
+repeat
+  :Chọn giờ và điền thông tin\n(tên, SĐT, tên bé, loại thú cưng);
+  |Website|
+  :JavaScript kiểm tra dữ liệu;
+  if (Dữ liệu hợp lệ?) then (không)
+    :Hiện lỗi cụ thể;
+  else (có)
+    :Gửi yêu cầu đến PHP;
+    :PHP kiểm tra lại và kiểm tra trùng giờ;
+    if (Khung giờ còn trống?) then (có)
+      :Lưu lịch hẹn (pending);
+      :Gửi tin xác nhận đã nhận lịch;
+    else (không)
+      :Báo khung giờ đã có người đặt;
+    endif
+  endif
+  |Khách|
+repeat while (Chưa đặt được lịch?) is (đúng) not (đã xong)
+:Nhận thông báo đã đặt lịch;
+|Lễ tân|
+:Xem lịch chờ xác nhận;
+if (Xác nhận lịch?) then (có)
+  :Chuyển sang confirmed;
+  |Website|
+  :Gửi xác nhận và nhắc lịch\ntrước 24 giờ và 2 giờ;
+  |Khách|
+  if (Khách đến đúng hẹn?) then (có)
+    |Lễ tân|
+    :Ghi nhận khách đến;
+    |Bác sĩ / Groomer|
+    :Thực hiện dịch vụ, ghi chú tình trạng bé;
+    :Chuyển sang done;
+    |Website|
+    :Gửi lời cảm ơn và mời đánh giá;
+  else (không)
+    |Lễ tân|
+    :Đánh dấu no_show;
+  endif
+else (không)
+  :Hủy lịch (cancelled), gọi báo khách;
+  |Website|
+  :Gửi thông báo hủy;
+endif
+stop
+@enduml

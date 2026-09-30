@@ -1,0 +1,98 @@
+@startuml 07_seq_dang_nhap_admin
+skinparam defaultFontName DejaVu Sans
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam roundCorner 14
+skinparam ArrowColor #8A5A44
+skinparam TitleFontSize 16
+skinparam TitleFontColor #E5533D
+skinparam usecase {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam actor {
+  BackgroundColor #FFE9B0
+  BorderColor #4A2E24
+}
+skinparam class {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+  HeaderBackgroundColor #FFE9B0
+}
+skinparam entity {
+  BackgroundColor #FFF8EE
+  BorderColor #E5533D
+}
+skinparam sequence {
+  ParticipantBackgroundColor #FFE9B0
+  ParticipantBorderColor #4A2E24
+  LifeLineBorderColor #8A5A44
+  ActorBackgroundColor #FFE9B0
+  ActorBorderColor #4A2E24
+}
+skinparam state {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam activity {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam component {
+  BackgroundColor #FFF1E0
+  BorderColor #E5533D
+}
+skinparam node {
+  BackgroundColor #FFF8EE
+  BorderColor #8A5A44
+}
+skinparam package {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+skinparam database {
+  BackgroundColor #FFE9B0
+  BorderColor #8A5A44
+}
+skinparam rectangle {
+  BackgroundColor #FFFBF3
+  BorderColor #8A5A44
+}
+title Sơ đồ tuần tự – Đăng nhập trang quản trị
+autonumber
+actor "Nhân viên" as U
+participant "admin/login.php" as L
+participant "includes/auth.php" as A
+database "MySQL" as DB
+
+U -> L : Mở trang đăng nhập
+L -> A : csrfToken()
+A --> L : token lưu trong session
+L --> U : Hiển thị form đăng nhập
+U -> L : Nhập tên đăng nhập, mật khẩu (POST)
+L -> A : verifyCsrf(token)
+alt token sai
+  A --> L : không hợp lệ
+  L --> U : Báo lỗi, tải lại form
+else token đúng
+  L -> A : login(username, password)
+  A -> DB : SELECT * FROM users WHERE username = ? (PDO)
+  DB --> A : bản ghi người dùng
+  alt tài khoản đang bị khóa tạm
+    A --> L : bị khóa
+    L --> U : Báo thử lại sau
+  else không bị khóa
+    A -> A : password_verify(password, password_hash)
+    alt mật khẩu đúng
+      A -> A : session_regenerate_id(true), lưu role vào session
+      A -> DB : UPDATE last_login_at
+      A --> L : thành công
+      L --> U : Chuyển đến dashboard theo vai trò
+    else mật khẩu sai
+      A -> A : Tăng số lần sai (khóa tạm sau nhiều lần)
+      A --> L : thất bại
+      L --> U : Báo sai thông tin đăng nhập
+    end
+  end
+end
+@enduml
