@@ -11,6 +11,10 @@ $page_desc = 'Đặt lịch hẹn khám chữa bệnh, tiêm phòng và spa cho 
 $active_menu = 'booking';
 
 require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/repository/ServiceRepository.php';
+
+$serviceRepo = new ServiceRepository();
+$allServices = $serviceRepo->findActive();
 
 $preset_service = $_GET['service'] ?? '';
 $preset_pet = $_GET['pet'] ?? '';
@@ -41,14 +45,19 @@ $preset_pet = $_GET['pet'] ?? '';
             Dịch vụ hoặc Gói chăm sóc <span class="text-red-500">*</span>
           </label>
           <select id="sv" class="w-full px-4 py-3 rounded-2xl border border-gray-200 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none clay-input">
-            <option value="Gói Spa & cắt tỉa" <?= $preset_service === 'Gói Spa & cắt tỉa' ? 'selected' : '' ?>>Gói Spa & cắt tỉa (Phổ biến nhất)</option>
-            <option value="Gói Cơ bản" <?= $preset_service === 'Gói Cơ bản' ? 'selected' : '' ?>>Gói Cơ bản (Tắm & Vệ sinh)</option>
-            <option value="Gói Toàn diện" <?= $preset_service === 'Gói Toàn diện' ? 'selected' : '' ?>>Gói Toàn diện (VIP Care + Khám)</option>
-            <option value="Khám tổng quát" <?= $preset_service === 'Khám tổng quát' ? 'selected' : '' ?>>Khám tổng quát & Chẩn đoán</option>
-            <option value="Tiêm phòng vaccine" <?= $preset_service === 'Tiêm phòng vaccine' ? 'selected' : '' ?>>Tiêm phòng vaccine & Tẩy giun</option>
-            <option value="Tắm Spa thảo mộc" <?= $preset_service === 'Tắm Spa thảo mộc' ? 'selected' : '' ?>>Tắm Spa thảo mộc ngâm bồn</option>
-            <option value="Cắt tỉa & tạo kiểu" <?= $preset_service === 'Cắt tỉa & tạo kiểu' ? 'selected' : '' ?>>Cắt tỉa & Tạo kiểu lông nghệ thuật</option>
-            <option value="Khách sạn lưu trú" <?= $preset_service === 'Khách sạn lưu trú' ? 'selected' : '' ?>>Khách sạn thú cưng (Pet Hotel)</option>
+            <?php if (!empty($allServices)): ?>
+              <?php foreach ($allServices as $s): ?>
+                <option value="<?= e($s['name']) ?>" <?= ($preset_service === $s['name']) ? 'selected' : '' ?>>
+                  <?= e($s['name']) ?> (<?= number_format((float)$s['price'], 0, ',', '.') ?> ₫<?= !empty($s['is_package']) ? ' - Gói' : '' ?>)
+                </option>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <option value="Gói Spa & cắt tỉa" <?= $preset_service === 'Gói Spa & cắt tỉa' ? 'selected' : '' ?>>Gói Spa & cắt tỉa (Phổ biến nhất)</option>
+              <option value="Gói Cơ bản" <?= $preset_service === 'Gói Cơ bản' ? 'selected' : '' ?>>Gói Cơ bản (Tắm & Vệ sinh)</option>
+              <option value="Gói Toàn diện" <?= $preset_service === 'Gói Toàn diện' ? 'selected' : '' ?>>Gói Toàn diện (VIP Care + Khám)</option>
+              <option value="Khám tổng quát" <?= $preset_service === 'Khám tổng quát' ? 'selected' : '' ?>>Khám tổng quát & Chẩn đoán</option>
+              <option value="Tiêm phòng vaccine" <?= $preset_service === 'Tiêm phòng vaccine' ? 'selected' : '' ?>>Tiêm phòng vaccine & Tẩy giun</option>
+            <?php endif; ?>
           </select>
         </div>
 

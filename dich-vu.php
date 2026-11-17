@@ -11,15 +11,37 @@ $page_desc = 'Danh sách dịch vụ khám chữa bệnh, tiêm chủng vaccine,
 $active_menu = 'services';
 
 require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/config/database.php';
+require_once __DIR__ . '/repository/ServiceRepository.php';
 
-// Lấy danh sách dịch vụ từ MySQL nếu có
-$servicesList = [];
-try {
-    $stmt = $pdo->query("SELECT * FROM services WHERE is_active = 1 ORDER BY is_package ASC, id ASC");
-    $servicesList = $stmt->fetchAll();
-} catch (Exception $e) {
-    // Fallback static
+$serviceRepo = new ServiceRepository();
+$servicesList = $serviceRepo->findActive();
+
+// Helper gán biểu tượng và phân loại trực quan cho dịch vụ
+function getServiceMeta(string $name, int|string $is_package): array {
+    $n = mb_strtolower($name, 'UTF-8');
+    if (str_contains($n, 'khám') || str_contains($n, 'chẩn đoán') || str_contains($n, 'điều trị')) {
+        return ['icon' => '🩺', 'bg' => 'bg-emerald-100 text-[#1a3d1a]', 'badge' => 'Khám & Điều trị'];
+    }
+    if (str_contains($n, 'tiêm') || str_contains($n, 'vắc') || str_contains($n, 'vac') || str_contains($n, 'giun')) {
+        return ['icon' => '💉', 'bg' => 'bg-amber-100 text-[#E86A10]', 'badge' => 'Tiêm chủng & Phòng ngừa'];
+    }
+    if (str_contains($n, 'tắm') || str_contains($n, 'spa') || str_contains($n, 'thơm')) {
+        return ['icon' => '🛁', 'bg' => 'bg-blue-100 text-blue-700', 'badge' => 'Spa & Thư giãn'];
+    }
+    if (str_contains($n, 'cắt') || str_contains($n, 'tỉa') || str_contains($n, 'kiểu') || str_contains($n, 'groom')) {
+        return ['icon' => '✂️', 'bg' => 'bg-pink-100 text-pink-700', 'badge' => 'Grooming Thẩm mỹ'];
+    }
+    if (str_contains($n, 'khách sạn') || str_contains($n, 'lưu trú') || str_contains($n, 'hotel')) {
+        return ['icon' => '🏨', 'bg' => 'bg-purple-100 text-purple-700', 'badge' => 'Lưu trú Khách sạn'];
+    }
+    if (str_contains($n, 'cấp cứu') || str_contains($n, 'hồi sức')) {
+        return ['icon' => '🚨', 'bg' => 'bg-red-100 text-red-600', 'badge' => 'Cấp cứu 24/7'];
+    }
+    if (!empty($is_package)) {
+        return ['icon' => '⭐', 'bg' => 'bg-amber-100 text-amber-700', 'badge' => 'Gói trọn gói'];
+    }
+    return ['icon' => '🐾', 'bg' => 'bg-emerald-50 text-emerald-800', 'badge' => 'Dịch vụ thú y'];
 }
 ?>
 
@@ -37,123 +59,52 @@ try {
     </p>
   </div>
 
-  <!-- Lưới dịch vụ chính (CSS Grid auto-fit) -->
+  <!-- Lưới dịch vụ động lấy từ Cơ sở Dữ liệu (MySQL) -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-    <!-- 1. Khám tổng quát & Chẩn đoán -->
-    <div class="clay-card p-6 flex flex-col justify-between">
-      <div>
-        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-[#1a3d1a] flex items-center justify-center text-2xl mb-4">
-          🩺
-        </div>
-        <h3 class="font-bold text-lg text-[#1a3d1a]">Khám Tổng Quát & Chẩn Đoán</h3>
-        <p class="text-xs text-gray-600 mt-2 leading-relaxed">
-          Kiểm tra tai, mắt, mũi, họng, tim phổi, da lông và siêu âm/xét nghiệm máu khi có chỉ định bác sĩ.
-        </p>
-        <div class="mt-4 flex items-center justify-between text-xs text-gray-500 border-t border-gray-100 pt-3">
-          <span>Thời lượng: <strong>30 - 45 phút</strong></span>
-          <span class="text-emerald-700 font-bold text-sm">150.000 ₫</span>
-        </div>
-      </div>
-      <div class="mt-5">
-        <a href="/dat-lich.php?service=Khám tổng quát" class="w-full clay-btn-orange py-2.5 text-xs">
-          Đặt lịch khám ngay
-        </a>
-      </div>
-    </div>
+    <?php if (!empty($servicesList)): ?>
+      <?php foreach ($servicesList as $svc): 
+        $meta = getServiceMeta($svc['name'], $svc['is_package'] ?? 0);
+      ?>
+        <div class="clay-card p-6 flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-12 h-12 rounded-2xl <?= $meta['bg'] ?> flex items-center justify-center text-2xl shadow-2xs">
+                <?= $meta['icon'] ?>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold <?= !empty($svc['is_package']) ? 'bg-[#E86A10]/10 text-[#E86A10]' : 'bg-gray-100 text-gray-600' ?>">
+                <?= $meta['badge'] ?>
+              </span>
+            </div>
 
-    <!-- 2. Tiêm phòng Vaccine & Tẩy giun -->
-    <div class="clay-card p-6 flex flex-col justify-between">
-      <div>
-        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-[#E86A10] flex items-center justify-center text-2xl mb-4">
-          💉
-        </div>
-        <h3 class="font-bold text-lg text-[#1a3d1a]">Tiêm Phòng Vaccine & Sổ Giun</h3>
-        <p class="text-xs text-gray-600 mt-2 leading-relaxed">
-          Vaccine 5 bệnh / 7 bệnh cho chó, 4 bệnh cho mèo nhập khẩu từ Pháp và Mỹ; theo dõi sổ sức khỏe điện tử.
-        </p>
-        <div class="mt-4 flex items-center justify-between text-xs text-gray-500 border-t border-gray-100 pt-3">
-          <span>Thời lượng: <strong>20 - 30 phút</strong></span>
-          <span class="text-emerald-700 font-bold text-sm">250.000 ₫</span>
-        </div>
-      </div>
-      <div class="mt-5">
-        <a href="/dat-lich.php?service=Tiêm phòng vaccine" class="w-full clay-btn-orange py-2.5 text-xs">
-          Đặt lịch tiêm phòng
-        </a>
-      </div>
-    </div>
+            <h3 class="font-bold text-lg text-[#1a3d1a] leading-snug"><?= e($svc['name']) ?></h3>
+            <p class="text-xs text-gray-600 mt-2 leading-relaxed">
+              <?= e($svc['description'] ?: 'Quy trình kiểm tra và chăm sóc chuyên nghiệp theo chuẩn quốc tế tại PawNest.') ?>
+            </p>
 
-    <!-- 3. Tắm Spa thảo mộc & sấy phồng -->
-    <div class="clay-card p-6 flex flex-col justify-between">
-      <div>
-        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center text-2xl mb-4">
-          🛁
-        </div>
-        <h3 class="font-bold text-lg text-[#1a3d1a]">Tắm Spa Thảo Mộc & Sấy Phồng</h3>
-        <p class="text-xs text-gray-600 mt-2 leading-relaxed">
-          Ngâm bồn sục khí nano, dầu tắm thảo mộc dưỡng ẩm sâu, vắt tuyến hôi, vệ sinh tai và sấy chải mềm mượt.
-        </p>
-        <div class="mt-4 flex items-center justify-between text-xs text-gray-500 border-t border-gray-100 pt-3">
-          <span>Thời lượng: <strong>60 - 90 phút</strong></span>
-          <span class="text-emerald-700 font-bold text-sm">180.000 ₫</span>
-        </div>
-      </div>
-      <div class="mt-5">
-        <a href="/dat-lich.php?service=Tắm Spa thảo mộc" class="w-full clay-btn-orange py-2.5 text-xs">
-          Đặt lịch tắm spa
-        </a>
-      </div>
-    </div>
+            <div class="mt-4 flex items-center justify-between text-xs text-gray-500 border-t border-gray-100 pt-3">
+              <span>Thời lượng: <strong><?= (int)$svc['duration_min'] ?> phút</strong></span>
+              <span class="text-emerald-700 font-extrabold text-sm"><?= number_format((float)$svc['price'], 0, ',', '.') ?> ₫</span>
+            </div>
+          </div>
 
-    <!-- 4. Cắt tỉa & Tạo kiểu lông nghệ thuật -->
-    <div class="clay-card p-6 flex flex-col justify-between">
-      <div>
-        <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-700 flex items-center justify-center text-2xl mb-4">
-          ✂️
+          <div class="mt-5">
+            <a href="/dat-lich.php?service=<?= urlencode($svc['name']) ?>" class="w-full clay-btn-orange py-2.5 text-xs inline-flex items-center justify-center gap-1.5 font-bold shadow-xs">
+              <span>Đặt lịch ngay</span>
+              <span>→</span>
+            </a>
+          </div>
         </div>
-        <h3 class="font-bold text-lg text-[#1a3d1a]">Cắt Tỉa & Tạo Kiểu Lông</h3>
-        <p class="text-xs text-gray-600 mt-2 leading-relaxed">
-          Tạo hình phong cách Hàn Quốc/Nhật Bản theo giống bé (Poodle, Phốc sóc, Bichon, Corgi) bởi Master Groomer.
-        </p>
-        <div class="mt-4 flex items-center justify-between text-xs text-gray-500 border-t border-gray-100 pt-3">
-          <span>Thời lượng: <strong>90 - 120 phút</strong></span>
-          <span class="text-emerald-700 font-bold text-sm">280.000 ₫</span>
-        </div>
-      </div>
-      <div class="mt-5">
-        <a href="/dat-lich.php?service=Cắt tỉa & tạo kiểu" class="w-full clay-btn-orange py-2.5 text-xs">
-          Đặt lịch cắt tỉa
-        </a>
-      </div>
-    </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
 
-    <!-- 5. Khách sạn thú cưng (Pet Hotel) -->
-    <div class="clay-card p-6 flex flex-col justify-between">
+    <!-- Card Cấp cứu 24/7 cố định -->
+    <div class="clay-card p-6 flex flex-col justify-between border-2 border-red-200 bg-red-50/20">
       <div>
-        <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center text-2xl mb-4">
-          🏨
-        </div>
-        <h3 class="font-bold text-lg text-[#1a3d1a]">Khách Sạn Lưu Trú Cao Cấp</h3>
-        <p class="text-xs text-gray-600 mt-2 leading-relaxed">
-          Phòng máy lạnh độc lập 24/24, camera trực tuyến cho chủ xem bé, chế độ ăn hạt cao cấp và dạo chơi mỗi ngày.
-        </p>
-        <div class="mt-4 flex items-center justify-between text-xs text-gray-500 border-t border-gray-100 pt-3">
-          <span>Thời lượng: <strong>Theo ngày</strong></span>
-          <span class="text-emerald-700 font-bold text-sm">200.000 ₫ / ngày</span>
-        </div>
-      </div>
-      <div class="mt-5">
-        <a href="/dat-lich.php?service=Khách sạn lưu trú" class="w-full clay-btn-orange py-2.5 text-xs">
-          Đặt phòng lưu trú
-        </a>
-      </div>
-    </div>
-
-    <!-- 6. Cấp cứu 24/7 & Hồi sức -->
-    <div class="clay-card p-6 flex flex-col justify-between border-2 border-red-200">
-      <div>
-        <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-2xl mb-4">
-          🚨
+        <div class="flex items-center justify-between mb-4">
+          <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center text-2xl shadow-2xs">
+            🚨
+          </div>
+          <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-700">Khẩn cấp</span>
         </div>
         <h3 class="font-bold text-lg text-red-800">Cấp Cứu Thú Y 24/7</h3>
         <p class="text-xs text-gray-600 mt-2 leading-relaxed">
@@ -165,7 +116,7 @@ try {
         </div>
       </div>
       <div class="mt-5">
-        <a href="tel:0900123456" class="w-full py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs inline-flex items-center justify-center gap-2">
+        <a href="tel:0900123456" class="w-full py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs inline-flex items-center justify-center gap-2 shadow-sm transition-all active:scale-98">
           <span>Gọi cấp cứu ngay</span>
         </a>
       </div>

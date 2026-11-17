@@ -967,12 +967,25 @@ require_once __DIR__ . "/includes/header.php";
             <div>
               <label class="block text-xs font-semibold text-gray-700 mb-1">Dịch vụ mong muốn</label>
               <select id="sv" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#1a3d1a] bg-gray-50/50">
-                <option value="Gói Spa & cắt tỉa">Gói Spa & cắt tỉa (320.000₫ - Phổ biến nhất)</option>
-                <option value="Gói Cơ bản – Tắm thơm">Gói Cơ bản – Tắm thơm (150.000₫)</option>
-                <option value="Gói Toàn diện">Gói Toàn diện: Khám + Tiêm + Spa (690.000₫)</option>
-                <option value="Khám & điều trị thú y">Khám tổng quát & điều trị thú y</option>
-                <option value="Tiêm phòng & tẩy giun">Tiêm phòng vắc-xin & tẩy giun định kỳ</option>
-                <option value="Cozy Cat House ($49.99)">Mua Cozy Cat House ($49.99)</option>
+                <?php
+                try {
+                    $servicesStmt = $pdo->query("SELECT name, price, is_package FROM services WHERE is_active = 1 ORDER BY is_package DESC, id ASC");
+                    $dbServices = $servicesStmt->fetchAll();
+                    if (!empty($dbServices)) {
+                        foreach ($dbServices as $s) {
+                            $isPkgText = !empty($s['is_package']) ? ' - Gói' : '';
+                            $priceText = number_format((float)$s['price'], 0, ',', '.') . '₫';
+                            echo '<option value="' . e($s['name']) . '">' . e($s['name']) . ' (' . $priceText . $isPkgText . ')</option>';
+                        }
+                    } else {
+                        echo '<option value="Gói Spa & cắt tỉa">Gói Spa & cắt tỉa (320.000₫ - Phổ biến nhất)</option>';
+                        echo '<option value="Gói Cơ bản – Tắm thơm">Gói Cơ bản – Tắm thơm (150.000₫)</option>';
+                    }
+                } catch (Throwable $e) {
+                    echo '<option value="Gói Spa & cắt tỉa">Gói Spa & cắt tỉa (320.000₫ - Phổ biến nhất)</option>';
+                    echo '<option value="Gói Cơ bản – Tắm thơm">Gói Cơ bản – Tắm thơm (150.000₫)</option>';
+                }
+                ?>
               </select>
             </div>
 

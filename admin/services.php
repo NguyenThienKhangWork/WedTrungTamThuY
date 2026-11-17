@@ -36,12 +36,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $description = trim($_POST['description'] ?? '');
         $duration = (int)($_POST['duration_min'] ?? 60);
         $price = (float)($_POST['price'] ?? 0);
-        $is_package = isset($_POST['is_package']) ? 1 : 0;
+        $is_package = isset($_POST['is_package']) && $_POST['is_package'] === '1' ? 1 : 0;
         
         if ($name && $price > 0) {
             $stmt = $pdo->prepare('INSERT INTO services (name, description, duration_min, price, is_package, is_active) VALUES (?, ?, ?, ?, ?, 1)');
             $stmt->execute([$name, $description, $duration, $price, $is_package]);
             $message = 'Đã thêm dịch vụ mới thành công!';
+        }
+    } elseif ($action === 'delete_service') {
+        $id = (int)($_POST['id'] ?? 0);
+        if ($id > 0) {
+            try {
+                $stmt = $pdo->prepare('DELETE FROM services WHERE id = ?');
+                $stmt->execute([$id]);
+                $message = 'Đã xóa dịch vụ thành công!';
+            } catch (Throwable $e) {
+                // Nếu dịch vụ đã có dữ liệu lịch hẹn tham chiếu, chuyển sang ẩn
+                $stmt = $pdo->prepare('UPDATE services SET is_active = 0 WHERE id = ?');
+                $stmt->execute([$id]);
+                $message = 'Dịch vụ đã có lịch hẹn liên kết, đã chuyển sang trạng thái Ẩn!';
+            }
         }
     }
 }
@@ -90,24 +104,40 @@ $services = $pdo->query('SELECT * FROM services ORDER BY is_package ASC, id ASC'
     <!-- Form thêm dịch vụ mới (FR-12) -->
     <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-xs">
       <h3 class="font-bold text-sm text-[#1a3d1a] mb-4">➕ Thêm Dịch Vụ Mới</h3>
-      <form method="POST" class="grid grid-cols-1 sm:grid-cols-5 gap-3 items-end text-xs">
+      <form method="POST" class="space-y-4 text-xs">
         <input type="hidden" name="action" value="add_service" />
-        <div class="sm:col-span-2">
-          <label class="block font-semibold text-gray-600 mb-1">Tên dịch vụ *</label>
-          <input type="text" name="name" placeholder="Ví dụ: Tẩy uế chuồng trại..." required class="w-full px-3 py-2 rounded-xl border border-gray-200" />
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div class="sm:col-span-2">
+            <label class="block font-semibold text-gray-600 mb-1">Tên dịch vụ *</label>
+            <input type="text" name="name" placeholder="Ví dụ: Tẩy uế chuồng trại, Siêu âm..." required class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]" />
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-600 mb-1">Loại dịch vụ</label>
+            <select name="is_package" class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]">
+              <option value="0">Dịch vụ lẻ</option>
+              <option value="1">Gói trọn gói</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-600 mb-1">Giá niêm yết (VNĐ) *</label>
+            <input type="number" name="price" placeholder="150000" min="0" step="1000" required class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]" />
+          </div>
         </div>
-        <div>
-          <label class="block font-semibold text-gray-600 mb-1">Giá (VNĐ) *</label>
-          <input type="number" name="price" placeholder="150000" required class="w-full px-3 py-2 rounded-xl border border-gray-200" />
-        </div>
-        <div>
-          <label class="block font-semibold text-gray-600 mb-1">Thời lượng (phút)</label>
-          <input type="number" name="duration_min" value="60" class="w-full px-3 py-2 rounded-xl border border-gray-200" />
-        </div>
-        <div>
-          <button type="submit" class="w-full py-2 bg-[#1a3d1a] hover:bg-[#2a5a2a] text-white font-bold rounded-xl cursor-pointer">
-            Lưu dịch vụ
-          </button>
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 items-end">
+          <div class="sm:col-span-3">
+            <label class="block font-semibold text-gray-600 mb-1">Mô tả chi tiết</label>
+            <input type="text" name="description" placeholder="Mô tả quy trình, lợi ích và đối tượng thú cưng phù hợp..." class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]" />
+          </div>
+          <div>
+            <label class="block font-semibold text-gray-600 mb-1">Thời lượng (phút)</label>
+            <div class="flex gap-2">
+              <input type="number" name="duration_min" value="60" min="5" step="5" class="w-full px-3 py-2 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]" />
+              <button type="submit" class="px-4 py-2 bg-[#1a3d1a] hover:bg-[#2a5a2a] text-white font-bold rounded-xl cursor-pointer whitespace-nowrap">
+                Lưu dịch vụ
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -154,13 +184,20 @@ $services = $pdo->query('SELECT * FROM services ORDER BY is_package ASC, id ASC'
                     <?= $s['is_active'] ? 'Đang hiển thị' : 'Đã ẩn' ?>
                   </span>
                 </td>
-                <td class="px-6 py-3 text-right">
+                <td class="px-6 py-3 text-right space-x-1">
                   <form method="POST" class="inline">
                     <input type="hidden" name="action" value="toggle_active" />
                     <input type="hidden" name="id" value="<?= $s['id'] ?>" />
                     <input type="hidden" name="current" value="<?= $s['is_active'] ?>" />
-                    <button type="submit" class="px-3 py-1 rounded text-[11px] font-semibold cursor-pointer <?= $s['is_active'] ? 'bg-red-50 text-red-600 hover:bg-red-100' : 'bg-green-50 text-green-700 hover:bg-green-100' ?>">
-                      <?= $s['is_active'] ? 'Ẩn dịch vụ' : 'Bật hiển thị' ?>
+                    <button type="submit" class="px-2.5 py-1 rounded text-[11px] font-semibold cursor-pointer <?= $s['is_active'] ? 'bg-red-50 text-red-600 hover:bg-red-100' : 'bg-green-50 text-green-700 hover:bg-green-100' ?>">
+                      <?= $s['is_active'] ? 'Ẩn' : 'Hiện' ?>
+                    </button>
+                  </form>
+                  <form method="POST" class="inline" onsubmit="return confirm('Bạn có chắc muốn xóa dịch vụ này không?');">
+                    <input type="hidden" name="action" value="delete_service" />
+                    <input type="hidden" name="id" value="<?= $s['id'] ?>" />
+                    <button type="submit" class="px-2.5 py-1 rounded text-[11px] font-semibold bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-700 cursor-pointer">
+                      Xóa
                     </button>
                   </form>
                 </td>
