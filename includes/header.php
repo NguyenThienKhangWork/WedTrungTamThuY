@@ -8,6 +8,12 @@ declare(strict_types=1);
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/functions.php';
 
+// Đảm bảo encoding UTF-8 cho toàn bộ response HTML
+if (!headers_sent()) {
+    header('Content-Type: text/html; charset=utf-8');
+}
+mb_internal_encoding('UTF-8');
+
 $page_title = $page_title ?? 'PawNest – Trung tâm thú y & spa thú cưng | BS. Nguyễn Thiện Khang';
 $page_desc = $page_desc ?? 'Trung tâm khám chữa bệnh, tiêm phòng và spa thú cưng cao cấp hàng đầu tại TP. Hồ Chí Minh. Đặt lịch hẹn trực tuyến nhanh chóng.';
 $active_menu = $active_menu ?? 'home';
