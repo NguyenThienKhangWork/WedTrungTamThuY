@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </button>
     </form>
     <div class="mt-4 text-center">
-      <a href="/lfpage.html" class="text-xs text-gray-500 hover:text-[#1a3d1a]">← Quay lại trang chủ</a>
+      <a href="/" class="text-xs text-gray-500 hover:text-[#1a3d1a]">← Quay lại trang chủ</a>
     </div>
   </div>
 </body>

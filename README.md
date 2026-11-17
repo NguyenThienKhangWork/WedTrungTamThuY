@@ -20,7 +20,7 @@ Dự án đáp ứng đầy đủ **100% 13 tiêu chí đánh giá** trong tài 
 
 | # | Tiêu chí đánh giá | Nội dung thực hiện chi tiết trong đồ án | Vị trí mã nguồn |
 |:---:|---|---|---|
-| **1** | **Xây dựng phần ảnh Banner, Navbar** | • Navbar cố định (sticky) với logo, menu điều hướng đầy đủ, nút Đăng nhập và nút "Đặt lịch" cố định.<br>• Hero Section CozyPaws chuẩn Viewport Height (`h-[calc(100vh-70px)]`), responsive 3 breakpoint (Desktop, Tablet, Mobile).<br>• Hiệu ứng chữ động `animate-word-pop` cùng 3 hình ảnh thú cưng đáy banner. | `index.php` (L16-311)<br>`includes/header.php`<br>`lfpage.html` |
+| **1** | **Xây dựng phần ảnh Banner, Navbar** | • Navbar cố định (sticky) với logo, menu điều hướng đầy đủ, nút Đăng nhập và nút "Đặt lịch" cố định.<br>• Hero Section CozyPaws chuẩn Viewport Height (`h-[calc(100vh-70px)]`), responsive 3 breakpoint (Desktop, Tablet, Mobile).<br>• Hiệu ứng chữ động `animate-word-pop` cùng 3 hình ảnh thú cưng đáy banner. | `index.php` (L16-311)<br>`includes/header.php`<br>`templates/landing-page.html` |
 | **2** | **Xây dựng Layout bằng Flex, Grid** | • Dùng Flexbox cho Navbar, hàng nút thao tác, Hero layers và căn giữa CTA.<br>• Dùng CSS Grid cho toàn bộ danh mục dịch vụ, bảng giá 3 gói, thư viện ảnh bé cưng, cửa hàng và các khối giới thiệu. | `assets/css/style.css`<br>`cua-hang.php`<br>`bang-gia.php` |
 | **3** | **Xây dựng phần "Thông tin cá nhân"** | • Giới thiệu trung tâm PawNest và Người phụ trách chuyên môn: **BS. Nguyễn Thiện Khang**.<br>• Năm thành lập: 2024, Địa chỉ: 123 Đường Hoa Cúc, P.7, Q.Phú Nhuận, TP.HCM.<br>• Hotline cấp cứu 24/7: 0900 123 456, Giờ làm việc: 08:00 – 20:00 (Thứ 2 – CN). | `index.php` (Mục Giới thiệu L317)<br>`includes/footer.php` |
 | **4** | **Xây dựng phần "Thông tin nghề nghiệp"** | • Khối "Sứ mệnh hoạt động" (Chăm sóc nhân văn, Fear Free, minh bạch chi phí).<br>• Khối "Tầm nhìn phát triển" (Đến năm 2028 trở thành hệ sinh thái bệnh viện thú y & e-medical hàng đầu TP.HCM). | `index.php` (L389-412) |
@@ -122,22 +122,57 @@ docker compose down
 
 ```
 LapTrinhWed/
-├── admin/                         # Phân hệ Quản trị Nội bộ
-│   ├── login.php                  # Đăng nhập Admin / Lễ tân
-│   ├── dashboard.php              # Bảng điều khiển KPI & Cảnh báo kho y tế
-│   ├── appointments.php           # Quản lý & duyệt lịch hẹn, đánh dấu thanh toán
-│   ├── inventory.php              # Quản lý kho, thuốc, vật tư & Cảnh báo tồn thấp
-│   ├── services.php               # Quản lý danh mục dịch vụ & bảng giá
-│   ├── gallery.php                # Quản lý thư viện hình ảnh
-│   └── reviews.php                # Kiểm duyệt đánh giá khách hàng
-├── api/                           # API RESTful xử lý JSON
-│   ├── appointments.php           # Tiếp nhận đơn đặt lịch hẹn (Transaction)
-│   ├── services.php               # Danh sách dịch vụ & giá
-│   ├── slots.php                  # Khung giờ làm việc khả dụng
-│   ├── reviews.php                # Đánh giá của khách hàng
-│   ├── customer_auth.php          # Đăng ký & Đăng nhập khách hàng thân thiết
-│   ├── shop_order.php             # Xử lý đơn mua thức ăn/thuốc và trừ kho
-│   └── ai_chat.php                # API kết nối OpenRouter Trợ lý Thú Y AI
+├── config/                        # Cấu hình hệ thống và cơ sở dữ liệu
+│   ├── config.php                 # Bộ nạp cấu hình trung tâm (Config Master)
+│   ├── app.php                    # Thông số hệ thống, giờ làm việc, Trợ lý AI OpenRouter
+│   ├── database.php               # Kết nối MySQL PDO Singleton chống SQL Injection
+│   └── config.local.php           # API key bảo mật cục bộ (được .gitignore bảo vệ)
+├── controllers/                   # Tầng điều phối nghiệp vụ (Business Logic Controllers)
+│   ├── AppointmentController.php  # Điều phối đặt lịch, kiểm tra trùng slot, VietQR
+│   ├── AuthController.php         # Xác thực thành viên & phân quyền quản trị
+│   ├── ShopController.php         # Quản lý bán hàng online, đơn hàng & cảnh báo tồn kho
+│   ├── AIController.php           # Tương tác Trợ lý AI PawBot với OpenRouter API
+│   ├── ReviewController.php       # Xử lý đánh giá và lời chứng thực của khách
+│   └── ServiceController.php      # Xử lý danh mục dịch vụ và bảng giá
+├── models/                        # Tầng đối tượng thực thể dữ liệu (Domain Models)
+│   ├── Appointment.php            # Thực thể Lịch hẹn khám & Spa
+│   ├── Product.php                # Thực thể Sản phẩm / Thuốc y tế & cảnh báo tồn kho
+│   ├── User.php                   # Thực thể Người dùng / Nhân sự & phân quyền
+│   ├── Review.php                 # Thực thể Đánh giá sao của khách hàng
+│   └── Service.php                # Thực thể Dịch vụ & gói chăm sóc
+├── repository/                    # Tầng Data Access Layer (DAL) tương tác MySQL qua PDO
+│   ├── AppointmentRepository.php  # Thao tác CSDL lịch hẹn qua Transaction
+│   ├── ProductRepository.php      # Quản lý sản phẩm, tồn kho & Audit Logs
+│   ├── ReviewRepository.php       # Truy vấn đánh giá khách hàng
+│   ├── ServiceRepository.php      # Truy vấn danh sách dịch vụ
+│   └── SlotRepository.php         # Tính toán khung giờ còn trống trong ngày
+├── api/                           # REST API Endpoints (nhận request & gọi Controller)
+│   ├── appointments.php           # API tạo cuộc hẹn và sinh VietQR
+│   ├── slots.php                  # API lấy khung giờ trống theo ngày
+│   ├── customer_auth.php          # API đăng ký / đăng nhập thành viên
+│   ├── shop_order.php             # API đặt mua thuốc & vật tư trực tuyến
+│   ├── ai_chat.php                # API trò chuyện cùng Trợ lý Bác sĩ PawBot
+│   ├── services.php               # API lấy danh sách dịch vụ
+│   └── reviews.php                # API lấy đánh giá của khách hàng
+├── admin/                         # Phân hệ quản trị (Dashboard, Quản lý kho & Lịch hẹn)
+│   ├── login.php                  # Trang đăng nhập dành cho Quản trị viên & Lễ tân
+│   ├── dashboard.php              # Thống kê tổng quan & phân tích phòng khám
+│   ├── appointments.php           # Quản lý duyệt/hủy lịch hẹn & trạng thái thanh toán
+│   ├── inventory.php              # Quản lý xuất/nhập kho thuốc, thức ăn & cảnh báo tồn thấp
+│   ├── services.php               # Quản lý danh mục dịch vụ và bảng giá
+│   ├── reviews.php                # Kiểm duyệt đánh giá của khách hàng
+│   └── gallery.php                # Quản lý thư viện hình ảnh bé cưng
+├── templates/                     # Bản mẫu giao diện HTML tĩnh
+│   └── landing-page.html          # Bản mẫu Landing Page HTML5 Claymorphism độc lập
+├── includes/                      # Giao diện dùng chung & bộ chuyển tiếp tương thích (Bridge)
+│   ├── header.php                 # Header dùng chung, Navbar, Font chữ
+│   ├── footer.php                 # Footer dùng chung, Modal VietQR & AI Chat Widget
+│   ├── auth.php                   # Tiện ích Session, CSRF, kiểm tra quyền
+│   ├── validator.php              # Kiểm tra dữ liệu đầu vào & chống XSS
+│   ├── functions.php              # Các hàm tiện ích dùng chung
+│   ├── config.php                 # Bridge chuyển tiếp tới config/config.php
+│   ├── db.php                     # Bridge chuyển tiếp tới config/database.php
+│   └── *Repository.php            # Bridge chuyển tiếp tới repository/
 ├── assets/                        # Tài nguyên giao diện tĩnh
 │   ├── css/
 │   │   ├── style.css              # Stylesheet CSS3 thuần, font Baloo 2 & Nunito
@@ -149,17 +184,6 @@ LapTrinhWed/
 │   ├── schema.sql                 # Cấu trúc bảng DDL (11 bảng)
 │   ├── seed.sql                   # Dữ liệu mẫu khởi tạo
 │   └── init.sql                   # Script gộp tự động nạp cho Docker
-├── includes/                      # Các thành phần dùng chung (Backend)
-│   ├── config.php                 # Cấu hình hệ thống, DB, OpenRouter Key
-│   ├── db.php                     # Lớp kết nối PDO Singleton chống SQL Injection
-│   ├── auth.php                   # Bảo mật Session, CSRF, kiểm tra quyền
-│   ├── validator.php              # Kiểm tra dữ liệu đầu vào & chống XSS
-│   ├── functions.php              # Các hàm tiện ích dùng chung
-│   ├── header.php                 # Header dùng chung, Navbar, Font chữ
-│   └── footer.php                 # Footer dùng chung, Modal VietQR & AI Chat Widget
-├── repository/                    # Tầng Data Access Object (DAO)
-│   ├── AppointmentRepository.php  # Thao tác CSDL lịch hẹn qua Transaction
-│   └── ProductRepository.php      # Quản lý sản phẩm, tồn kho & Audit Logs
 ├── bang-gia.php                   # Trang Bảng giá 3 gói chăm sóc thú cưng
 ├── cua-hang.php                   # Trang Cửa hàng Thức ăn & Dược Thú Y Online
 ├── danh-gia.php                   # Trang Đánh giá của các chủ nuôi
@@ -168,11 +192,11 @@ LapTrinhWed/
 ├── index.php                      # Trang chủ chính (Landing Page hoàn chỉnh)
 ├── lien-he.php                    # Trang Liên hệ, bản đồ và mạng xã hội
 ├── thu-vien.php                   # Trang Thư viện ảnh bé cưng trước và sau spa
-├── lfpage.html                    # Bản Landing Page HTML tĩnh độc lập
 ├── Dockerfile                     # Dockerfile đóng gói PHP 8.2 + Apache
 ├── docker-compose.yml             # Cấu hình 3 service (Web, MySQL, phpMyAdmin)
 ├── .dockerignore                  # Loại trừ tệp khi build image Docker
-├── .gitignore                     # Bỏ qua tệp không cần đưa lên Git
+├── .env.example                   # Tệp mẫu biến môi trường
+├── .gitignore                     # Bỏ qua tệp bảo mật không đưa lên Git
 └── README.md                      # Tài liệu thuyết minh đồ án
 ```
 

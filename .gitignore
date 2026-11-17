@@ -5,3 +5,4 @@ dist
 .env
 .env.local
 includes/config.local.php
+config/config.local.php
