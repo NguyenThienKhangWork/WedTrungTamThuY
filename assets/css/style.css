@@ -1,0 +1,178 @@
+/**
+ * PawNest & CozyPaws - Hệ thống Stylesheet chuẩn (CSS3 thuần)
+ * Tuân thủ mục 4.2 (màu sắc), 4.3 (bố cục), 4.6 (CSS3 nâng cao & animation), mục 5.1 (không framework)
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Serif+Display&display=swap');
+
+:root {
+  /* Bảng màu đặc tả mục 4.2 & CozyPaws palette */
+  --bg-color: #EFFDF0;         /* Xanh bạc hà nhẹ / Mint */
+  --bg-cream: #FFF1E0;         /* Màu Kem nền đặc tả */
+  --primary: #1a3d1a;          /* Xanh đậm chủ đạo */
+  --primary-hover: #2a5a2a;    /* Xanh hover */
+  --orange: #E86A10;           /* Cam điểm nhấn */
+  --orange-coral: #FF7F66;     /* Cam san hô nút chính */
+  --yellow-sun: #FFC94D;       /* Vàng nắng gói nổi bật */
+  --mint-accent: #6FD1BC;      /* Xanh bạc hà biểu tượng */
+  --pink-pastel: #FFB5C8;      /* Hồng phấn */
+  --text-cacao: #4A2E24;       /* Nâu cacao */
+  --text-muted: #64748b;
+  --white: #ffffff;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  background-color: var(--bg-color);
+  color: var(--primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Kiểu chữ tiêu đề theo Mục 4.3 Đặc tả website: Baloo 2 cho tiêu đề, Nunito cho nội dung */
+h1, h2, h3, h4, h5, h6, .font-serif-display, .font-display, .font-heading {
+  font-family: 'Baloo 2', 'Nunito', cursive, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Kiểu chữ Serif phụ trợ nếu cần */
+.font-serif-classic {
+  font-family: 'DM Serif Display', Georgia, serif;
+}
+
+/* ================= 3D PERSPECTIVE & TILT SYSTEM ================= */
+.perspective-stage {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Thẻ 3D nghiêng đổ bóng */
+.shadow-3d-card {
+  box-shadow: 
+    0 16px 36px -10px rgba(26, 61, 26, 0.12),
+    0 0 0 1px rgba(26, 61, 26, 0.05),
+    0 2px 4px 0 rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.shadow-3d-card:hover {
+  box-shadow: 
+    0 26px 52px -15px rgba(26, 61, 26, 0.22),
+    0 0 0 1px rgba(232, 106, 16, 0.25),
+    0 8px 16px -4px rgba(0, 0, 0, 0.08);
+}
+
+/* Lớp vệt sáng phản quang trên thẻ (Specular Glare) */
+.card-3d-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: overlay;
+  z-index: 5;
+}
+
+.card-3d-container:hover .card-3d-glare {
+  opacity: 1;
+}
+
+/* ================= KEYFRAME ANIMATIONS ================= */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  0% { opacity: 0; transform: translateX(-40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes wordPop {
+  0% { opacity: 0; transform: translateY(60px) scale(0.7) rotate(-4deg); filter: blur(8px); }
+  65% { opacity: 1; transform: translateY(-8px) scale(1.05) rotate(1deg); filter: blur(0px); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); filter: blur(0px); }
+}
+
+@keyframes photoReveal {
+  0% { opacity: 0; transform: translateY(80px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float3D {
+  0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translateY(-8px) rotateX(2deg) rotateY(-2deg); }
+}
+
+@keyframes float3DReverse {
+  0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translateY(8px) rotateX(-2deg) rotateY(2deg); }
+}
+
+@keyframes pawDrift {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.25; }
+  50% { transform: translateY(-16px) rotate(8deg); opacity: 0.6; }
+}
+
+.animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fade-in { animation: fadeIn 0.6s ease-out both; }
+.animate-slide-in-left { animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-slide-in-right { animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-word-pop { opacity: 0; animation: wordPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-photo-reveal { animation: photoReveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-float-3d { animation: float3D 6s ease-in-out infinite; }
+.animate-float-3d-reverse { animation: float3DReverse 7s ease-in-out infinite; }
+.animate-paw-drift { animation: pawDrift 8s ease-in-out infinite; }
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+.delay-800 { animation-delay: 800ms; }
+.delay-900 { animation-delay: 900ms; }
+.delay-1000 { animation-delay: 1000ms; }
+.delay-1100 { animation-delay: 1100ms; }
+.delay-1200 { animation-delay: 1200ms; }
+
+/* Tôn trọng người dùng bật giảm chuyển động (Mục 4.4 & 4.6) */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

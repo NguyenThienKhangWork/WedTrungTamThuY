@@ -1,0 +1,122 @@
+/**
+ * PawNest & CozyPaws - Claymorphism Design System (Mục 4.1, 4.2, 4.3)
+ * Định hình phong cách thẻ đất sét: bo tròn lớn, bóng nổi đa lớp & bóng đổ mềm mại
+ */
+
+:root {
+  --clay-bg-card: #ffffff;
+  --clay-border-radius: 28px;
+  --clay-border-radius-lg: 32px;
+  --clay-border-radius-pill: 9999px;
+
+  /* Đa tầng đổ bóng Claymorphism */
+  --clay-shadow-card: 
+    10px 14px 28px rgba(26, 61, 26, 0.08),
+    inset -4px -4px 10px rgba(26, 61, 26, 0.03),
+    inset 4px 4px 10px rgba(255, 255, 255, 0.95);
+
+  --clay-shadow-card-hover: 
+    14px 20px 36px rgba(26, 61, 26, 0.14),
+    inset -4px -4px 10px rgba(26, 61, 26, 0.04),
+    inset 4px 4px 10px rgba(255, 255, 255, 1);
+
+  --clay-shadow-button-orange:
+    0 10px 24px -4px rgba(232, 106, 16, 0.45),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.15);
+
+  --clay-shadow-button-green:
+    0 10px 24px -4px rgba(26, 61, 26, 0.35),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+
+  --clay-shadow-input:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.06),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.8),
+    0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* Thẻ đất sét Claymorphism */
+.clay-card {
+  background-color: var(--clay-bg-card);
+  border-radius: var(--clay-border-radius-lg);
+  box-shadow: var(--clay-shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.28s ease;
+}
+
+.clay-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--clay-shadow-card-hover);
+}
+
+/* Nút bấm hiệu ứng đất sét nổi */
+.clay-btn-orange {
+  background: linear-gradient(135deg, #FF7F66 0%, #E86A10 100%);
+  color: #ffffff;
+  border-radius: var(--clay-border-radius-pill);
+  box-shadow: var(--clay-shadow-button-orange);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clay-btn-orange:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 28px -4px rgba(232, 106, 16, 0.55);
+}
+
+.clay-btn-orange:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 12px rgba(232, 106, 16, 0.4);
+}
+
+.clay-btn-green {
+  background: linear-gradient(135deg, #2a5a2a 0%, #1a3d1a 100%);
+  color: #ffffff;
+  border-radius: var(--clay-border-radius-pill);
+  box-shadow: var(--clay-shadow-button-green);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clay-btn-green:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 28px -4px rgba(26, 61, 26, 0.45);
+}
+
+.clay-btn-green:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Ô nhập liệu phong cách đất sét lõm */
+.clay-input {
+  border-radius: 18px;
+  background-color: #FAFCFA;
+  box-shadow: var(--clay-shadow-input);
+  border: 1px solid rgba(26, 61, 26, 0.1);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clay-input:focus {
+  outline: none;
+  border-color: #E86A10;
+  box-shadow: 
+    0 0 0 3px rgba(232, 106, 16, 0.2),
+    inset 2px 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* Huy hiệu mềm (Pill Badge) */
+.clay-badge {
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 20px rgba(26, 61, 26, 0.08);
+}

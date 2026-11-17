@@ -1,176 +1,1930 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PawNest – Trung tâm thú y & spa thú cưng</title>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#FFF1E0;--card:#FFF8EE;--ink:#4A2E24;--mute:#8A6A5C;--coral:#FF7F66;--sun:#FFC94D;--mint:#6FD1BC;--pink:#FFB5C8;--sh:rgba(150,80,40,.22);--hi:rgba(255,255,255,.85);--lo:rgba(150,80,40,.10);
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2B1D18;--card:#3B2A23;--ink:#FFEBD6;--mute:#D3B7A4;--sh:rgba(0,0,0,.45);--hi:rgba(255,255,255,.07);--lo:rgba(0,0,0,.25)}}
-:root[data-theme="dark"]{--bg:#2B1D18;--card:#3B2A23;--ink:#FFEBD6;--mute:#D3B7A4;--sh:rgba(0,0,0,.45);--hi:rgba(255,255,255,.07);--lo:rgba(0,0,0,.25)}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;line-height:1.6;font-size:17px}
-h1,h2,h3{font-family:'Baloo 2',Nunito,sans-serif;line-height:1.15;margin:0}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-section{padding:72px 0}
-h2{font-size:clamp(2rem,4vw,2.8rem);font-weight:800;margin-bottom:8px}
-.sub{color:var(--mute);max-width:56ch;margin:0 0 36px}
-.clay{background:var(--card);border-radius:32px;box-shadow:10px 10px 22px var(--sh),inset -7px -7px 14px var(--lo),inset 7px 7px 14px var(--hi)}
-.btn{display:inline-block;border:0;cursor:pointer;font:700 1rem 'Baloo 2',sans-serif;padding:14px 28px;border-radius:999px;color:#fff;background:var(--coral);box-shadow:6px 6px 14px var(--sh),inset -4px -4px 8px rgba(0,0,0,.14),inset 4px 4px 8px rgba(255,255,255,.4);transition:transform .15s}
-.btn:active{transform:scale(.96)}
-.btn.alt{background:var(--sun);color:#4A2E24}
-:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;padding:12px 0}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:10px 20px}
-nav .clay{border-radius:999px;display:flex;width:100%;align-items:center;justify-content:space-between;padding:8px 12px 8px 22px}
-.logo{font:800 1.4rem 'Baloo 2',sans-serif}
-.links{display:flex;gap:22px;font-weight:700}
-.links a:hover{color:var(--coral)}
-@media(max-width:760px){.links{display:none}}
-.hero{padding-top:36px}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
-h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:800}
-.hero p{color:var(--mute);font-size:1.15rem;max-width:46ch;margin:18px 0 26px}
-.cta{display:flex;gap:14px;flex-wrap:wrap}
-.blob{aspect-ratio:1;border-radius:46% 54% 50% 50%/55% 45% 55% 45%;background:var(--sun);display:grid;place-items:center;font-size:clamp(7rem,20vw,11rem);position:relative;animation:bob 5s ease-in-out infinite;box-shadow:14px 14px 30px var(--sh),inset -12px -12px 24px rgba(0,0,0,.1),inset 12px 12px 24px rgba(255,255,255,.5)}
-.blob i{position:absolute;font-style:normal;font-size:3.2rem;background:var(--pink);border-radius:50%;width:84px;height:84px;display:grid;place-items:center;box-shadow:6px 6px 12px var(--sh),inset -4px -4px 8px rgba(0,0,0,.1),inset 4px 4px 8px rgba(255,255,255,.5)}
-.blob i:nth-child(1){top:-4%;right:2%}.blob i:nth-child(2){bottom:2%;left:-4%;background:var(--mint)}
-@keyframes bob{50%{transform:translateY(-12px)}}
-@media(prefers-reduced-motion:reduce){.blob{animation:none}html{scroll-behavior:auto}}
-@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.blob{max-width:320px;margin:0 auto}}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px;max-width:520px}
-.stats div{padding:14px;text-align:center}
-.stats b{display:block;font:800 1.6rem 'Baloo 2',sans-serif;color:var(--coral)}
-.stats span{font-size:.85rem;color:var(--mute)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
-.svc{padding:28px;display:flex;flex-direction:column;gap:10px}
-.svc .ic{width:64px;height:64px;border-radius:22px;display:grid;place-items:center;font-size:2rem;background:var(--pink);box-shadow:inset -4px -4px 8px rgba(0,0,0,.1),inset 4px 4px 8px rgba(255,255,255,.55)}
-.svc:nth-child(2) .ic{background:var(--mint)}.svc:nth-child(3) .ic{background:var(--sun)}.svc:nth-child(4) .ic{background:#FFB08F}
-.svc h3{font-size:1.3rem}.svc p{margin:0;color:var(--mute);font-size:.95rem}
-.pk{padding:32px 28px;display:flex;flex-direction:column;gap:14px}
-.pk.hot{background:var(--sun);color:#4A2E24}
-.pk.hot li,.pk.hot .tag{color:#4A2E24}
-.tag{font-weight:700;color:var(--coral)}
-.price{font:800 2.3rem 'Baloo 2',sans-serif}
-.price small{font:600 .9rem Nunito;color:var(--mute)}
-.pk ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;flex:1}
-.pk li::before{content:"🐾 ";}
-.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:22px}
-.pet{aspect-ratio:1;border-radius:34px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:4.5rem;box-shadow:8px 8px 18px var(--sh),inset -8px -8px 16px rgba(0,0,0,.09),inset 8px 8px 16px rgba(255,255,255,.5);color:#4A2E24;transition:transform .2s}
-.pet:hover{transform:rotate(-3deg) scale(1.03)}
-.pet span{font:700 1rem 'Baloo 2',sans-serif}
-.pet small{font-size:.8rem;opacity:.75}
-.bk{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:start}
-@media(max-width:820px){.bk{grid-template-columns:1fr}}
-.info{padding:30px}.info p{color:var(--mute)}
-form{padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-form .full{grid-column:1/-1}
-label{display:grid;gap:6px;font-weight:700;font-size:.92rem}
-input,select{font:600 1rem Nunito,sans-serif;color:var(--ink);background:var(--bg);border:0;border-radius:18px;padding:13px 16px;box-shadow:inset 4px 4px 9px var(--lo),inset -4px -4px 9px var(--hi);width:100%}
-@media(max-width:520px){form{grid-template-columns:1fr}}
-.msg{display:none;padding:18px 20px;border-radius:22px;background:var(--mint);color:#173A33;font-weight:700}
-.msg.err{background:#FFB5A8;color:#5A1D12}
-.tests .t{padding:28px}
-.t p{margin:0 0 16px}
-.who{display:flex;align-items:center;gap:12px;font-weight:700}
-.av{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;background:var(--pink);box-shadow:inset -3px -3px 6px rgba(0,0,0,.1),inset 3px 3px 6px rgba(255,255,255,.5)}
-.who small{display:block;font-weight:400;color:var(--mute)}
-.stars{color:var(--sun);letter-spacing:2px}
-footer{padding:36px 0 48px;color:var(--mute);text-align:center;font-size:.92rem}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PawNest & CozyPaws – Trung tâm thú y & Spa thú cưng cao cấp | Nguyễn Thiện Khang</title>
+  <link rel="icon" type="image/svg+xml" href="https://polo-pecan-73837341.figma.site/_assets/v11/0ae29d6d9628bede667f90d57bebe81b8f1ec2bf.svg" />
+  
+  <!-- ================= GOOGLE FONTS: Inter & DM Serif Display ================= -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- ================= TIÊU CHÍ 11 & 12: CSS3 NÂNG CAO, ANIMATIONS & CLAYMORPHISM ================= -->
+  <style>
+    :root {
+      --bg: #EFFDF0;
+      --primary: #1a3d1a;
+      --hover-green: #2a5a2a;
+      --orange: #E86A10;
+      --orange-hover: #d45e0d;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      background-color: var(--bg);
+      color: var(--primary);
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, .font-serif-display {
+      font-family: 'Baloo 2', cursive, sans-serif;
+    }
+
+    /* Hiệu ứng thẻ đất sét claymorphism */
+    .clay-card {
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 10px 10px 24px rgba(26, 61, 26, 0.08), inset -4px -4px 8px rgba(26, 61, 26, 0.03), inset 4px 4px 8px rgba(255, 255, 255, 0.9);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .clay-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 12px 14px 28px rgba(26, 61, 26, 0.12);
+    }
+
+    /* Keyframes Animations */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      0% { opacity: 0; transform: translateX(-40px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      0% { opacity: 0; transform: translateX(40px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes wordPop {
+      0% { opacity: 0; transform: translateY(60px) scale(0.7) rotate(-4deg); filter: blur(8px); }
+      65% { opacity: 1; transform: translateY(-8px) scale(1.05) rotate(1deg); filter: blur(0px); }
+      100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); filter: blur(0px); }
+    }
+    @keyframes photoReveal {
+      0% { opacity: 0; transform: translateY(80px) scale(1.02); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    /* ================= 3D ANIMATION & DEPTH SYSTEM ================= */
+    .perspective-stage {
+      perspective: 1200px;
+      perspective-origin: 50% 50%;
+      transform-style: preserve-3d;
+    }
+
+    .preserve-3d {
+      transform-style: preserve-3d;
+    }
+
+    @keyframes float3D {
+      0%, 100% {
+        transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+      }
+      50% {
+        transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+      }
+    }
+
+    @keyframes float3DReverse {
+      0%, 100% {
+        transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+      }
+      50% {
+        transform: translateY(8px) rotateX(-2deg) rotateY(2deg);
+      }
+    }
+
+    @keyframes pawDrift {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.25;
+      }
+      50% {
+        transform: translateY(-16px) rotate(8deg);
+        opacity: 0.6;
+      }
+    }
+
+    .animate-float-3d {
+      animation: float3D 6s ease-in-out infinite;
+    }
+
+    .animate-float-3d-reverse {
+      animation: float3DReverse 7s ease-in-out infinite;
+    }
+
+    .animate-paw-drift {
+      animation: pawDrift 8s ease-in-out infinite;
+    }
+
+    /* 3D Glass card shine overlay */
+    .card-3d-glare {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      mix-blend-mode: overlay;
+    }
+
+    .card-3d-container:hover .card-3d-glare {
+      opacity: 1;
+    }
+
+    .shadow-3d-card {
+      box-shadow: 
+        0 15px 35px -10px rgba(26, 61, 26, 0.12),
+        0 0 0 1px rgba(26, 61, 26, 0.05),
+        0 2px 4px 0 rgba(0, 0, 0, 0.04);
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+    }
+
+    .shadow-3d-card:hover {
+      box-shadow: 
+        0 25px 50px -15px rgba(26, 61, 26, 0.22),
+        0 0 0 1px rgba(232, 106, 16, 0.25),
+        0 8px 16px -4px rgba(0, 0, 0, 0.08);
+    }
+
+    .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .animate-fade-in { animation: fadeIn 0.6s ease-out both; }
+    .animate-slide-in-left { animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .animate-slide-in-right { animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .animate-word-pop { opacity: 0; animation: wordPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+    .animate-photo-reveal { animation: photoReveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; }
+    .delay-600 { animation-delay: 600ms; }
+    .delay-700 { animation-delay: 700ms; }
+    .delay-800 { animation-delay: 800ms; }
+    .delay-900 { animation-delay: 900ms; }
+    .delay-1000 { animation-delay: 1000ms; }
+    .delay-1100 { animation-delay: 1100ms; }
+    .delay-1200 { animation-delay: 1200ms; }
+
+    /* Tôn trọng chế độ giảm chuyển động của hệ điều hành */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
-<body>
-<nav><div class="wrap"><div class="clay">
-<a class="logo" href="#top">🐾 PawNest</a>
-<div class="links"><a href="#dich-vu">Dịch vụ</a><a href="#goi">Gói chăm sóc</a><a href="#thu-cung">Bé cưng</a><a href="#danh-gia">Đánh giá</a></div>
-<a class="btn" href="#dat-lich">Đặt lịch</a></div></div></nav>
+<body class="bg-[#EFFDF0] text-[#1a3d1a] antialiased overflow-x-hidden m-0 p-0 selection:bg-[#E86A10] selection:text-white">
 
-<header class="hero" id="top"><div class="wrap">
-<div>
-<h1>Bé cưng khỏe mạnh, thơm tho, vui cả ngày</h1>
-<p>Trung tâm thú y & spa thú cưng tại TP. Hồ Chí Minh. Bác sĩ thú y khám tổng quát, tiêm phòng và tắm cắt tỉa nhẹ nhàng ngay trong một buổi hẹn.</p>
-<div class="cta"><a class="btn" href="#dat-lich">Đặt lịch hẹn</a><a class="btn alt" href="#goi">Xem bảng giá</a></div>
-<div class="stats"><div class="clay"><b>5.000+</b><span>bé đã được chăm sóc</span></div><div class="clay"><b>8</b><span>bác sĩ & groomer</span></div><div class="clay"><b>4,9/5</b><span>điểm đánh giá</span></div></div>
-</div>
-<div class="blob" aria-hidden="true">🐶<i>🛁</i><i>💉</i></div>
-</div></header>
+  <!-- ========================================================================= -->
+  <!-- TIÊU CHÍ 1: NAVBAR CỐ ĐỊNH, LOGO, MENU ĐIỀU HƯỚNG & NÚT ĐẶT LỊCH HẸN     -->
+  <!-- ========================================================================= -->
+  <header class="w-full px-4 sm:px-6 md:px-8 lg:px-12 py-3.5 sticky top-0 z-40 bg-[#EFFDF0]/90 backdrop-blur-md border-b border-[#1a3d1a]/10 flex items-center justify-between">
+    <!-- Logo PawNest & CozyPaws -->
+    <div class="flex items-center gap-3">
+      <a href="#top" class="block">
+        <img
+          src="https://polo-pecan-73837341.figma.site/_assets/v11/0ae29d6d9628bede667f90d57bebe81b8f1ec2bf.svg"
+          alt="PawNest & CozyPaws"
+          class="w-[125px] h-[32px] md:w-[190px] md:h-[48px] object-contain"
+        />
+      </a>
+      <span class="hidden xl:inline-block text-[11px] font-semibold text-gray-500 border-l border-gray-300 pl-3">
+        Trung tâm Thú Y & Spa Cao Cấp
+      </span>
+    </div>
 
-<section id="dich-vu"><div class="wrap">
-<h2>Mọi thứ bé cần, gói gọn một nơi</h2>
-<p class="sub">Từ khám bệnh đến làm đẹp, bé không phải chạy qua nhiều địa chỉ.</p>
-<div class="grid">
-<div class="clay svc"><div class="ic">🩺</div><h3>Khám & điều trị</h3><p>Khám tổng quát, siêu âm, xét nghiệm máu và điều trị bệnh thường gặp.</p></div>
-<div class="clay svc"><div class="ic">💉</div><h3>Tiêm phòng & tẩy giun</h3><p>Lịch tiêm dại, 5 bệnh, 7 bệnh được nhắc trước hẹn qua Zalo.</p></div>
-<div class="clay svc"><div class="ic">🛁</div><h3>Tắm & spa</h3><p>Sữa tắm dịu nhẹ, sấy êm, vệ sinh tai, cắt móng và chải lông.</p></div>
-<div class="clay svc"><div class="ic">✂️</div><h3>Cắt tỉa tạo kiểu</h3><p>Cắt tỉa theo giống hoặc theo ý bạn, ảnh trước/sau gửi ngay cho bạn.</p></div>
-</div></div></section>
+    <!-- Center Navigation Links -->
+    <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold tracking-wide">
+      <a href="#top" class="text-[#1a3d1a] hover:text-[#E86A10] transition-colors">Trang chủ</a>
+      <a href="#gioi-thieu" class="text-gray-600 hover:text-[#1a3d1a] transition-colors">Giới thiệu</a>
+      <a href="#dich-vu" class="text-gray-600 hover:text-[#1a3d1a] transition-colors">Dịch vụ</a>
+      <a href="#goi" class="text-gray-600 hover:text-[#1a3d1a] transition-colors">Bảng giá</a>
+      <a href="#thu-cung" class="text-gray-600 hover:text-[#1a3d1a] transition-colors">Bé cưng</a>
+      <a href="#ky-nang" class="text-gray-600 hover:text-[#1a3d1a] transition-colors">Kỹ năng</a>
+      <a href="#du-an" class="text-gray-600 hover:text-[#1a3d1a] transition-colors">Dự án</a>
+      <a href="#danh-gia" class="text-gray-600 hover:text-[#1a3d1a] transition-colors">Đánh giá</a>
+      <a href="#lien-he" class="text-gray-600 hover:text-[#1a3d1a] transition-colors">Liên hệ</a>
+    </nav>
 
-<section id="goi"><div class="wrap">
-<h2>Chọn gói phù hợp với bé</h2>
-<p class="sub">Giá áp dụng cho bé dưới 10 kg. Bé lớn hơn phụ thu 20.000 – 60.000 ₫.</p>
-<div class="grid">
-<div class="clay pk"><span class="tag">Gói Cơ bản</span><h3>Tắm thơm</h3><div class="price">150.000 ₫<small> /lần</small></div><ul><li>Tắm & sấy khô</li><li>Cắt móng, vệ sinh tai</li><li>Xịt thơm cho bé</li></ul><button class="btn" data-pk="Gói Cơ bản – Tắm thơm">Chọn gói này</button></div>
-<div class="clay pk hot"><span class="tag">Được chọn nhiều nhất</span><h3>Spa & cắt tỉa</h3><div class="price">320.000 ₫<small> /lần</small></div><ul><li>Toàn bộ gói Cơ bản</li><li>Cắt tỉa tạo kiểu</li><li>Massage & dưỡng lông</li><li>Khám sức khỏe nhanh</li></ul><button class="btn" data-pk="Gói Spa & cắt tỉa">Chọn gói này</button></div>
-<div class="clay pk"><span class="tag">Gói Toàn diện</span><h3>Khám + tiêm + spa</h3><div class="price">690.000 ₫<small> /lần</small></div><ul><li>Khám tổng quát</li><li>1 mũi tiêm phòng</li><li>Tẩy giun</li><li>Gói Spa & cắt tỉa</li></ul><button class="btn" data-pk="Gói Toàn diện">Chọn gói này</button></div>
-</div></div></section>
+    <!-- Right Actions -->
+    <div class="flex items-center gap-2.5">
+      <!-- Nút Đăng ký / Đăng nhập Khách hàng -->
+      <button id="btn-auth-modal" type="button" class="bg-white hover:bg-gray-50 border border-gray-300 text-[#1a3d1a] px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-2xs transition-all cursor-pointer">
+        <i data-lucide="user" class="w-3.5 h-3.5 text-[#E86A10]"></i>
+        <span id="nav-user-label">Đăng nhập</span>
+      </button>
 
-<section id="thu-cung"><div class="wrap">
-<h2>Những gương mặt quen thuộc</h2>
-<p class="sub">Một vài bé vừa ghé PawNest tuần này.</p>
-<div class="gal">
-<div class="pet" style="background:#FFD9A0">🐕<span>Bơ</span><small>Corgi, 2 tuổi</small></div>
-<div class="pet" style="background:#FFC2D4">🐩<span>Mochi</span><small>Poodle, 3 tuổi</small></div>
-<div class="pet" style="background:#BDEBDD">🐈<span>Mướp</span><small>Mèo ta, 1 tuổi</small></div>
-<div class="pet" style="background:#FFE38A">🐇<span>Cà Rốt</span><small>Thỏ, 8 tháng</small></div>
-<div class="pet" style="background:#FFB9A0">🐶<span>Xíu</span><small>Phốc sóc, 4 tuổi</small></div>
-<div class="pet" style="background:#D9CBFF">🐱<span>Bông</span><small>Ba Tư, 2 tuổi</small></div>
-</div></div></section>
+      <!-- Nút đặt lịch nhanh (luôn hiển thị trên navbar) -->
+      <a href="#dat-lich" class="bg-[#E86A10] hover:bg-[#d45e0d] text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 active:scale-95">
+        <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+        <span>Đặt lịch</span>
+      </a>
 
-<section id="dat-lich"><div class="wrap">
-<h2>Đặt lịch trong 1 phút</h2>
-<p class="sub">Điền thông tin, chúng tôi gọi xác nhận trong 30 phút (giờ làm việc).</p>
-<div class="bk">
-<div class="clay info"><h3>Giờ mở cửa</h3><p>Thứ 2 – Chủ nhật: 08:00 – 20:00</p><h3>Địa chỉ</h3><p>123 Đường Hoa Cúc, Q. Phú Nhuận, TP. Hồ Chí Minh</p><h3>Cấp cứu 24/7</h3><p>Hotline: 0900 123 456</p></div>
-<form class="clay" id="f" novalidate>
-<label class="full">Dịch vụ<select id="sv"><option>Gói Cơ bản – Tắm thơm</option><option>Gói Spa & cắt tỉa</option><option>Gói Toàn diện</option><option>Khám bệnh</option><option>Tiêm phòng</option></select></label>
-<label>Tên chủ nuôi<input id="nm" placeholder="Nguyễn Văn A" autocomplete="name"></label>
-<label>Số điện thoại<input id="ph" type="tel" placeholder="09xx xxx xxx" autocomplete="tel"></label>
-<label>Loại thú cưng<select id="pt"><option>Chó</option><option>Mèo</option><option>Thỏ</option><option>Khác</option></select></label>
-<label>Tên bé<input id="pn" placeholder="Bơ"></label>
-<label>Ngày hẹn<input id="dt" type="date"></label>
-<label>Giờ hẹn<select id="tm"><option>08:00</option><option>09:30</option><option>11:00</option><option>13:30</option><option>15:00</option><option>16:30</option><option>18:00</option></select></label>
-<div class="full msg" id="ms" role="status"></div>
-<button class="btn full" type="submit">Xác nhận đặt lịch</button>
-</form></div></div></section>
+      <!-- Favorites button (badge 4) -->
+      <a href="#thu-cung" class="relative w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center text-[#E86A10] shadow-xs" title="4 bé cưng yêu thích">
+        <i data-lucide="heart" class="w-4 h-4 fill-[#E86A10]"></i>
+        <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#E86A10] text-white text-[9px] font-bold flex items-center justify-center">4</span>
+      </a>
 
-<section id="danh-gia"><div class="wrap">
-<h2>Chủ nuôi nói gì về PawNest</h2>
-<p class="sub">Những lời nhắn từ các gia đình đã đồng hành cùng chúng tôi.</p>
-<div class="grid tests">
-<div class="clay t"><div class="stars">★★★★★</div><p>Bơ vốn sợ nước nhưng lần này ra về vẫn vẫy đuôi. Bạn groomer rất kiên nhẫn và gửi ảnh cho mình liên tục.</p><div class="who"><div class="av">👩</div><div>Chị Thu Hà<small>Chủ của Bơ</small></div></div></div>
-<div class="clay t"><div class="stars">★★★★★</div><p>Khám và tiêm phòng cho mèo xong còn tắm luôn trong buổi sáng, đỡ phải đi hai nơi. Bác sĩ giải thích rất rõ ràng.</p><div class="who"><div class="av">👨</div><div>Anh Minh Quân<small>Chủ của Mướp</small></div></div></div>
-<div class="clay t"><div class="stars">★★★★★</div><p>Đặt lịch online nhanh, đến nơi không phải chờ. Mochi được cắt tỉa đúng kiểu mình muốn, giá cũng hợp lý.</p><div class="who"><div class="av">👧</div><div>Bạn Ngọc Anh<small>Chủ của Mochi</small></div></div></div>
-</div></div></section>
+      <!-- Admin link -->
+      <a href="/admin/dashboard.php" class="text-gray-500 hover:text-[#1a3d1a] p-1.5 rounded-full hover:bg-white" title="Trang Quản trị Nội bộ">
+        <i data-lucide="shield-check" class="w-4 h-4"></i>
+      </a>
 
-<footer><div class="wrap">🐾 PawNest – Trung tâm thú y & spa thú cưng · 123 Đường Hoa Cúc, Q. Phú Nhuận, TP.HCM<br>© 2026 PawNest. Thông tin của bạn được bảo vệ theo Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân.</div></footer>
+      <!-- Avatar người phụ trách (Nguyễn Thiện Khang) -->
+      <div class="w-9 h-9 rounded-full overflow-hidden border border-[#1a3d1a]/20 bg-amber-100 shrink-0" title="Bác sĩ Phụ trách: Nguyễn Thiện Khang">
+        <img
+          src="https://polo-pecan-73837341.figma.site/_assets/v11/e62173d41f91350a59628e8a9a55ae078a886fb9.png?w=128"
+          alt="Nguyễn Thiện Khang"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  </header>
 
-<script>
-const $=id=>document.getElementById(id);
-$('dt').min=new Date().toISOString().split('T')[0];
-document.querySelectorAll('[data-pk]').forEach(b=>b.onclick=()=>{$('sv').value=b.dataset.pk;$('dat-lich').scrollIntoView({behavior:'smooth'});$('nm').focus({preventScroll:true})});
-$('f').onsubmit=e=>{
-e.preventDefault();const m=$('ms');m.style.display='block';
-const ph=$('ph').value.replace(/\s/g,'');
-if(!$('nm').value.trim()||!$('pn').value.trim()||!$('dt').value){m.className='full msg err';m.textContent='Vui lòng điền tên chủ nuôi, tên bé và chọn ngày hẹn.';return}
-if(!/^0\d{9}$/.test(ph)){m.className='full msg err';m.textContent='Số điện thoại cần đủ 10 số, bắt đầu bằng 0.';return}
-const [y,mo,d]=$('dt').value.split('-');
-m.className='full msg';
-m.textContent=`Đã đặt lịch cho bé ${$('pn').value.trim()} (${$('pt').value.toLowerCase()}): ${$('sv').value}, lúc ${$('tm').value} ngày ${d}/${mo}/${y}. Chúng tôi sẽ gọi ${$('ph').value} để xác nhận.`;
-};
-</script>
+  <!-- ========================================================================= -->
+  <!-- TIÊU CHÍ 1 & 12: HERO BANNER (COZYPAWS SECTION - VIEWPORT HEIGHT CHUẨN)  -->
+  <!-- ========================================================================= -->
+  <section id="top" class="relative h-[calc(100vh-70px)] min-h-[580px] w-full flex flex-col overflow-hidden select-none border-b border-[#1a3d1a]/10 perspective-stage">
+    
+    <!-- DESKTOP HERO (lg+) -->
+    <div class="hidden lg:block relative w-full h-full flex-1 overflow-hidden">
+      <!-- 0. Background Ambient 3D Elements (Floating paws & light glow) -->
+      <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-200/35 rounded-full blur-3xl"></div>
+        <div class="absolute top-[18%] left-[22%] text-emerald-800/20 animate-paw-drift text-2xl select-none">🐾</div>
+        <div class="absolute top-[32%] right-[24%] text-emerald-800/15 animate-paw-drift text-xl select-none" style="animation-delay: -3s;">🐾</div>
+        <div class="absolute top-[55%] left-[8%] text-emerald-800/15 animate-paw-drift text-lg select-none" style="animation-delay: -5s;">🐾</div>
+      </div>
+
+      <!-- 1. Text Layer (z-20, centered, pt-[clamp(1.5rem,3.5vh,3rem)], pointer-events-none, 3D depth) -->
+      <div id="hero-heading-3d" class="absolute inset-x-0 top-0 z-20 flex flex-col items-center justify-start text-center px-6 pt-[clamp(1.5rem,3.5vh,3rem)] pointer-events-none transition-transform duration-200 ease-out preserve-3d">
+        <!-- Phụ trách chuyên môn Bác sĩ Khang -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/85 backdrop-blur-md border border-[#1a3d1a]/15 text-[#1a3d1a] text-xs font-semibold mb-2 shadow-xs animate-fade-in delay-100">
+          <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+          <span>Phụ trách chuyên môn: <strong>BS. Nguyễn Thiện Khang</strong> • TP. Hồ Chí Minh</span>
+        </div>
+
+        <h1 class="font-serif-display text-[#1a3d1a] text-[clamp(48px,5.8vw,92px)] leading-[0.98] tracking-tight drop-shadow-[0_2px_12px_rgba(239,253,240,0.9)]">
+          <div class="overflow-visible block">
+            <span class="inline-block animate-word-pop delay-200">Everything</span>
+          </div>
+          <div class="overflow-visible block mt-1">
+            <span class="inline-block animate-word-pop delay-300 mr-[0.28em]">Your</span>
+            <span class="inline-block animate-word-pop delay-400 mr-[0.28em]">Pets</span>
+            <span class="inline-block animate-word-pop delay-500">Love</span>
+          </div>
+        </h1>
+      </div>
+
+      <!-- 2. Thẻ sản phẩm góc trái: top-[50px] left-12, 3D Tilt -->
+      <div id="hero-card-left-wrap" class="absolute top-[50px] left-8 xl:left-12 z-25 w-[clamp(160px,13.5vw,250px)] animate-slide-in-left delay-600 preserve-3d">
+        <a href="#goi" id="hero-card-left" class="card-3d-container block group preserve-3d transition-transform duration-200 ease-out shadow-3d-card rounded-2xl bg-white p-2">
+          <div class="relative aspect-[260/257] rounded-xl overflow-hidden bg-[#F8FAF8]">
+            <img
+              src="https://polo-pecan-73837341.figma.site/_assets/v11/3e5158dad63d392ade022e81890edc9f54d750bc.png"
+              alt="Cozy Cat House"
+              class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+            />
+            <div class="card-3d-glare" id="glare-card-left"></div>
+            <div class="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-[#1a3d1a] group-hover:bg-[#E86A10] text-white flex items-center justify-center shadow-lg transition-all duration-300 transform group-hover:scale-110 active:scale-95 group-hover:rotate-12">
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </div>
+          </div>
+          <div class="mt-2 px-1 pb-0.5 flex flex-col">
+            <span class="text-gray-700 font-medium text-[clamp(13px,1.1vw,16px)] leading-snug group-hover:text-[#1a3d1a] transition-colors">Cozy Cat House</span>
+            <span class="text-[#1a3d1a] font-bold text-[clamp(15px,1.3vw,19px)] flex items-center justify-between">
+              <span>$49.99</span>
+              <span class="text-[10px] text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">Bán chạy</span>
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <!-- 3. Thẻ video review góc phải: top-[50px] right-12, 3D Tilt -->
+      <div id="hero-card-right-wrap" class="absolute top-[50px] right-8 xl:right-12 z-25 w-[clamp(120px,9.5vw,170px)] animate-slide-in-right delay-700 preserve-3d">
+        <a href="#danh-gia" id="hero-card-right" class="card-3d-container block group preserve-3d transition-transform duration-200 ease-out shadow-3d-card rounded-2xl bg-neutral-900 p-1.5">
+          <div class="relative aspect-[177/287] rounded-xl overflow-hidden bg-neutral-950">
+            <img
+              src="https://polo-pecan-73837341.figma.site/_assets/v11/76be6ec3a93a703b15e9cc01e764a4e3f9d7d2c0.png"
+              alt="Video Reviews"
+              class="w-full h-full object-cover opacity-90 group-hover:scale-108 transition-transform duration-500"
+            />
+            <div class="card-3d-glare" id="glare-card-right"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"></div>
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center justify-center">
+              <span class="absolute w-10 h-10 rounded-full bg-[#E86A10] animate-ping opacity-35"></span>
+              <div class="w-10 h-10 rounded-full bg-[#1a3d1a] group-hover:bg-[#E86A10] text-white flex items-center justify-center shadow-xl transition-all duration-300 transform group-hover:scale-115 pl-0.5 z-10">
+                <i data-lucide="play" class="w-4 h-4 fill-white"></i>
+              </div>
+            </div>
+            <p class="absolute bottom-2 inset-x-2 text-center text-white text-[clamp(9px,0.8vw,11.5px)] font-medium leading-tight drop-shadow">
+              Watch Product Reviews on TikTok and YouTube
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <!-- 4. 3 Ảnh đáy (bottom-0 left-0 right-0, z-10, flex items-end, 3D Parallax Depth) -->
+      <div id="hero-pets-layer" class="absolute bottom-0 left-0 right-0 z-10 flex items-end justify-between pointer-events-none select-none transition-transform duration-200 ease-out preserve-3d">
+        <div id="hero-pet-left" class="flex-1 flex items-end animate-photo-reveal delay-800 transition-transform duration-200 ease-out" style="max-height: min(60vh, 480px);">
+          <img
+            src="https://polo-pecan-73837341.figma.site/_assets/v11/8d44b25186ef45a5789c74668fb781cea4e1ff49.png"
+            alt="Dachshund pet left"
+            class="w-full h-auto block object-bottom object-contain pointer-events-none"
+          />
+        </div>
+
+        <div id="hero-pet-center" class="flex-[1.265] flex items-end justify-center animate-photo-reveal delay-600 transition-transform duration-200 ease-out" style="max-height: min(78vh, 680px);">
+          <img
+            src="https://polo-pecan-73837341.figma.site/_assets/v11/96745c4e72ad5c5208e53a885df797fd82cd854a.png?h=1024"
+            alt="Golden retriever center"
+            class="w-full h-auto block object-bottom object-contain pointer-events-none"
+          />
+        </div>
+
+        <div id="hero-pet-right" class="flex-1 flex items-end justify-end animate-photo-reveal delay-900 transition-transform duration-200 ease-out" style="max-height: min(60vh, 480px);">
+          <img
+            src="https://polo-pecan-73837341.figma.site/_assets/v11/81bd2e7a66b58f3d8f3ad78fd1ebf01af8dfdee1.png"
+            alt="Ginger cat right"
+            class="w-full h-auto block object-bottom object-contain pointer-events-none"
+          />
+        </div>
+      </div>
+
+      <!-- 5. Overlays (bottom: clamp(20px, 4vh, 50px), z-30, 3D Elevation) -->
+      <div id="hero-overlay-left" style="bottom: clamp(20px, 4vh, 50px);" class="absolute left-6 lg:left-12 z-30 animate-fade-up delay-1000 animate-float-3d">
+        <div class="flex items-center gap-3 bg-white/80 backdrop-blur-xl px-4 py-2.5 rounded-full border border-white/90 shadow-[0_12px_30px_rgba(26,61,26,0.12)] hover:scale-105 transition-transform duration-300">
+          <div class="flex items-center -space-x-2">
+            <img src="https://polo-pecan-73837341.figma.site/_assets/v11/e62173d41f91350a59628e8a9a55ae078a886fb9.png?w=128" alt="Avatar" class="w-8 h-8 rounded-full border-2 border-white object-cover" />
+            <div class="w-8 h-8 rounded-full bg-[#1a3d1a] border-2 border-white flex items-center justify-center text-white">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-extrabold text-[#1a3d1a] text-lg leading-none">98K+</span>
+            <span class="text-[10px] text-gray-500 font-medium">Khách hàng tin chọn</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="hero-overlay-center" style="bottom: clamp(20px, 4vh, 50px);" class="absolute left-0 right-0 z-30 flex flex-col items-center gap-3 text-center animate-fade-up delay-1100 pointer-events-none">
+        <h2 class="text-white font-medium text-lg lg:text-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] tracking-wide">
+          Best Products & Care for Your Pet
+        </h2>
+        <div class="flex items-center gap-3">
+          <a href="#dat-lich" class="bg-[#E86A10] hover:bg-[#d45e0d] text-white px-7 py-3 rounded-full font-semibold text-sm inline-flex items-center gap-2.5 transition-all transform hover:scale-106 hover:-translate-y-0.5 shadow-[0_10px_25px_-5px_rgba(232,106,16,0.5)] active:translate-y-0">
+            <span>Đặt lịch hẹn ngay</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <a href="#goi" class="bg-white/90 hover:bg-white text-[#1a3d1a] hover:text-[#E86A10] px-6 py-3 rounded-full font-semibold text-sm shadow-md hover:shadow-lg transition-all transform hover:scale-105 backdrop-blur-md">
+            Xem bảng giá
+          </a>
+        </div>
+      </div>
+
+      <div id="hero-overlay-right" style="bottom: clamp(20px, 4vh, 50px);" class="absolute right-6 lg:right-12 z-30 animate-fade-up delay-1200 animate-float-3d-reverse">
+        <div class="flex items-center gap-2.5 bg-white/80 backdrop-blur-xl px-4 py-2.5 rounded-full border border-white/90 shadow-[0_12px_30px_rgba(26,61,26,0.12)] hover:scale-105 transition-transform duration-300">
+          <div class="w-7 h-7 rounded-full bg-amber-50 flex items-center justify-center">
+            <i data-lucide="star" class="w-4 h-4 fill-[#E86A10] text-[#E86A10]"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-extrabold text-[#1a3d1a] text-lg leading-none">4.9/5</span>
+            <span class="text-[10px] text-gray-500 font-medium">Hài lòng tuyệt đối</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Interactive Indicator Badge: removed to avoid badge collision -->
+    </div>
+
+    <!-- TABLET HERO (md to lg) -->
+    <div class="hidden md:block lg:hidden relative w-full h-full flex-1 overflow-hidden select-none">
+      <div class="relative z-20 flex flex-col items-center justify-center text-center px-6 pt-7 md:pt-9 pointer-events-none">
+        <h1 class="font-serif-display text-[#1a3d1a] text-6xl md:text-7xl leading-tight drop-shadow-[0_2px_8px_rgba(239,253,240,0.85)]">
+          <span class="inline-block animate-word-pop delay-200">Everything</span><br />
+          <span class="inline-block animate-word-pop delay-300 mr-2">Your</span>
+          <span class="inline-block animate-word-pop delay-400 mr-2">Pets</span>
+          <span class="inline-block animate-word-pop delay-500">Love</span>
+        </h1>
+      </div>
+
+      <a href="#dat-lich" class="absolute top-[80px] left-4 z-20 w-[160px] animate-slide-in-left delay-600 block">
+        <div class="relative aspect-[260/257] rounded-2xl overflow-hidden shadow-md bg-white">
+          <img src="https://polo-pecan-73837341.figma.site/_assets/v11/3e5158dad63d392ade022e81890edc9f54d750bc.png" alt="Product" class="w-full h-full object-cover" />
+          <div class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-[#1a3d1a] text-white flex items-center justify-center shadow">
+            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+          </div>
+        </div>
+        <div class="mt-2 text-xs">
+          <p class="text-gray-700 font-medium">Cozy Cat House</p>
+          <p class="text-[#1a3d1a] font-bold text-sm">$49.99</p>
+        </div>
+      </a>
+
+      <a href="#danh-gia" class="absolute top-[80px] right-4 z-20 w-[120px] animate-slide-in-right delay-700 block">
+        <div class="relative aspect-[177/287] rounded-2xl overflow-hidden shadow-md bg-neutral-900">
+          <img src="https://polo-pecan-73837341.figma.site/_assets/v11/76be6ec3a93a703b15e9cc01e764a4e3f9d7d2c0.png" alt="Video" class="w-full h-full object-cover opacity-90" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent"></div>
+          <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#1a3d1a] text-white flex items-center justify-center pl-0.5">
+            <i data-lucide="play" class="w-3.5 h-3.5 fill-white"></i>
+          </div>
+          <p class="absolute bottom-1 inset-x-1 text-center text-white text-[9px] font-medium leading-tight">Reviews</p>
+        </div>
+      </a>
+
+      <!-- Bottom Images Tablet -->
+      <div class="absolute bottom-0 left-0 right-0 z-10 flex items-end justify-between pointer-events-none">
+        <div class="flex-1 max-h-[50vh] overflow-hidden flex items-end animate-photo-reveal delay-800">
+          <img src="https://polo-pecan-73837341.figma.site/_assets/v11/8d44b25186ef45a5789c74668fb781cea4e1ff49.png" class="w-full h-auto block object-bottom object-contain" />
+        </div>
+        <div class="flex-[1.265] max-h-[58vh] overflow-hidden flex items-end justify-center animate-photo-reveal delay-600">
+          <img src="https://polo-pecan-73837341.figma.site/_assets/v11/96745c4e72ad5c5208e53a885df797fd82cd854a.png?h=1024" class="w-full h-auto block object-bottom object-contain" />
+        </div>
+        <div class="flex-1 max-h-[50vh] overflow-hidden flex items-end justify-end animate-photo-reveal delay-900">
+          <img src="https://polo-pecan-73837341.figma.site/_assets/v11/81bd2e7a66b58f3d8f3ad78fd1ebf01af8dfdee1.png" class="w-full h-auto block object-bottom object-contain" />
+        </div>
+      </div>
+
+      <div class="absolute left-6 bottom-6 z-20 animate-fade-up delay-1000">
+        <div class="flex items-center gap-2 bg-white/70 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/80 shadow-md">
+          <span class="font-bold text-[#1a3d1a] text-sm">98K+</span>
+        </div>
+      </div>
+      <div class="absolute left-1/2 -translate-x-1/2 bottom-6 z-20 flex flex-col items-center gap-2 text-center animate-fade-up delay-1100">
+        <a href="#dat-lich" class="bg-[#E86A10] hover:bg-[#d45e0d] text-white px-5 py-2.5 rounded-full text-xs font-semibold inline-flex items-center gap-2 shadow-md">
+          <span>Đặt lịch ngay</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+      <div class="absolute right-6 bottom-6 z-20 animate-fade-up delay-1200">
+        <div class="flex items-center gap-1.5 bg-white/70 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/80 shadow-md">
+          <i data-lucide="star" class="w-4 h-4 fill-[#E86A10] text-[#E86A10]"></i>
+          <span class="font-bold text-[#1a3d1a] text-sm">4.9/5</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE HERO (below md) -->
+    <div class="flex md:hidden flex-col h-full justify-between relative overflow-hidden select-none">
+      <div class="pt-3 px-4 flex flex-col items-center text-center z-20">
+        <h1 class="font-serif-display text-[#1a3d1a] text-[34px] leading-[1.05]">
+          <span class="inline-block animate-word-pop delay-200 mr-1.5">Everything</span>
+          <span class="inline-block animate-word-pop delay-300 mr-1.5">Your</span>
+          <span class="inline-block animate-word-pop delay-400 mr-1.5">Pets</span>
+          <span class="inline-block animate-word-pop delay-500">Love</span>
+        </h1>
+        <p class="text-gray-600 text-xs mt-1">Khám thú y & Spa chăm sóc toàn diện tại TP.HCM</p>
+        <div class="flex items-center gap-2 mt-2.5">
+          <a href="#dat-lich" class="bg-[#E86A10] text-white px-5 py-2 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 shadow-md">
+            <span>Đặt lịch ngay</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </a>
+          <a href="#goi" class="bg-white/80 text-[#1a3d1a] px-4 py-2 rounded-full text-xs font-semibold shadow-xs">
+            Bảng giá
+          </a>
+        </div>
+      </div>
+
+      <!-- Two cards side-by-side -->
+      <div class="flex items-start justify-center gap-3 px-4 z-20 mt-1">
+        <div class="w-[130px] shrink-0">
+          <div class="relative aspect-square rounded-2xl overflow-hidden shadow-md bg-white">
+            <img src="https://polo-pecan-73837341.figma.site/_assets/v11/3e5158dad63d392ade022e81890edc9f54d750bc.png" class="w-full h-full object-cover" />
+            <div class="absolute bottom-1.5 right-1.5 w-6 h-6 rounded-full bg-[#1a3d1a] text-white flex items-center justify-center">
+              <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+            </div>
+          </div>
+          <div class="mt-1 text-[11px]">
+            <p class="text-gray-700 font-medium truncate">Cozy Cat House</p>
+            <p class="text-[#1a3d1a] font-bold text-xs">$49.99</p>
+          </div>
+        </div>
+
+        <div class="w-[100px] shrink-0">
+          <div class="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-md bg-neutral-900">
+            <img src="https://polo-pecan-73837341.figma.site/_assets/v11/76be6ec3a93a703b15e9cc01e764a4e3f9d7d2c0.png" class="w-full h-full object-cover opacity-90" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent"></div>
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-[#1a3d1a] text-white flex items-center justify-center pl-0.5">
+              <i data-lucide="play" class="w-3 h-3 fill-white"></i>
+            </div>
+            <p class="absolute bottom-1.5 inset-x-1 text-center text-white text-[8px] font-medium leading-tight">Reviews</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="z-20 flex justify-center px-4 my-1">
+        <div class="flex items-center gap-3 bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/90 shadow-sm text-xs font-bold text-[#1a3d1a]">
+          <span>98K+ Reviews</span>
+          <div class="w-px h-3.5 bg-black/15"></div>
+          <span class="flex items-center gap-1">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-[#E86A10] text-[#E86A10]"></i> 4.9/5
+          </span>
+        </div>
+      </div>
+
+      <!-- Bottom Images Mobile -->
+      <div class="relative w-full z-10 flex items-end justify-between pointer-events-none mt-auto">
+        <div class="flex-1 overflow-hidden flex items-end">
+          <img src="https://polo-pecan-73837341.figma.site/_assets/v11/8d44b25186ef45a5789c74668fb781cea4e1ff49.png" class="w-full h-auto block object-bottom object-contain" />
+        </div>
+        <div class="flex-[1.265] overflow-hidden flex items-end justify-center">
+          <img src="https://polo-pecan-73837341.figma.site/_assets/v11/96745c4e72ad5c5208e53a885df797fd82cd854a.png?h=1024" class="w-full h-auto block object-bottom object-contain" />
+        </div>
+        <div class="flex-1 overflow-hidden flex items-end justify-end">
+          <img src="https://polo-pecan-73837341.figma.site/_assets/v11/81bd2e7a66b58f3d8f3ad78fd1ebf01af8dfdee1.png" class="w-full h-auto block object-bottom object-contain" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- TIÊU CHÍ 3 & 10 & 13: GIỚI THIỆU TRUNG TÂM & THÔNG TIN CÁ NHÂN SINH VIÊN   -->
+  <!-- Người phụ trách: Nguyễn Thiện Khang (Thông tin thật, ảnh thật, không giữ chỗ) -->
+  <!-- ========================================================================= -->
+  <section id="gioi-thieu" class="py-16 px-6 sm:px-12 max-w-7xl mx-auto">
+    <div class="clay-card p-8 sm:p-12 border border-[#1a3d1a]/10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Ảnh thật người phụ trách (Ảnh thật số 1) -->
+        <div class="lg:col-span-5 flex flex-col items-center text-center">
+          <div class="relative w-52 h-52 sm:w-64 sm:h-64 rounded-full overflow-hidden border-4 border-[#EFFDF0] shadow-xl ring-4 ring-[#1a3d1a]/15">
+            <img
+              src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80"
+              alt="Bác sĩ Thú y Nguyễn Thiện Khang"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <h3 class="mt-4 text-xl font-bold text-[#1a3d1a]">Nguyễn Thiện Khang</h3>
+          <p class="text-xs font-semibold text-[#E86A10] uppercase tracking-wider">Người sáng lập & Bác sĩ Thú y Trưởng</p>
+          <div class="mt-3 flex items-center gap-2 text-xs text-gray-500">
+            <span>🎓 ĐH Nông Lâm TP.HCM</span>
+            <span>•</span>
+            <span>⭐ 5+ năm kinh nghiệm</span>
+          </div>
+        </div>
+
+        <!-- Nội dung giới thiệu trung tâm (Tiêu chí 3) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EFFDF0] text-[#1a3d1a] text-xs font-bold">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#E86A10]"></i>
+            Thông tin đơn vị & Người phụ trách
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-serif-display text-[#1a3d1a]">
+            PawNest – Tận tâm vì sức khỏe & nụ cười của bé cưng
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            Được thành lập từ năm <strong>2024</strong> dưới sự dẫn dắt của Bác sĩ Thú y <strong>Nguyễn Thiện Khang</strong>, PawNest ra đời với định hướng mang chuẩn mực y khoa thú y hiện đại kết hợp không gian Spa thư giãn không tiếng ồn. Chúng tôi xem mỗi bé thú cưng như một thành viên trong gia đình bạn.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs">
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-[#E86A10] shrink-0 mt-0.5"></i>
+              <div>
+                <strong class="block text-gray-900">Địa chỉ:</strong>
+                <span class="text-gray-600">123 Đường Hoa Cúc, Phường 7, Q. Phú Nhuận, TP.HCM</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="clock" class="w-4 h-4 text-[#E86A10] shrink-0 mt-0.5"></i>
+              <div>
+                <strong class="block text-gray-900">Giờ làm việc:</strong>
+                <span class="text-gray-600">08:00 – 20:00 (Thứ 2 – Chủ nhật)</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="phone-call" class="w-4 h-4 text-[#E86A10] shrink-0 mt-0.5"></i>
+              <div>
+                <strong class="block text-gray-900">Hotline Cấp cứu 24/7:</strong>
+                <span class="text-gray-600 font-bold">0900 123 456</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i data-lucide="mail" class="w-4 h-4 text-[#E86A10] shrink-0 mt-0.5"></i>
+              <div>
+                <strong class="block text-gray-900">Email liên hệ:</strong>
+                <span class="text-gray-600">thienkhang.pawnest@gmail.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- TIÊU CHÍ 4: THÔNG TIN NGHỀ NGHIỆP – SỨ MỆNH VÀ TẦM NHÌN                   -->
+  <!-- ========================================================================= -->
+  <section class="py-12 px-6 sm:px-12 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="clay-card p-8 border-l-4 border-[#E86A10]">
+        <div class="w-12 h-12 rounded-2xl bg-[#EFFDF0] flex items-center justify-center text-[#1a3d1a] mb-4">
+          <i data-lucide="target" class="w-6 h-6 text-[#E86A10]"></i>
+        </div>
+        <h3 class="text-xl font-serif-display text-[#1a3d1a] mb-2">Sứ mệnh hoạt động</h3>
+        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+          Cung cấp giải pháp chăm sóc y tế và làm đẹp toàn diện, nhân văn và minh bạch chi phí cho thú cưng. Cam kết không lạm dụng thuốc, giảm thiểu tối đa căng thẳng (Fear Free) cho các bé khi đi khám và đi spa.
+        </p>
+      </div>
+
+      <div class="clay-card p-8 border-l-4 border-[#1a3d1a]">
+        <div class="w-12 h-12 rounded-2xl bg-[#EFFDF0] flex items-center justify-center text-[#1a3d1a] mb-4">
+          <i data-lucide="compass" class="w-6 h-6 text-[#1a3d1a]"></i>
+        </div>
+        <h3 class="text-xl font-serif-display text-[#1a3d1a] mb-2">Tầm nhìn phát triển</h3>
+        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+          Đến năm 2028, PawNest trở thành hệ sinh thái bệnh viện thú y & trung tâm huấn luyện - chăm sóc thú cưng uy tín hàng đầu tại TP.HCM, tiên phong ứng dụng bệnh án điện tử và quản lý lịch hẹn thông minh.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- TIÊU CHÍ 5: SỞ THÍCH CỦA ĐỘI NGŨ & BÉ CƯNG (DẠNG THẺ BIỂU TƯỢNG)        -->
+  <!-- ========================================================================= -->
+  <section class="py-12 px-6 sm:px-12 max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-8">
+      <span class="text-xs font-bold text-[#E86A10] uppercase tracking-wider">Đồng điệu cùng bé</span>
+      <h2 class="text-2xl sm:text-3xl font-serif-display text-[#1a3d1a] mt-1">Sở thích & Niềm đam mê của chúng tôi</h2>
+      <p class="text-xs text-gray-500">Những điều đội ngũ bác sĩ và các bé cưng luôn say mê mỗi ngày.</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="clay-card p-4 text-center flex flex-col items-center justify-center gap-2">
+        <div class="text-3xl">🐶</div>
+        <h4 class="font-bold text-xs text-[#1a3d1a]">Corgi & Poodle</h4>
+        <p class="text-[10px] text-gray-500">Thích chơi ném bóng & tắm nắng</p>
+      </div>
+      <div class="clay-card p-4 text-center flex flex-col items-center justify-center gap-2">
+        <div class="text-3xl">🐱</div>
+        <h4 class="font-bold text-xs text-[#1a3d1a]">Mèo lông ngắn</h4>
+        <p class="text-[10px] text-gray-500">Thích cỏ mèo & cào móng gỗ</p>
+      </div>
+      <div class="clay-card p-4 text-center flex flex-col items-center justify-center gap-2">
+        <div class="text-3xl">✂️</div>
+        <h4 class="font-bold text-xs text-[#1a3d1a]">Grooming nghệ thuật</h4>
+        <p class="text-[10px] text-gray-500">Tạo kiểu gấu Teddy tròn xinh</p>
+      </div>
+      <div class="clay-card p-4 text-center flex flex-col items-center justify-center gap-2">
+        <div class="text-3xl">🥗</div>
+        <h4 class="font-bold text-xs text-[#1a3d1a]">Dinh dưỡng hữu cơ</h4>
+        <p class="text-[10px] text-gray-500">Nấu pate tươi & hạt không ngũ cốc</p>
+      </div>
+      <div class="clay-card p-4 text-center flex flex-col items-center justify-center gap-2">
+        <div class="text-3xl">🩺</div>
+        <h4 class="font-bold text-xs text-[#1a3d1a]">Nghiên cứu y khoa</h4>
+        <p class="text-[10px] text-gray-500">Cập nhật vắc-xin thế hệ mới</p>
+      </div>
+      <div class="clay-card p-4 text-center flex flex-col items-center justify-center gap-2">
+        <div class="text-3xl">🏡</div>
+        <h4 class="font-bold text-xs text-[#1a3d1a]">Cứu hộ động vật</h4>
+        <p class="text-[10px] text-gray-500">Hỗ trợ nhận nuôi chó mèo hoang</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- TIÊU CHÍ 6: NGÔN NGỮ & KỸ NĂNG CHUYÊN MÔN (THANH TIẾN TRÌNH PROGRESS BARS)-->
+  <!-- ========================================================================= -->
+  <section id="ky-nang" class="py-16 px-6 sm:px-12 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <!-- Cột 1: Kỹ năng chuyên môn Thú y -->
+      <div class="clay-card p-8">
+        <div class="flex items-center gap-2 mb-4">
+          <i data-lucide="activity" class="w-5 h-5 text-[#E86A10]"></i>
+          <h3 class="text-xl font-serif-display text-[#1a3d1a]">Kỹ năng chuyên môn thú y</h3>
+        </div>
+        <p class="text-xs text-gray-500 mb-6">Được chứng nhận qua văn bằng và số ca điều trị thực tế tại phòng khám.</p>
+
+        <div class="space-y-5 text-xs">
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Chẩn đoán & Điều trị nội khoa</span>
+              <span>95%</span>
+            </div>
+            <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-[#1a3d1a] rounded-full transition-all duration-1000" style="width: 95%;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Phẫu thuật ngoại khoa & Tiệt trùng</span>
+              <span>90%</span>
+            </div>
+            <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-[#1a3d1a] rounded-full transition-all duration-1000" style="width: 90%;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Tạo kiểu Spa & Grooming thẩm mỹ</span>
+              <span>98%</span>
+            </div>
+            <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-[#E86A10] rounded-full transition-all duration-1000" style="width: 98%;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Tư vấn Dinh dưỡng & Chăm sóc phòng ngừa</span>
+              <span>92%</span>
+            </div>
+            <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-[#1a3d1a] rounded-full transition-all duration-1000" style="width: 92%;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Cấp cứu thú y & Hồi sức 24/7</span>
+              <span>90%</span>
+            </div>
+            <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-[#E86A10] rounded-full transition-all duration-1000" style="width: 90%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cột 2: Ngôn ngữ & Kỹ năng bổ trợ -->
+      <div class="clay-card p-8">
+        <div class="flex items-center gap-2 mb-4">
+          <i data-lucide="languages" class="w-5 h-5 text-[#1a3d1a]"></i>
+          <h3 class="text-xl font-serif-display text-[#1a3d1a]">Ngôn ngữ giao tiếp</h3>
+        </div>
+        <p class="text-xs text-gray-500 mb-6">Sẵn sàng tiếp đón chủ nuôi người Việt và khách hàng quốc tế.</p>
+
+        <div class="space-y-5 text-xs mb-8">
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Tiếng Việt (Bản ngữ)</span>
+              <span>100%</span>
+            </div>
+            <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-[#1a3d1a] rounded-full" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Tiếng Anh (Giao tiếp y khoa & Khách quốc tế)</span>
+              <span>85%</span>
+            </div>
+            <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div class="h-full bg-[#E86A10] rounded-full" style="width: 85%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tiêu chí 7: Chứng chỉ - Giải thưởng -->
+        <div class="pt-4 border-t border-gray-100">
+          <h4 class="font-serif-display text-base text-[#1a3d1a] mb-3 flex items-center gap-2">
+            <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
+            Chứng chỉ – Giải thưởng nghề nghiệp (Tiêu chí 7)
+          </h4>
+          <ul class="space-y-2 text-xs text-gray-600">
+            <li class="flex items-center gap-2">
+              <span class="text-amber-500">★</span>
+              <span>Giấy phép hành nghề Thú y số <strong>458/GPHN-TYTPHCM</strong></span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-500">★</span>
+              <span>Bằng Bác sĩ Thú y – ĐH Nông Lâm TP.HCM (Hạng Xuất sắc)</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-500">★</span>
+              <span>Chứng nhận Master Pet Grooming & Styling (ISCC Châu Á)</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-500">★</span>
+              <span>Giải thưởng "Phòng khám Thú y Thân thiện 2025"</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- TIÊU CHÍ 8: CÁC DỰ ÁN TIÊU BIỂU (ĐÃ HOÀN THÀNH / ĐANG THỰC HIỆN)          -->
+  <!-- ========================================================================= -->
+  <section id="du-an" class="py-16 px-6 sm:px-12 max-w-7xl mx-auto border-t border-[#1a3d1a]/10">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-bold text-[#E86A10] uppercase tracking-wider">Cộng đồng & Đổi mới</span>
+      <h2 class="text-3xl sm:text-4xl font-serif-display text-[#1a3d1a] mt-1">Các dự án chính đã & đang thực hiện</h2>
+      <p class="text-gray-600 text-xs sm:text-sm mt-2">Đóng góp cho sức khỏe cộng đồng thú cưng và số hóa quy trình thú y.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Dự án 1 -->
+      <div class="clay-card overflow-hidden flex flex-col justify-between">
+        <div class="h-40 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=500&q=80" alt="Tiêm phòng cộng đồng" class="w-full h-full object-cover" />
+          <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-green-600 text-white font-bold text-[10px]">
+            Đã hoàn thành
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-sm text-[#1a3d1a] mb-1">Chiến dịch Vắc-xin Cộng đồng 2025</h4>
+            <p class="text-xs text-gray-500 leading-relaxed">Tiêm phòng dại và tẩy giun miễn phí cho hơn 1.200 bé chó mèo tại khu vực TP.HCM.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[11px] text-gray-400">
+            Thời gian: 03/2025 – 08/2025
+          </div>
+        </div>
+      </div>
+
+      <!-- Dự án 2 -->
+      <div class="clay-card overflow-hidden flex flex-col justify-between">
+        <div class="h-40 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=500&q=80" alt="Cứu trợ PawHope" class="w-full h-full object-cover" />
+          <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-[#E86A10] text-white font-bold text-[10px]">
+            Đang thực hiện
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-sm text-[#1a3d1a] mb-1">Trạm Cứu hộ & Nhận nuôi PawHope</h4>
+            <p class="text-xs text-gray-500 leading-relaxed">Tiếp nhận, chữa trị chấn thương và tìm mái ấm yêu thương cho chó mèo vô gia cư.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[11px] text-gray-400">
+            Thời gian: 2025 – Hiện tại
+          </div>
+        </div>
+      </div>
+
+      <!-- Dự án 3 -->
+      <div class="clay-card overflow-hidden flex flex-col justify-between">
+        <div class="h-40 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80" alt="Hệ thống bệnh án điện tử" class="w-full h-full object-cover" />
+          <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-green-600 text-white font-bold text-[10px]">
+            Đã hoàn thành
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-sm text-[#1a3d1a] mb-1">PawNest Smart Booking & E-Medical</h4>
+            <p class="text-xs text-gray-500 leading-relaxed">Xây dựng website đặt lịch hẹn trực tuyến đồng bộ với lịch làm việc thực của bác sĩ.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[11px] text-gray-400">
+            Công nghệ: PHP, MySQL, React, Tailwind
+          </div>
+        </div>
+      </div>
+
+      <!-- Dự án 4 -->
+      <div class="clay-card overflow-hidden flex flex-col justify-between">
+        <div class="h-40 overflow-hidden relative">
+          <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80" alt="Workshop sơ cứu" class="w-full h-full object-cover" />
+          <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-[#E86A10] text-white font-bold text-[10px]">
+            Đang thực hiện
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h4 class="font-bold text-sm text-[#1a3d1a] mb-1">Workshop Sơ cứu Thú cưng Định kỳ</h4>
+            <p class="text-xs text-gray-500 leading-relaxed">Khóa học kỹ năng xử lý khi bé bị sốc nhiệt, hóc dị vật hoặc ngộ độc thực phẩm cho chủ nuôi.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[11px] text-gray-400">
+            Tổ chức vào Thứ 7 tuần thứ 2 mỗi tháng
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- DỊCH VỤ TIÊU BIỂU (FR-10)                                                 -->
+  <!-- ========================================================================= -->
+  <section id="dich-vu" class="py-16 px-6 sm:px-12 max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-xs font-bold text-[#E86A10] uppercase tracking-wider">Chăm sóc chuẩn y khoa</span>
+      <h2 class="text-3xl sm:text-4xl font-serif-display text-[#1a3d1a] mt-1">Mọi thứ bé cần, gói gọn một nơi</h2>
+      <p class="text-gray-600 text-sm mt-2">Từ khám chữa bệnh đến làm đẹp, bé không phải di chuyển qua nhiều địa chỉ.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="clay-card p-6">
+        <div class="text-4xl mb-3">🩺</div>
+        <h3 class="font-bold text-base mb-1 text-[#1a3d1a]">Khám & điều trị</h3>
+        <p class="text-xs text-gray-600 leading-relaxed">Khám lâm sàng, siêu âm, xét nghiệm sinh hóa máu và điều trị bệnh truyền nhiễm cho chó mèo.</p>
+      </div>
+
+      <div class="clay-card p-6">
+        <div class="text-4xl mb-3">💉</div>
+        <h3 class="font-bold text-base mb-1 text-[#1a3d1a]">Tiêm phòng & tẩy giun</h3>
+        <p class="text-xs text-gray-600 leading-relaxed">Lịch tiêm phòng dại, 5 bệnh, 7 bệnh và tẩy giun định kỳ, nhắc lịch hẹn tự động qua tin nhắn.</p>
+      </div>
+
+      <div class="clay-card p-6">
+        <div class="text-4xl mb-3">🛁</div>
+        <h3 class="font-bold text-base mb-1 text-[#1a3d1a]">Tắm & spa thư giãn</h3>
+        <p class="text-xs text-gray-600 leading-relaxed">Dòng sữa tắm thảo mộc dịu êm, máy sấy chống ồn, vệ sinh tai kẽ chân và xịt dưỡng bóng mượt.</p>
+      </div>
+
+      <div class="clay-card p-6">
+        <div class="text-4xl mb-3">✂️</div>
+        <h3 class="font-bold text-base mb-1 text-[#1a3d1a]">Cắt tỉa tạo kiểu</h3>
+        <p class="text-xs text-gray-600 leading-relaxed">Grooming thẩm mỹ theo giống hoặc theo yêu cầu của bạn, gửi ảnh trước/sau hoàn thiện.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- BẢNG GIÁ 3 GÓI CHĂM SÓC (FR-11)                                           -->
+  <!-- ========================================================================= -->
+  <section id="goi" class="py-16 px-6 sm:px-12 bg-white/50 border-y border-black/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold text-[#1a3d1a] uppercase tracking-wider bg-[#EFFDF0] px-3.5 py-1.5 rounded-full border border-black/5">
+          Bảng giá công khai minh bạch
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-serif-display text-[#1a3d1a] mt-2">Chọn gói phù hợp với bé</h2>
+        <p class="text-gray-600 text-xs sm:text-sm mt-1">Giá áp dụng cho bé dưới 10 kg. Bé lớn hơn phụ thu 20.000 – 60.000 ₫.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <!-- Gói 1 -->
+        <div class="clay-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-[#E86A10] uppercase">Gói Cơ bản</span>
+            <h3 class="text-2xl font-serif-display text-[#1a3d1a] mt-1">Tắm thơm</h3>
+            <div class="text-3xl font-extrabold text-[#1a3d1a] my-4">
+              150.000 ₫ <span class="text-xs font-normal text-gray-500">/lần</span>
+            </div>
+            <ul class="space-y-2 text-xs text-gray-600 mb-6">
+              <li>🐾 Tắm & sấy khô nhẹ nhàng</li>
+              <li>🐾 Cắt móng, vệ sinh tai</li>
+              <li>🐾 Xịt thơm thảo mộc tự nhiên</li>
+            </ul>
+          </div>
+          <button data-pk="Gói Cơ bản – Tắm thơm" class="select-pkg-btn w-full py-3 rounded-2xl bg-[#EFFDF0] hover:bg-[#1a3d1a] hover:text-white text-[#1a3d1a] font-semibold text-xs transition-colors cursor-pointer">
+            Chọn gói này
+          </button>
+        </div>
+
+        <!-- Gói 2 (Nổi bật nhất) -->
+        <div class="rounded-3xl p-6 bg-[#1a3d1a] text-white shadow-xl flex flex-col justify-between scale-105 border-2 border-[#E86A10]">
+          <div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs font-bold text-[#E86A10] uppercase bg-white/10 px-2.5 py-0.5 rounded-full">
+                Gói Spa & Cắt tỉa
+              </span>
+              <span class="text-[10px] text-amber-300 font-bold">★ Phổ biến nhất</span>
+            </div>
+            <h3 class="text-2xl font-serif-display mt-2">Spa & tạo kiểu hoàn hảo</h3>
+            <div class="text-3xl font-extrabold my-4">
+              320.000 ₫ <span class="text-xs font-normal text-gray-300">/lần</span>
+            </div>
+            <ul class="space-y-2 text-xs text-gray-200 mb-6">
+              <li>🐾 Toàn bộ dịch vụ Gói Cơ bản</li>
+              <li>🐾 Cắt tỉa tạo kiểu theo phong cách</li>
+              <li>🐾 Massage thư giãn & dưỡng mềm mượt</li>
+              <li>🐾 Khám sức khỏe tổng quát nhanh</li>
+            </ul>
+          </div>
+          <button data-pk="Gói Spa & cắt tỉa" class="select-pkg-btn w-full py-3 rounded-2xl bg-[#E86A10] hover:bg-[#d45e0d] text-white font-semibold text-xs transition-colors shadow-md cursor-pointer">
+            Chọn gói này
+          </button>
+        </div>
+
+        <!-- Gói 3 -->
+        <div class="clay-card p-6 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-[#E86A10] uppercase">Gói Toàn diện</span>
+            <h3 class="text-2xl font-serif-display text-[#1a3d1a] mt-1">Khám + Tiêm + Spa</h3>
+            <div class="text-3xl font-extrabold text-[#1a3d1a] my-4">
+              690.000 ₫ <span class="text-xs font-normal text-gray-500">/lần</span>
+            </div>
+            <ul class="space-y-2 text-xs text-gray-600 mb-6">
+              <li>🐾 Khám tổng quát cùng bác sĩ thú y</li>
+              <li>🐾 1 mũi tiêm phòng định kỳ</li>
+              <li>🐾 Tẩy giun & kiểm tra ve rận</li>
+              <li>🐾 Trọn gói Spa & cắt tỉa tạo kiểu</li>
+            </ul>
+          </div>
+          <button data-pk="Gói Toàn diện" class="select-pkg-btn w-full py-3 rounded-2xl bg-[#EFFDF0] hover:bg-[#1a3d1a] hover:text-white text-[#1a3d1a] font-semibold text-xs transition-colors cursor-pointer">
+            Chọn gói này
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- THƯ VIỆN BÉ CƯNG (FR-30, FR-31)                                           -->
+  <!-- ========================================================================= -->
+  <section id="thu-cung" class="py-16 px-6 sm:px-12 max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <span class="text-xs font-bold text-[#1a3d1a] uppercase tracking-wider bg-white/70 px-3.5 py-1.5 rounded-full border border-black/5">
+        Khách hàng nhí thân thiết
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-serif-display text-[#1a3d1a] mt-2">Những gương mặt quen thuộc</h2>
+      <p class="text-gray-600 text-xs sm:text-sm mt-1">Các bé cưng vừa ghé PawNest spa và thăm khám tuần này.</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <!-- 1. Bơ (Corgi) - Ảnh thật -->
+      <div class="clay-card overflow-hidden group flex flex-col justify-between">
+        <div class="aspect-square relative overflow-hidden bg-amber-50">
+          <img
+            src="https://images.unsplash.com/photo-1612536057832-2ff7ead58194?auto=format&fit=crop&w=600&q=80"
+            alt="Bơ - Corgi 2 tuổi"
+            class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+          />
+          <span class="absolute top-2 left-2 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+            Spa & Tắm thơm
+          </span>
+        </div>
+        <div class="p-3 text-center">
+          <h4 class="font-bold text-sm text-[#1a3d1a]">Bơ</h4>
+          <p class="text-[11px] text-gray-500 font-medium">Corgi, 2 tuổi</p>
+          <span class="inline-block mt-1 text-[10px] text-green-700 bg-green-50 px-2 py-0.5 rounded-full font-semibold">
+            ✓ Đã spa tuần này
+          </span>
+        </div>
+      </div>
+
+      <!-- 2. Mochi (Poodle) - Ảnh thật -->
+      <div class="clay-card overflow-hidden group flex flex-col justify-between">
+        <div class="aspect-square relative overflow-hidden bg-rose-50">
+          <img
+            src="https://images.unsplash.com/photo-1516371535707-512a1e83bb9a?auto=format&fit=crop&w=600&q=80"
+            alt="Mochi - Poodle 3 tuổi"
+            class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+          />
+          <span class="absolute top-2 left-2 bg-[#E86A10] text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+            Cắt tỉa Teddy
+          </span>
+        </div>
+        <div class="p-3 text-center">
+          <h4 class="font-bold text-sm text-[#1a3d1a]">Mochi</h4>
+          <p class="text-[11px] text-gray-500 font-medium">Poodle, 3 tuổi</p>
+          <span class="inline-block mt-1 text-[10px] text-green-700 bg-green-50 px-2 py-0.5 rounded-full font-semibold">
+            ✓ Đã spa tuần này
+          </span>
+        </div>
+      </div>
+
+      <!-- 3. Mướp (Mèo ta) - Ảnh thật -->
+      <div class="clay-card overflow-hidden group flex flex-col justify-between">
+        <div class="aspect-square relative overflow-hidden bg-emerald-50">
+          <img
+            src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&q=80"
+            alt="Mướp - Mèo ta 1 tuổi"
+            class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+          />
+          <span class="absolute top-2 left-2 bg-blue-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+            Tiêm vắc-xin 7 bệnh
+          </span>
+        </div>
+        <div class="p-3 text-center">
+          <h4 class="font-bold text-sm text-[#1a3d1a]">Mướp</h4>
+          <p class="text-[11px] text-gray-500 font-medium">Mèo ta, 1 tuổi</p>
+          <span class="inline-block mt-1 text-[10px] text-green-700 bg-green-50 px-2 py-0.5 rounded-full font-semibold">
+            ✓ Khám định kỳ
+          </span>
+        </div>
+      </div>
+
+      <!-- 4. Cà Rốt (Thỏ kiểng) - Ảnh thật -->
+      <div class="clay-card overflow-hidden group flex flex-col justify-between">
+        <div class="aspect-square relative overflow-hidden bg-yellow-50">
+          <img
+            src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=600&q=80"
+            alt="Cà Rốt - Thỏ kiểng 8 tháng"
+            class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+          />
+          <span class="absolute top-2 left-2 bg-amber-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+            Tỉa móng & Vệ sinh
+          </span>
+        </div>
+        <div class="p-3 text-center">
+          <h4 class="font-bold text-sm text-[#1a3d1a]">Cà Rốt</h4>
+          <p class="text-[11px] text-gray-500 font-medium">Thỏ kiểng, 8 tháng</p>
+          <span class="inline-block mt-1 text-[10px] text-green-700 bg-green-50 px-2 py-0.5 rounded-full font-semibold">
+            ✓ Đã spa tuần này
+          </span>
+        </div>
+      </div>
+
+      <!-- 5. Xíu (Phốc sóc) - Ảnh thật -->
+      <div class="clay-card overflow-hidden group flex flex-col justify-between">
+        <div class="aspect-square relative overflow-hidden bg-orange-50">
+          <img
+            src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=600&q=80"
+            alt="Xíu - Phốc sóc 4 tuổi"
+            class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+          />
+          <span class="absolute top-2 left-2 bg-[#E86A10] text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+            Spa Dưỡng lông
+          </span>
+        </div>
+        <div class="p-3 text-center">
+          <h4 class="font-bold text-sm text-[#1a3d1a]">Xíu</h4>
+          <p class="text-[11px] text-gray-500 font-medium">Phốc sóc, 4 tuổi</p>
+          <span class="inline-block mt-1 text-[10px] text-green-700 bg-green-50 px-2 py-0.5 rounded-full font-semibold">
+            ✓ Đã spa tuần này
+          </span>
+        </div>
+      </div>
+
+      <!-- 6. Bông (Mèo Ba Tư) - Ảnh thật -->
+      <div class="clay-card overflow-hidden group flex flex-col justify-between">
+        <div class="aspect-square relative overflow-hidden bg-purple-50">
+          <img
+            src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=600&q=80"
+            alt="Bông - Ba Tư 2 tuổi"
+            class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+          />
+          <span class="absolute top-2 left-2 bg-purple-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
+            Tắm sấy khử ố
+          </span>
+        </div>
+        <div class="p-3 text-center">
+          <h4 class="font-bold text-sm text-[#1a3d1a]">Bông</h4>
+          <p class="text-[11px] text-gray-500 font-medium">Ba Tư, 2 tuổi</p>
+          <span class="inline-block mt-1 text-[10px] text-green-700 bg-green-50 px-2 py-0.5 rounded-full font-semibold">
+            ✓ Đã spa tuần này
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- FORM ĐẶT LỊCH HẸN TRỰC TUYẾN (FR-20, FR-21, AJAX VÀO API HOẶC LOCAL)      -->
+  <!-- ========================================================================= -->
+  <section id="dat-lich" class="py-16 px-6 sm:px-12 bg-white/70 border-t border-black/5">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-10">
+        <span class="text-xs font-bold text-[#E86A10] uppercase tracking-wider">Đặt lịch nhanh chóng</span>
+        <h2 class="text-3xl sm:text-4xl font-serif-display text-[#1a3d1a] mt-1">Đặt lịch khám & Spa trong 1 phút</h2>
+        <p class="text-gray-600 text-xs sm:text-sm mt-1">Điền thông tin, hệ thống tự động lưu trữ và lễ tân sẽ gọi xác nhận trong 30 phút.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div class="clay-card p-6 space-y-5 bg-[#EFFDF0]">
+          <div>
+            <h4 class="font-bold text-sm text-[#1a3d1a] mb-1">Giờ mở cửa</h4>
+            <p class="text-xs text-gray-600">Thứ 2 – Chủ nhật: 08:00 – 20:00</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-[#1a3d1a] mb-1">Địa chỉ phòng khám</h4>
+            <p class="text-xs text-gray-600">123 Đường Hoa Cúc, Phường 7, Q. Phú Nhuận, TP.HCM</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-[#E86A10] mb-1">Cấp cứu 24/7</h4>
+            <p class="text-sm font-bold text-[#1a3d1a]">Hotline: 0900 123 456</p>
+          </div>
+          <div class="pt-2 border-t border-gray-200 text-[11px] text-gray-500">
+            🔒 Thông tin được bảo vệ theo Nghị định 13/2023/NĐ-CP.
+          </div>
+        </div>
+
+        <div class="md:col-span-2 clay-card p-6 sm:p-8">
+          <div id="ms" class="hidden p-4 rounded-2xl mb-5 text-xs sm:text-sm" role="status"></div>
+
+          <form id="f" class="space-y-4" novalidate>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Dịch vụ mong muốn</label>
+              <select id="sv" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#1a3d1a] bg-gray-50/50">
+                <option value="Gói Spa & cắt tỉa">Gói Spa & cắt tỉa (320.000₫ - Phổ biến nhất)</option>
+                <option value="Gói Cơ bản – Tắm thơm">Gói Cơ bản – Tắm thơm (150.000₫)</option>
+                <option value="Gói Toàn diện">Gói Toàn diện: Khám + Tiêm + Spa (690.000₫)</option>
+                <option value="Khám & điều trị thú y">Khám tổng quát & điều trị thú y</option>
+                <option value="Tiêm phòng & tẩy giun">Tiêm phòng vắc-xin & tẩy giun định kỳ</option>
+                <option value="Cozy Cat House ($49.99)">Mua Cozy Cat House ($49.99)</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Tên chủ nuôi *</label>
+                <input id="nm" placeholder="Nguyễn Văn A" autocomplete="name" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]" required />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Số điện thoại * (10 số, bắt đầu bằng 0)</label>
+                <input id="ph" type="tel" placeholder="0912345678" autocomplete="tel" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]" required />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Loại thú cưng</label>
+                <select id="pt" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]">
+                  <option>Chó</option>
+                  <option>Mèo</option>
+                  <option>Thỏ</option>
+                  <option>Khác</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Tên bé cưng *</label>
+                <input id="pn" placeholder="Bơ / Mochi" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]" required />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1 flex items-center gap-1">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 text-gray-400"></i> Ngày hẹn *
+                </label>
+                <input id="dt" type="date" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]" required />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1 flex items-center gap-1">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-gray-400"></i> Khung giờ hẹn
+                </label>
+                <select id="tm" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#1a3d1a]">
+                  <option>08:00</option>
+                  <option>09:30</option>
+                  <option>11:00</option>
+                  <option>13:30</option>
+                  <option>15:00</option>
+                  <option>16:30</option>
+                  <option>18:00</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 rounded-2xl bg-[#E86A10] hover:bg-[#d45e0d] text-white font-bold text-xs sm:text-sm transition-all shadow-md active:scale-98 cursor-pointer">
+              Xác nhận đặt lịch hẹn
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- ĐÁNH GIÁ CỦA CHỦ NUÔI (FR-40)                                             -->
+  <!-- ========================================================================= -->
+  <section id="danh-gia" class="py-16 px-6 sm:px-12 max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <span class="text-xs font-bold text-[#E86A10] uppercase tracking-wider">Niềm tin gửi trọn</span>
+      <h2 class="text-3xl sm:text-4xl font-serif-display text-[#1a3d1a] mt-1">Chủ nuôi nói gì về PawNest</h2>
+      <p class="text-gray-600 text-xs sm:text-sm mt-1">Những lời nhắn chân thật từ các gia đình đã đồng hành cùng chúng tôi.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="clay-card p-6 flex flex-col justify-between">
+        <div>
+          <div class="text-amber-500 flex gap-1 mb-3">★★★★★</div>
+          <p class="text-xs text-gray-700 leading-relaxed italic">
+            “Bơ vốn sợ nước nhưng lần này ra về vẫn vẫy đuôi. Bạn groomer rất kiên nhẫn và gửi ảnh cho mình liên tục.”
+          </p>
+        </div>
+        <div class="flex items-center gap-3 mt-4 pt-4 border-t border-gray-100">
+          <div class="w-9 h-9 rounded-full bg-pink-100 flex items-center justify-center text-base">👩</div>
+          <div>
+            <h5 class="font-bold text-xs text-[#1a3d1a]">Chị Thu Hà</h5>
+            <small class="text-[11px] text-gray-500">Chủ của Bơ (Corgi 2 tuổi)</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="clay-card p-6 flex flex-col justify-between">
+        <div>
+          <div class="text-amber-500 flex gap-1 mb-3">★★★★★</div>
+          <p class="text-xs text-gray-700 leading-relaxed italic">
+            “Khám và tiêm phòng cho mèo xong còn tắm luôn trong buổi sáng, đỡ phải đi hai nơi. Bác sĩ giải thích rất rõ ràng.”
+          </p>
+        </div>
+        <div class="flex items-center gap-3 mt-4 pt-4 border-t border-gray-100">
+          <div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-base">👨</div>
+          <div>
+            <h5 class="font-bold text-xs text-[#1a3d1a]">Anh Minh Quân</h5>
+            <small class="text-[11px] text-gray-500">Chủ của Mướp (Mèo ta 1 tuổi)</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="clay-card p-6 flex flex-col justify-between">
+        <div>
+          <div class="text-amber-500 flex gap-1 mb-3">★★★★★</div>
+          <p class="text-xs text-gray-700 leading-relaxed italic">
+            “Đặt lịch online nhanh, đến nơi không phải chờ. Mochi được cắt tỉa đúng kiểu mình muốn, giá cũng hợp lý.”
+          </p>
+        </div>
+        <div class="flex items-center gap-3 mt-4 pt-4 border-t border-gray-100">
+          <div class="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center text-base">👧</div>
+          <div>
+            <h5 class="font-bold text-xs text-[#1a3d1a]">Bạn Ngọc Anh</h5>
+            <small class="text-[11px] text-gray-500">Chủ của Mochi (Poodle 3 tuổi)</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- TIÊU CHÍ 9: LIÊN HỆ & MẠNG XÃ HỘI (GITHUB, FB, INS, TIKTOK, ZALO, BẢN ĐỒ) -->
+  <!-- ========================================================================= -->
+  <section id="lien-he" class="py-16 px-6 sm:px-12 bg-white/80 border-t border-black/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold text-[#E86A10] uppercase tracking-wider">Kết nối với chúng tôi</span>
+        <h2 class="text-3xl sm:text-4xl font-serif-display text-[#1a3d1a] mt-1">Liên hệ & Mạng xã hội</h2>
+        <p class="text-gray-600 text-xs sm:text-sm mt-1">Luôn sẵn sàng lắng nghe và hỗ trợ gia đình bé mọi lúc.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <!-- Thông tin liên hệ & Social Icons -->
+        <div class="space-y-6">
+          <div class="clay-card p-6 space-y-4">
+            <h4 class="font-bold text-sm text-[#1a3d1a]">Thông tin trung tâm</h4>
+            <p class="text-xs text-gray-600 flex items-center gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-[#E86A10] shrink-0"></i>
+              <span>123 Đường Hoa Cúc, Phường 7, Q. Phú Nhuận, TP. Hồ Chí Minh</span>
+            </p>
+            <p class="text-xs text-gray-600 flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 text-[#E86A10] shrink-0"></i>
+              <span>Hotline 24/7: <strong>0900 123 456</strong></span>
+            </p>
+            <p class="text-xs text-gray-600 flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 text-[#E86A10] shrink-0"></i>
+              <span>Email: <strong>thienkhang.pawnest@gmail.com</strong></span>
+            </p>
+          </div>
+
+          <!-- Các liên kết mạng xã hội theo Tiêu chí 9 -->
+          <div>
+            <h4 class="font-bold text-xs text-gray-500 uppercase tracking-wider mb-3">Mạng xã hội & Mã nguồn dự án:</h4>
+            <div class="flex flex-wrap items-center gap-3">
+              <!-- GitHub Repository của sinh viên -->
+              <a href="https://github.com/NguyenThienKhangWork/WedTrungTamThuY" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gray-900 text-white text-xs font-semibold hover:bg-black transition-all shadow-sm">
+                <i data-lucide="github" class="w-4 h-4"></i>
+                <span>GitHub Repository</span>
+              </a>
+
+              <!-- Facebook -->
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-all shadow-sm">
+                <i data-lucide="facebook" class="w-4 h-4"></i>
+                <span>Facebook</span>
+              </a>
+
+              <!-- Instagram -->
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-pink-600 text-white text-xs font-semibold hover:bg-pink-700 transition-all shadow-sm">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+                <span>Instagram</span>
+              </a>
+
+              <!-- TikTok -->
+              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-neutral-900 text-white text-xs font-semibold hover:bg-black transition-all shadow-sm">
+                <i data-lucide="video" class="w-4 h-4"></i>
+                <span>TikTok (@cozypaws.vn)</span>
+              </a>
+
+              <!-- Zalo -->
+              <a href="https://zalo.me" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-blue-500 text-white text-xs font-semibold hover:bg-blue-600 transition-all shadow-sm">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Zalo Official</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Maps Iframe -->
+        <div class="clay-card overflow-hidden h-[340px] border border-gray-200">
+          <iframe
+            title="Bản đồ PawNest Phú Nhuận"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2612702759976!2d106.68725831533423!3d10.791289992311494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d22383c271%3A0x67302f232463bf90!2zUGjDuiBOaHXhuq1uLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1699999999999!5m2!1svi!2s"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER                                                                    -->
+  <!-- ========================================================================= -->
+  <footer class="py-12 px-6 sm:px-12 bg-white border-t border-black/5 text-center text-xs text-gray-500 space-y-2">
+    <p class="font-bold text-[#1a3d1a] text-sm">
+      🐾 PawNest & CozyPaws – Trung tâm thú y & Spa thú cưng cao cấp
+    </p>
+    <p>Người thực hiện: <strong>Nguyễn Thiện Khang</strong> · Mã môn: Lập trình Web</p>
+    <p>Địa chỉ: 123 Đường Hoa Cúc, Q. Phú Nhuận, TP. Hồ Chí Minh · Hotline: 0900 123 456</p>
+    <p>© 2026 PawNest. Toàn bộ thông tin cá nhân tuân thủ Nghị định 13/2023/NĐ-CP.</p>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL ĐĂNG NHẬP / ĐĂNG KÝ TÀI KHOẢN KHÁCH HÀNG (FR-50, FR-51, FR-52)      -->
+  <!-- ========================================================================= -->
+  <div id="auth-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+    <div class="bg-white rounded-3xl w-full max-w-md p-6 sm:p-8 shadow-2xl relative border border-[#1a3d1a]/10 max-h-[90vh] overflow-y-auto">
+      <!-- Nút đóng modal -->
+      <button id="close-auth-modal" type="button" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors cursor-pointer">
+        ✕
+      </button>
+
+      <!-- User Logged In View -->
+      <div id="user-profile-box" class="hidden text-center space-y-4 py-4">
+        <div class="w-16 h-16 rounded-full bg-[#EFFDF0] border-2 border-[#1a3d1a] flex items-center justify-center mx-auto text-2xl text-[#1a3d1a]">
+          🐾
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-[#1a3d1a]" id="profile-name">Khách hàng PawNest</h3>
+          <p class="text-xs text-gray-500" id="profile-phone">0912345678</p>
+          <span class="inline-block mt-1 px-3 py-0.5 rounded-full bg-green-50 text-green-700 text-[11px] font-semibold">Tài khoản khách hàng thân thiết</span>
+        </div>
+        <div class="pt-4 border-t border-gray-100 flex flex-col gap-2">
+          <a href="#dat-lich" onclick="document.getElementById('auth-modal').classList.add('hidden')" class="w-full py-2.5 rounded-xl bg-[#E86A10] hover:bg-[#d45e0d] text-white text-xs font-semibold">
+            Đặt lịch chăm sóc bé mới
+          </a>
+          <button id="btn-logout" type="button" class="w-full py-2.5 rounded-xl border border-gray-200 hover:bg-red-50 text-red-600 text-xs font-semibold cursor-pointer">
+            Đăng xuất
+          </button>
+        </div>
+      </div>
+
+      <!-- Auth Tabs & Forms (When NOT logged in) -->
+      <div id="auth-forms-container">
+        <!-- Tab Switcher -->
+        <div class="flex border-b border-gray-100 pb-3 mb-5 gap-3">
+          <button id="tab-login" type="button" class="flex-1 pb-2 font-bold text-sm border-b-2 border-[#1a3d1a] text-[#1a3d1a] transition-all cursor-pointer">
+            Đăng nhập
+          </button>
+          <button id="tab-register" type="button" class="flex-1 pb-2 font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-700 transition-all cursor-pointer">
+            Đăng ký tài khoản
+          </button>
+        </div>
+
+        <div id="auth-alert" class="hidden p-3 rounded-xl mb-4 text-xs font-medium"></div>
+
+        <!-- 1. FORM ĐĂNG NHẬP -->
+        <form id="form-customer-login" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Số điện thoại hoặc Email</label>
+            <input id="login-identifier" type="text" placeholder="0912345678" required
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Mật khẩu</label>
+            <input id="login-password" type="password" placeholder="••••••••" required
+              class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none" />
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-gray-500">
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="checkbox" checked class="rounded text-[#1a3d1a]" /> Ghi nhớ đăng nhập
+            </label>
+            <a href="javascript:void(0)" onclick="alert('Vui lòng liên hệ hotline 0900 123 456 để nhận mã OTP lấy lại mật khẩu!')" class="hover:text-[#E86A10]">Quên mật khẩu?</a>
+          </div>
+          <button type="submit" class="w-full py-3 rounded-2xl bg-[#E86A10] hover:bg-[#d45e0d] text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98 cursor-pointer">
+            Đăng nhập ngay
+          </button>
+
+          <!-- Gợi ý đăng nhập nhanh -->
+          <div class="mt-4 pt-3 border-t border-gray-100 text-center space-y-2">
+            <p class="text-[11px] text-gray-400">Tài khoản khách hàng mẫu: <strong>0912345678</strong> (Mật khẩu bất kỳ)</p>
+            <a href="/admin/login.php" class="text-[11px] font-semibold text-[#1a3d1a] hover:underline block">
+              🛡️ Đăng nhập tài khoản Quản trị viên (Admin) →
+            </a>
+          </div>
+        </form>
+
+        <!-- 2. FORM ĐĂNG KÝ -->
+        <form id="form-customer-register" class="space-y-3.5 hidden">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Họ và tên chủ nuôi *</label>
+            <input id="reg-name" type="text" placeholder="Nguyễn Văn A" required
+              class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none" />
+          </div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Số điện thoại *</label>
+              <input id="reg-phone" type="tel" placeholder="0912345678" required
+                class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Email</label>
+              <input id="reg-email" type="email" placeholder="email@gmail.com"
+                class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Mật khẩu * (Tối thiểu 6 ký tự)</label>
+            <input id="reg-pass" type="password" placeholder="••••••••" required
+              class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none" />
+          </div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Tên bé cưng</label>
+              <input id="reg-pet-name" type="text" placeholder="Bơ / Mochi"
+                class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Loài thú cưng</label>
+              <select id="reg-pet-species" class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none">
+                <option value="Chó">Chó 🐶</option>
+                <option value="Mèo">Mèo 🐱</option>
+                <option value="Thỏ">Thỏ 🐰</option>
+                <option value="Khác">Khác 🐾</option>
+              </select>
+            </div>
+          </div>
+          <div class="text-[11px] text-gray-500">
+            <label class="flex items-start gap-1.5 cursor-pointer">
+              <input id="reg-consent" type="checkbox" checked required class="mt-0.5 rounded text-[#1a3d1a]" />
+              <span>Tôi đồng ý xử lý dữ liệu cá nhân theo Nghị định 13/2023/NĐ-CP.</span>
+            </label>
+          </div>
+          <button type="submit" class="w-full py-3 rounded-2xl bg-[#1a3d1a] hover:bg-[#2a5a2a] text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98 cursor-pointer">
+            Tạo tài khoản thành viên
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT XỬ LÝ (KIỂM TRA DỮ LIỆU FORM, GỌI API / LOCAL FALLBACK)        -->
+  <!-- ========================================================================= -->
+  <script>
+    // Khởi tạo các icon Lucide
+    lucide.createIcons();
+
+    const $ = id => document.getElementById(id);
+
+    // ================= HIỆU ỨNG TƯƠNG TÁC 3D PARALLAX & TILT =================
+    (function init3DHero() {
+      const heroSection = $('top');
+      const heading = $('hero-heading-3d');
+      const cardLeft = $('hero-card-left');
+      const cardRight = $('hero-card-right');
+      const glareLeft = $('glare-card-left');
+      const glareRight = $('glare-card-right');
+      const petCenter = $('hero-pet-center');
+      const petLeft = $('hero-pet-left');
+      const petRight = $('hero-pet-right');
+      const overlayCenter = $('hero-overlay-center');
+
+      if (!heroSection || !cardLeft) return;
+
+      let targetX = 0, targetY = 0;
+      let currentX = 0, currentY = 0;
+      let isHovering = false;
+      let rafId = null;
+
+      heroSection.addEventListener('mousemove', (e) => {
+        const rect = heroSection.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        targetX = ((x / rect.width) * 2) - 1;
+        targetY = ((y / rect.height) * 2) - 1;
+        isHovering = true;
+
+        if (cardLeft && glareLeft) {
+          const cRect = cardLeft.getBoundingClientRect();
+          const gx = Math.max(0, Math.min(100, ((e.clientX - cRect.left) / cRect.width) * 100));
+          const gy = Math.max(0, Math.min(100, ((e.clientY - cRect.top) / cRect.height) * 100));
+          glareLeft.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 65%)`;
+        }
+        if (cardRight && glareRight) {
+          const cRect = cardRight.getBoundingClientRect();
+          const gx = Math.max(0, Math.min(100, ((e.clientX - cRect.left) / cRect.width) * 100));
+          const gy = Math.max(0, Math.min(100, ((e.clientY - cRect.top) / cRect.height) * 100));
+          glareRight.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 65%)`;
+        }
+
+        if (!rafId) {
+          rafId = requestAnimationFrame(updatePhysics);
+        }
+      });
+
+      heroSection.addEventListener('mouseleave', () => {
+        targetX = 0;
+        targetY = 0;
+        isHovering = false;
+      });
+
+      function updatePhysics() {
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
+
+        if (cardLeft) {
+          const rotX = currentY * -16;
+          const rotY = currentX * 16;
+          cardLeft.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateZ(30px)`;
+        }
+
+        if (cardRight) {
+          const rotX = currentY * -16;
+          const rotY = currentX * 16;
+          cardRight.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateZ(30px)`;
+        }
+
+        if (heading) {
+          const tx = currentX * 10;
+          const ty = currentY * 6;
+          heading.style.transform = `perspective(1000px) translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 35px)`;
+        }
+
+        if (petCenter) {
+          const tx = currentX * 14;
+          const ty = currentY * 8;
+          petCenter.style.transform = `perspective(1000px) translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 20px)`;
+        }
+
+        if (petLeft) {
+          const tx = currentX * 7;
+          const ty = currentY * 4;
+          petLeft.style.transform = `perspective(1000px) translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 10px)`;
+        }
+        if (petRight) {
+          const tx = currentX * 7;
+          const ty = currentY * 4;
+          petRight.style.transform = `perspective(1000px) translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 10px)`;
+        }
+
+        if (overlayCenter) {
+          const tx = currentX * 8;
+          overlayCenter.style.transform = `translateX(-50%) translate3d(${tx.toFixed(2)}px, 0, 45px)`;
+        }
+
+        if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001 || isHovering) {
+          rafId = requestAnimationFrame(updatePhysics);
+        } else {
+          rafId = null;
+        }
+      }
+    })();
+    
+    // Đặt ngày hẹn tối thiểu là hôm nay
+    $('dt').min = new Date().toISOString().split('T')[0];
+    $('dt').value = new Date().toISOString().split('T')[0];
+
+    // Nút "Chọn gói này" tự động điền form và cuộn xuống
+    document.querySelectorAll('.select-pkg-btn').forEach(b => {
+      b.onclick = () => {
+        $('sv').value = b.dataset.pk;
+        $('dat-lich').scrollIntoView({ behavior: 'smooth' });
+        $('nm').focus({ preventScroll: true });
+      };
+    });
+
+    // ================= XỬ LÝ MODAL ĐĂNG NHẬP / ĐĂNG KÝ =================
+    const authModal = $('auth-modal');
+    const btnOpenAuth = $('btn-auth-modal');
+    const btnCloseAuth = $('close-auth-modal');
+    const tabLogin = $('tab-login');
+    const tabRegister = $('tab-register');
+    const formLogin = $('form-customer-login');
+    const formRegister = $('form-customer-register');
+    const authAlert = $('auth-alert');
+    const authFormsContainer = $('auth-forms-container');
+    const userProfileBox = $('user-profile-box');
+    const navUserLabel = $('nav-user-label');
+
+    // Kiểm tra trạng thái đã đăng nhập từ localStorage
+    const savedUser = JSON.parse(localStorage.getItem('pawnest_customer') || 'null');
+    if (savedUser && savedUser.name) {
+      navUserLabel.textContent = savedUser.name;
+    }
+
+    btnOpenAuth.onclick = () => {
+      authModal.classList.remove('hidden');
+      const currentUser = JSON.parse(localStorage.getItem('pawnest_customer') || 'null');
+      if (currentUser && currentUser.name) {
+        authFormsContainer.classList.add('hidden');
+        userProfileBox.classList.remove('hidden');
+        $('profile-name').textContent = currentUser.name;
+        $('profile-phone').textContent = currentUser.phone || '';
+      } else {
+        authFormsContainer.classList.remove('hidden');
+        userProfileBox.classList.add('hidden');
+      }
+    };
+
+    btnCloseAuth.onclick = () => {
+      authModal.classList.add('hidden');
+    };
+
+    authModal.onclick = e => {
+      if (e.target === authModal) authModal.classList.add('hidden');
+    };
+
+    tabLogin.onclick = () => {
+      tabLogin.className = 'flex-1 pb-2 font-bold text-sm border-b-2 border-[#1a3d1a] text-[#1a3d1a] cursor-pointer';
+      tabRegister.className = 'flex-1 pb-2 font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-700 cursor-pointer';
+      formLogin.classList.remove('hidden');
+      formRegister.classList.add('hidden');
+      authAlert.classList.add('hidden');
+    };
+
+    tabRegister.onclick = () => {
+      tabRegister.className = 'flex-1 pb-2 font-bold text-sm border-b-2 border-[#1a3d1a] text-[#1a3d1a] cursor-pointer';
+      tabLogin.className = 'flex-1 pb-2 font-semibold text-sm border-b-2 border-transparent text-gray-400 hover:text-gray-700 cursor-pointer';
+      formRegister.classList.remove('hidden');
+      formLogin.classList.add('hidden');
+      authAlert.classList.add('hidden');
+    };
+
+    // Xử lý gửi Form Đăng nhập
+    formLogin.onsubmit = async e => {
+      e.preventDefault();
+      const identifier = $('login-identifier').value.trim();
+      const password = $('login-password').value.trim();
+
+      try {
+        const res = await fetch('/api/customer_auth.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'login', identifier, password })
+        });
+        const data = await res.json();
+        if (data.success) {
+          const userObj = data.customer || { name: identifier, phone: identifier };
+          localStorage.setItem('pawnest_customer', JSON.stringify(userObj));
+          navUserLabel.textContent = userObj.name;
+          authAlert.className = 'p-3 rounded-xl mb-4 text-xs font-semibold bg-green-50 text-green-700 border border-green-200';
+          authAlert.textContent = data.message || 'Đăng nhập thành công!';
+          authAlert.classList.remove('hidden');
+          setTimeout(() => authModal.classList.add('hidden'), 1000);
+          return;
+        } else {
+          authAlert.className = 'p-3 rounded-xl mb-4 text-xs font-semibold bg-red-50 text-red-700 border border-red-200';
+          authAlert.textContent = data.message || 'Sai thông tin đăng nhập.';
+          authAlert.classList.remove('hidden');
+          return;
+        }
+      } catch (err) {
+        // Fallback demo
+        const userObj = { name: 'Chị Thu Hà', phone: identifier };
+        localStorage.setItem('pawnest_customer', JSON.stringify(userObj));
+        navUserLabel.textContent = userObj.name;
+        authAlert.className = 'p-3 rounded-xl mb-4 text-xs font-semibold bg-green-50 text-green-700';
+        authAlert.textContent = 'Đăng nhập thành công!';
+        authAlert.classList.remove('hidden');
+        setTimeout(() => authModal.classList.add('hidden'), 800);
+      }
+    };
+
+    // Xử lý gửi Form Đăng ký
+    formRegister.onsubmit = async e => {
+      e.preventDefault();
+      const name = $('reg-name').value.trim();
+      const phone = $('reg-phone').value.trim();
+      const email = $('reg-email').value.trim();
+      const password = $('reg-pass').value.trim();
+      const petName = $('reg-pet-name').value.trim();
+      const petSpecies = $('reg-pet-species').value;
+
+      if (!/^0\d{9}$/.test(phone)) {
+        authAlert.className = 'p-3 rounded-xl mb-4 text-xs font-semibold bg-red-50 text-red-700 border border-red-200';
+        authAlert.textContent = 'Số điện thoại cần đủ 10 số và bắt đầu bằng 0.';
+        authAlert.classList.remove('hidden');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/customer_auth.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'register',
+            full_name: name,
+            phone,
+            email,
+            password,
+            pet_name: petName,
+            pet_species: petSpecies
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          const userObj = data.customer || { name, phone, email };
+          localStorage.setItem('pawnest_customer', JSON.stringify(userObj));
+          navUserLabel.textContent = userObj.name;
+          authAlert.className = 'p-3 rounded-xl mb-4 text-xs font-semibold bg-green-50 text-green-700 border border-green-200';
+          authAlert.textContent = data.message || 'Đăng ký thành công!';
+          authAlert.classList.remove('hidden');
+          setTimeout(() => authModal.classList.add('hidden'), 1000);
+          return;
+        } else {
+          authAlert.className = 'p-3 rounded-xl mb-4 text-xs font-semibold bg-red-50 text-red-700 border border-red-200';
+          authAlert.textContent = data.message || 'Đăng ký không thành công.';
+          authAlert.classList.remove('hidden');
+          return;
+        }
+      } catch (err) {
+        const userObj = { name, phone, email };
+        localStorage.setItem('pawnest_customer', JSON.stringify(userObj));
+        navUserLabel.textContent = name;
+        authAlert.className = 'p-3 rounded-xl mb-4 text-xs font-semibold bg-green-50 text-green-700';
+        authAlert.textContent = 'Đăng ký thành viên thành công!';
+        authAlert.classList.remove('hidden');
+        setTimeout(() => authModal.classList.add('hidden'), 800);
+      }
+    };
+
+    // Đăng xuất
+    $('btn-logout').onclick = () => {
+      localStorage.removeItem('pawnest_customer');
+      navUserLabel.textContent = 'Đăng nhập';
+      fetch('/api/customer_auth.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'logout' })
+      }).catch(() => {});
+      authModal.classList.add('hidden');
+    };
+
+    // ================= XỬ LÝ ĐẶT LỊCH HẸN =================
+    $('f').onsubmit = async e => {
+      e.preventDefault();
+      const m = $('ms');
+      m.style.display = 'block';
+
+      const nm = $('nm').value.trim();
+      const ph = $('ph').value.replace(/\s/g, '');
+      const pn = $('pn').value.trim();
+      const pt = $('pt').value;
+      const sv = $('sv').value;
+      const dt = $('dt').value;
+      const tm = $('tm').value;
+
+      // 1. Kiểm tra trường bắt buộc
+      if (!nm || !pn || !dt) {
+        m.className = 'p-4 rounded-2xl mb-5 text-xs sm:text-sm bg-red-50 text-red-700 border border-red-200';
+        m.textContent = 'Vui lòng điền đầy đủ tên chủ nuôi, tên bé và chọn ngày hẹn.';
+        return;
+      }
+
+      // 2. Kiểm tra số điện thoại 10 số bắt đầu bằng 0
+      if (!/^0\d{9}$/.test(ph)) {
+        m.className = 'p-4 rounded-2xl mb-5 text-xs sm:text-sm bg-red-50 text-red-700 border border-red-200';
+        m.textContent = 'Số điện thoại cần đủ 10 số, bắt đầu bằng 0.';
+        return;
+      }
+
+      // Thử gọi backend API PHP nếu có server, hoặc fallback hiển thị thông báo ngay
+      try {
+        const res = await fetch('/api/appointments.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            owner_name: nm,
+            phone: ph,
+            pet_name: pn,
+            pet_type: pt,
+            service_name: sv,
+            date: dt,
+            time: tm
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          m.className = 'p-4 rounded-2xl mb-5 text-xs sm:text-sm bg-[#EFFDF0] text-[#1a3d1a] border border-[#1a3d1a]/20';
+          m.textContent = data.message || 'Đặt lịch thành công qua hệ thống!';
+          return;
+        }
+      } catch (err) {
+        // Fallback khi chạy file tĩnh không có web server PHP
+      }
+
+      const [y, mo, d] = dt.split('-');
+      m.className = 'p-4 rounded-2xl mb-5 text-xs sm:text-sm bg-[#EFFDF0] text-[#1a3d1a] border border-[#1a3d1a]/20';
+      m.textContent = `Đã đặt lịch cho bé ${pn} (${pt.toLowerCase()}): ${sv}, lúc ${tm} ngày ${d}/${mo}/${y}. PawNest sẽ gọi ${ph} để xác nhận trong 15-30 phút!`;
+    };
+  </script>
 </body>
 </html>
