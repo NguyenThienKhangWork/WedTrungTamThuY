@@ -268,6 +268,11 @@ document.addEventListener('DOMContentLoaded', () => {
       btnLogout.onclick = () => {
         localStorage.removeItem('pawnest_customer');
         if (navUserLabel) navUserLabel.textContent = 'Đăng nhập';
+        fetch('/api/customer_auth.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'logout' })
+        }).catch(() => {});
         authModal.classList.add('hidden');
       };
     }

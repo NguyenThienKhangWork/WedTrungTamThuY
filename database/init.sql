@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS customers (
     full_name VARCHAR(100) NOT NULL,
     phone VARCHAR(15) NOT NULL,
     email VARCHAR(100) NULL,
+    password_hash VARCHAR(255) NULL,
     address VARCHAR(255) NULL,
     consent_at DATETIME NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
