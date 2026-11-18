@@ -1544,22 +1544,6 @@
             <input id="reg-pass" type="password" placeholder="••••••••" required
               class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none" />
           </div>
-          <div class="grid grid-cols-2 gap-2.5">
-            <div>
-              <label class="block text-xs font-semibold text-gray-700 mb-1">Tên bé cưng</label>
-              <input id="reg-pet-name" type="text" placeholder="Bơ / Mochi"
-                class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none" />
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-gray-700 mb-1">Loài thú cưng</label>
-              <select id="reg-pet-species" class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none">
-                <option value="Chó">Chó 🐶</option>
-                <option value="Mèo">Mèo 🐱</option>
-                <option value="Thỏ">Thỏ 🐰</option>
-                <option value="Khác">Khác 🐾</option>
-              </select>
-            </div>
-          </div>
           <div class="text-[11px] text-gray-500">
             <label class="flex items-start gap-1.5 cursor-pointer">
               <input id="reg-consent" type="checkbox" checked required class="mt-0.5 rounded text-[#1a3d1a]" />
@@ -1804,8 +1788,6 @@
       const phone = $('reg-phone').value.trim();
       const email = $('reg-email').value.trim();
       const password = $('reg-pass').value.trim();
-      const petName = $('reg-pet-name').value.trim();
-      const petSpecies = $('reg-pet-species').value;
 
       if (!/^0\d{9}$/.test(phone)) {
         authAlert.className = 'p-3 rounded-xl mb-4 text-xs font-semibold bg-red-50 text-red-700 border border-red-200';
@@ -1823,9 +1805,7 @@
             full_name: name,
             phone,
             email,
-            password,
-            pet_name: petName,
-            pet_species: petSpecies
+            password
           })
         });
         const data = await res.json();

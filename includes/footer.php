@@ -178,21 +178,6 @@ require_once __DIR__ . '/functions.php';
             <label class="block text-xs font-semibold text-gray-700 mb-1">Mật khẩu *</label>
             <input id="reg-pass" type="password" placeholder="Tối thiểu 6 ký tự" required class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none clay-input" />
           </div>
-          <div class="grid grid-cols-2 gap-2.5">
-            <div>
-              <label class="block text-xs font-semibold text-gray-700 mb-1">Tên bé cưng *</label>
-              <input id="reg-pet-name" type="text" placeholder="Mochi, Bơ..." required class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none clay-input" />
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-gray-700 mb-1">Loài *</label>
-              <select id="reg-pet-species" class="w-full px-3.5 py-2 rounded-xl border border-gray-300 text-xs sm:text-sm focus:ring-2 focus:ring-[#1a3d1a] focus:outline-none clay-input">
-                <option value="Chó">Chó</option>
-                <option value="Mèo">Mèo</option>
-                <option value="Thỏ">Thỏ</option>
-                <option value="Khác">Khác</option>
-              </select>
-            </div>
-          </div>
           <button type="submit" class="w-full py-2.5 rounded-2xl bg-[#1a3d1a] hover:bg-[#2a5a2a] text-white font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98 cursor-pointer clay-btn-green">
             Tạo tài khoản mới
           </button>

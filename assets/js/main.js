@@ -188,14 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const phone    = document.getElementById('reg-phone')?.value.trim();
         const email    = document.getElementById('reg-email')?.value.trim();
         const password = document.getElementById('reg-pass')?.value.trim();
-        const petName  = document.getElementById('reg-pet-name')?.value.trim();
-        const petSpec  = document.getElementById('reg-pet-species')?.value;
 
         try {
           const res = await fetch('/api/customer_auth.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'register', full_name: fullName, phone, email, password, pet_name: petName, pet_species: petSpec })
+            body: JSON.stringify({ action: 'register', full_name: fullName, phone, email, password })
           });
           const data = await res.json();
           if (authAlert) {
