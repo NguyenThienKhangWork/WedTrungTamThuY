@@ -20,10 +20,14 @@ class ProductRepository
     /**
      * Lấy danh sách sản phẩm có lọc theo danh mục hoặc chỉ lấy tồn kho thấp
      */
-    public function findAll(?string $category = null, bool $lowStockOnly = false, ?string $search = null): array
+    public function findAll(?string $category = null, bool $lowStockOnly = false, ?string $search = null, bool $activeOnly = false): array
     {
         $sql = 'SELECT * FROM products WHERE 1=1';
         $params = [];
+
+        if ($activeOnly) {
+            $sql .= ' AND status = "active"';
+        }
 
         if ($category && in_array($category, ['medicine', 'food', 'supply', 'accessory'], true)) {
             $sql .= ' AND category = :category';
@@ -73,25 +77,68 @@ class ProductRepository
     }
 
     /**
-     * Tạo sản phẩm mới
+     * Tìm sản phẩm theo SKU
+     */
+    public function findBySku(string $sku): ?array
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM products WHERE sku = :sku LIMIT 1');
+        $stmt->execute(['sku' => strtoupper(trim($sku))]);
+        $row = $stmt->fetch();
+        return $row ?: null;
+    }
+
+    /**
+     * Tạo sản phẩm mới (Tự động sinh SKU nếu để trống, tự động gán ảnh placeholder nếu không có)
      */
     public function create(array $data): int
     {
+        $category = $data['category'] ?? 'food';
+        $sku = strtoupper(trim($data['sku'] ?? ''));
+
+        // Tự động sinh mã SKU theo loại hàng nếu người dùng để trống
+        if ($sku === '') {
+            $prefix = match($category) {
+                'medicine' => 'MED',
+                'food' => 'FOOD',
+                'supply' => 'SUP',
+                default => 'ACC'
+            };
+            $sku = $prefix . '-' . strtoupper(substr(uniqid(), -6));
+        }
+
+        // Nếu mã SKU đã tồn tại, tự động thêm hậu tố để tránh lỗi trùng khóa (Duplicate Key)
+        $checkStmt = $this->pdo->prepare('SELECT id FROM products WHERE sku = :sku LIMIT 1');
+        $checkStmt->execute(['sku' => $sku]);
+        if ($checkStmt->fetch()) {
+            $sku .= '-' . rand(10, 99);
+        }
+
+        // Ảnh mẫu chuẩn theo danh mục nếu người dùng chưa nhập link ảnh
+        $image = trim($data['image'] ?? '');
+        if ($image === '') {
+            $image = match($category) {
+                'medicine' => 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
+                'food' => 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=600&q=80',
+                'supply' => 'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=600&q=80',
+                default => 'https://polo-pecan-73837341.figma.site/_assets/v11/3e5158dad63d392ade022e81890edc9f54d750bc.png'
+            };
+        }
+
         $stmt = $this->pdo->prepare('
             INSERT INTO products (sku, name, category, price, cost_price, stock_quantity, min_stock, unit, image, description, is_critical, status)
             VALUES (:sku, :name, :category, :price, :cost_price, :stock_quantity, :min_stock, :unit, :image, :description, :is_critical, :status)
         ');
 
         $stmt->execute([
-            'sku'            => strtoupper(trim($data['sku'] ?? 'SP-' . time())),
+            'sku'            => $sku,
             'name'           => trim($data['name'] ?? ''),
-            'category'       => $data['category'] ?? 'food',
+            'category'       => $category,
             'price'          => (float)($data['price'] ?? 0),
             'cost_price'     => (float)($data['cost_price'] ?? 0),
             'stock_quantity' => (int)($data['stock_quantity'] ?? 0),
             'min_stock'      => (int)($data['min_stock'] ?? 5),
-            'unit'           => trim($data['unit'] ?? 'Hộp'),
-            'image'          => trim($data['image'] ?? ''),
+            'unit'           => trim($data['unit'] ?? 'Hộp') ?: 'Hộp',
+            'image'          => $image,
             'description'    => trim($data['description'] ?? ''),
             'is_critical'    => !empty($data['is_critical']) ? 1 : 0,
             'status'         => $data['status'] ?? 'active'
@@ -105,6 +152,15 @@ class ProductRepository
         }
 
         return $newId;
+    }
+
+    /**
+     * Xóa sản phẩm
+     */
+    public function delete(int $id): bool
+    {
+        $stmt = $this->pdo->prepare('DELETE FROM products WHERE id = :id');
+        return $stmt->execute(['id' => $id]);
     }
 
     /**

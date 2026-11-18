@@ -7,8 +7,8 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../includes/auth.php';
-require_once __DIR__ . '/../includes/AppointmentRepository.php';
-require_once __DIR__ . '/../includes/ProductRepository.php';
+require_once __DIR__ . '/../repository/AppointmentRepository.php';
+require_once __DIR__ . '/../repository/ProductRepository.php';
 
 Auth::requireRole(['admin', 'receptionist']);
 

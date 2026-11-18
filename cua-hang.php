@@ -10,13 +10,13 @@ $page_title = "Cửa hàng Thức ăn, Thuốc & Vật tư Thú Cưng | PawNest 
 $active_menu = "shop";
 
 require_once __DIR__ . "/includes/header.php";
-require_once __DIR__ . "/includes/ProductRepository.php";
+require_once __DIR__ . "/repository/ProductRepository.php";
 
 $repo = new ProductRepository();
 $category = $_GET['cat'] ?? null;
 $search = $_GET['q'] ?? null;
 
-$products = $repo->findAll($category, false, $search);
+$products = $repo->findAll($category, false, $search, true);
 
 function formatShopPrice(float|int $p): string {
     return number_format($p, 0, ',', '.') . ' ₫';

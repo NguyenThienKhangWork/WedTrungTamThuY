@@ -7,7 +7,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../includes/auth.php';
-require_once __DIR__ . '/../includes/ProductRepository.php';
+require_once __DIR__ . '/../repository/ProductRepository.php';
 
 Auth::requireRole(['admin', 'receptionist']);
 
@@ -51,12 +51,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'status'         => 'active'
             ];
 
-            if ($data['name'] === '' || $data['sku'] === '') {
-                throw new InvalidArgumentException('Tên sản phẩm và Mã SKU không được để trống.');
+            if ($data['name'] === '') {
+                throw new InvalidArgumentException('Vui lòng nhập tên sản phẩm.');
             }
 
-            $repo->create($data);
-            $message = "Thành công: Đã thêm mới sản phẩm {$data['name']}.";
+            $newId = $repo->create($data);
+            $message = "Thành công: Đã thêm mới sản phẩm {$data['name']} vào kho.";
+        } elseif ($action === 'delete_product') {
+            $id = (int)($_POST['product_id'] ?? 0);
+            if ($id > 0) {
+                try {
+                    $repo->delete($id);
+                    $message = 'Đã xóa mặt hàng thành công khỏi kho.';
+                } catch (Throwable $e) {
+                    $repo->update($id, ['status' => 'inactive']);
+                    $message = 'Mặt hàng đã có dữ liệu giao dịch liên quan, đã chuyển sang trạng thái Ẩn.';
+                }
+            }
         } elseif ($action === 'update_product') {
             $id = (int)($_POST['product_id'] ?? 0);
             if ($id <= 0) {
@@ -391,6 +402,13 @@ function formatVND(float|int $n): string {
                       title="Sửa thông tin">
                       ✏️ Sửa
                     </button>
+                    <form method="POST" action="/admin/inventory.php?tab=products" class="inline" onsubmit="return confirm('Bạn có chắc chắn muốn xóa mặt hàng <?= htmlspecialchars(addslashes($p['name'])) ?> khỏi kho?');">
+                      <input type="hidden" name="action" value="delete_product">
+                      <input type="hidden" name="product_id" value="<?= $p['id'] ?>">
+                      <button type="submit" class="px-2 py-1.5 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-500 hover:text-red-700 font-semibold text-[11px] transition-colors cursor-pointer" title="Xóa mặt hàng">
+                        🗑️
+                      </button>
+                    </form>
                   </td>
                 </tr>
               <?php endforeach; ?>
@@ -508,19 +526,19 @@ function formatVND(float|int $n): string {
       <h3 class="text-base font-bold text-[#1a3d1a] mb-1">Thêm mặt hàng mới vào kho</h3>
       <p class="text-xs text-gray-500 mb-4">Nhập thông tin thuốc thú y, thức ăn hoặc vật tư y tế</p>
 
-      <form method="POST" class="space-y-3.5">
+      <form method="POST" action="/admin/inventory.php?tab=products" class="space-y-3.5">
         <input type="hidden" name="action" value="create_product">
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-gray-700 mb-1">Mã SKU *</label>
-            <input type="text" name="sku" required placeholder="MED-VAC-03" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-[#1a3d1a] uppercase font-mono">
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Mã SKU (Tùy chọn)</label>
+            <input type="text" name="sku" placeholder="Tự sinh nếu để trống" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-[#1a3d1a] uppercase font-mono">
           </div>
           <div>
             <label class="block text-xs font-semibold text-gray-700 mb-1">Danh mục *</label>
             <select name="category" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-[#1a3d1a]">
-              <option value="medicine">💊 Thuốc & Vắc xin</option>
               <option value="food">🥣 Thức ăn dinh dưỡng</option>
+              <option value="medicine">💊 Thuốc & Vắc xin</option>
               <option value="supply">🩹 Vật tư tiêu hao</option>
               <option value="accessory">🏠 Phụ kiện CozyPaws</option>
             </select>
@@ -559,8 +577,8 @@ function formatVND(float|int $n): string {
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1">Link hình ảnh (URL)</label>
-          <input type="url" name="image" placeholder="https://..." class="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-[#1a3d1a]">
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Link hình ảnh (Tùy chọn)</label>
+          <input type="text" name="image" placeholder="https://... hoặc để trống để dùng ảnh mẫu mặc định" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-[#1a3d1a]">
         </div>
 
         <div>
@@ -599,7 +617,7 @@ function formatVND(float|int $n): string {
       <h3 class="text-base font-bold text-[#1a3d1a] mb-1">Cập nhật thông tin hàng hóa</h3>
       <p class="text-xs text-gray-500 mb-4">Thay đổi giá bán, ngưỡng cảnh báo an toàn và phân loại</p>
 
-      <form method="POST" class="space-y-3.5">
+      <form method="POST" action="/admin/inventory.php?tab=products" class="space-y-3.5">
         <input type="hidden" name="action" value="update_product">
         <input type="hidden" id="edit-id" name="product_id" value="">
 
@@ -647,8 +665,8 @@ function formatVND(float|int $n): string {
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-gray-700 mb-1">Link hình ảnh (URL)</label>
-          <input type="url" id="edit-image" name="image" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-[#1a3d1a]">
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Link hình ảnh (URL hoặc đường dẫn)</label>
+          <input type="text" id="edit-image" name="image" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-xs focus:ring-2 focus:ring-[#1a3d1a]">
         </div>
 
         <div>
